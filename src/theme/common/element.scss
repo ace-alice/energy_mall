@@ -1,0 +1,99 @@
+.submit-button {
+  --el-button-bg-color: var(--brand-color);
+  --el-button-border-color: var(--brand-color);
+  --el-button-text-color: var(--normal-btn-text-color);
+  --el-button-hover-bg-color: var(--brand-color);
+  --el-button-hover-text-color: var(--normal-btn-text-color);
+  --el-button-hover-border-color: var(--brand-color);
+  --el-button-active-border-color: var(--brand-color);
+  --el-button-disabled-text-color: var(--normal-btn-text-color-disabled);
+  --el-button-disabled-bg-color: var(--normal-btn-color-disabled);
+  border: none !important;
+  --el-border-radius-base: 5px;
+  --el-font-size-base: 18px;
+  height: 52px;
+  width: 100%;
+}
+
+/* 针对现代浏览器 */
+.el-input::placeholder {
+  font-size: 12px !important;
+}
+
+/* 针对 WebKit 浏览器（如 Chrome、Safari） */
+.el-input::-webkit-input-placeholder {
+  font-size: 12px !important;
+}
+
+/* 针对 Mozilla 浏览器（如 Firefox） */
+.el-input::-moz-placeholder {
+  font-size: 12px !important;
+}
+
+/* 针对旧版本的 Internet Explorer */
+.el-input::-ms-input-placeholder {
+  font-size: 12px !important;
+}
+
+/* 针对 Edge 浏览器 */
+.el-input::-ms-input-placeholder {
+  font-size: 12px !important;
+}
+
+.el-overlay {
+  position: absolute !important;
+}
+
+@media (max-width: 540px) {
+  .form-checkbox {
+    --el-checkbox-input-height: 14px;
+    --el-checkbox-input-width: 14px;
+    .el-checkbox__inner:after {
+      height: 58%;
+      width: 26%;
+      top: 2%;
+      left: 34%;
+    }
+  }
+}
+
+.custom-message {
+  position: absolute;
+  --el-message-bg-color: var(--toast-bg-color);
+  border-width: 0;
+  --el-message-text-color: var(--main-text-color);
+  /* 成功类型消息的图标 */
+  .el-message-icon--success {
+    background: url('/svg/success.svg') no-repeat center center;
+    background-size: contain;
+    color: #00000000;
+  }
+
+  /* 警告类型消息的图标 */
+  .el-message-icon--warning {
+    background: url('/svg/warning.svg') no-repeat center center;
+    background-size: contain;
+    color: #00000000;
+  }
+
+  /* 错误类型消息的图标 */
+  .el-message-icon--error {
+    background: url('/svg/fail.svg') no-repeat center center;
+    background-size: contain;
+    color: #00000000;
+  }
+}
+
+.van-popup {
+  // position: absolute !important;
+  // max-width: 540px;
+}
+
+.van-popup--bottom {
+  margin: 0 auto !important;
+}
+
+.van-calendar__popup.van-popup--bottom,
+.van-calendar__popup.van-popup--top {
+  max-height: 560px;
+}

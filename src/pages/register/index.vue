@@ -277,9 +277,9 @@ onMounted(() => {
             <van-field v-model="formattedDateOfBirth" placeholder="Select date of birth" readonly name="dateOfBirth"
               right-icon="calendar-o" :rules="[{ required: true, message: 'Please select bate of birth' }]"
               @click="showCalendar = true">
-              <template #right-icon>
+              <!-- <template #right-icon>
                 <van-image :src="calendarIcon" width="20" height="20" fit="contain" />
-              </template>
+              </template> -->
             </van-field>
           </div>
           <div class="form-item">

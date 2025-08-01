@@ -6,6 +6,7 @@ const { title, showBack = true } = defineProps<{
 
 import { useCommonStore } from '@/stores/common'
 import { useSlots } from 'vue'
+import backIcon from '@/assets/images/icons/back_icon.png'
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 const slots = useSlots()
@@ -26,11 +27,12 @@ function goBack() {
     '--top-height': `${mediaQueryInfo.top}px`
   }">
     <div class="header-box">
-      <van-icon v-if="showBack" name="arrow-left" size="18" class="arrow-left" @click="goBack" />
-      <div v-else style="width: 18px; height: 1px"></div>
-      <div>{{ title }}</div>
+      <!-- <van-icon v-if="showBack" name="arrow-left" size="18" class="arrow-left" @click="goBack" /> -->
+      <van-image v-if="showBack" name="arrow-left" width="18" height="18" :src="backIcon" />
+      <div v-else style="width: 30px; height: 1px"></div>
+      <div class="title">{{ title }}</div>
       <slot name="right">
-        <div v-if="!slots.right" style="width: 18px; height: 1px"></div>
+        <div v-if="!slots.right" style="width: 30px; height: 1px"></div>
       </slot>
     </div>
   </div>
@@ -61,6 +63,11 @@ function goBack() {
 
   .arrow-left {
     padding-right: 12px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
   }
 }
 </style>

@@ -15,7 +15,15 @@ const router = createRouter({
     })
   },
   routes: [
-    { path: '/', name: 'Index', redirect: '/home' },
+    { path: '/', name: 'Index', redirect: '/login' },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import(/* webpackChunkName: "login" */ '@/pages/login/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
     {
       path: '/home',
       name: 'Home',

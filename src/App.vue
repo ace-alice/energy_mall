@@ -37,18 +37,14 @@ onMounted(async () => {
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <div>
-        <keep-alive>
-          <component :is="Component" v-if="route.meta.keepAlive" :key="route.path" />
-        </keep-alive>
-        <component :is="Component" v-if="!route.meta.keepAlive" :key="route.path" />
-      </div>
+      <keep-alive>
+        <component :is="Component" :key="route.path" />
+      </keep-alive>
     </transition>
-
   </router-view>
 </template>
 
-<style lang="scss" scoped>
+<style>
 .fade-enter-from,
 .fade-leave-to {
   /*定义进入开始和离开结束的透明度为0*/

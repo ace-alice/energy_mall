@@ -17,19 +17,53 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'Index', redirect: '/login' },
     {
+      path: '/index',
+      name: 'Layout',
+      redirect: '/index/home',
+      component: () => import('@/layouts/index-layout.vue'),
+      children: [
+        {
+          path: 'home',
+          name: 'Home',
+          component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'shopping',
+          name: 'Shopping',
+          component: () => import(/* webpackChunkName: "shopcart" */ '@/pages/shopcart/index.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'me',
+          name: 'Me',
+          component: () => import(/* webpackChunkName: "me" */ '@/pages/me/index.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+      ]
+    },
+    {
+      path: '/service',
+      name: 'Service',
+      component: () => import(/* webpackChunkName: "service" */ '@/pages/service/index.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
       path: '/login',
       name: 'Login',
       component: () => import(/* webpackChunkName: "login" */ '@/pages/login/index.vue'),
       meta: {
-        keepAlive: true
-      }
-    },
-    {
-      path: '/home',
-      name: 'Home',
-      component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
-      meta: {
-        keepAlive: true
+        keepAlive: true,
+        noAuth: true
       }
     },
     {
@@ -37,7 +71,33 @@ const router = createRouter({
       name: 'Register',
       component: () => import(/* webpackChunkName: "Register" */ '@/pages/register/index.vue'),
       meta: {
-        // keepAlive: true
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/forget-password',
+      name: 'ForgetPassword',
+      component: () => import(/* webpackChunkName: "forget" */ '@/pages/forget-password/index.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: () => import(/* webpackChunkName: "signin" */ '@/pages/signin/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/home-search',
+      name: 'HomeSearch',
+      component: () => import(/* webpackChunkName: "search" */ '@/pages/home-search/index.vue'),
+      meta: {
+        keepAlive: true
       }
     },
     {

@@ -1,14 +1,15 @@
 <script setup name="Home" lang="ts">
-import HomeHeader from './components/home_header.vue'
-import GuideRegister from './components/guide_register.vue'
+import HomeHeaderBox from './components/home-header-box.vue'
 </script>
 
 <template>
   <div class="normal-page">
-    <NormalHeader title="Home" />
-    <div class="home-content">
-      <GuideRegister />
-    </div>
+    <BgTwo />
+    <HomeHeader>
+      <template #box>
+        <HomeHeaderBox />
+      </template>
+    </HomeHeader>
   </div>
 </template>
 
@@ -17,10 +18,5 @@ import GuideRegister from './components/guide_register.vue'
   width: 100%;
   padding: 20px 16px;
   box-sizing: border-box;
-}
-
-.enter-box {
-  display: flex;
-  justify-items: center;
 }
 </style>

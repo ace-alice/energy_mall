@@ -1,7 +1,12 @@
 <script setup name="NormalHeader" lang="ts">
-const { title, showBack = true } = defineProps<{
+const {
+  title,
+  showBack = true,
+  background = true
+} = defineProps<{
   title?: string
   showBack?: boolean
+  background?: boolean
 }>()
 
 import { useCommonStore } from '@/stores/common'
@@ -23,12 +28,23 @@ function goBack() {
 </script>
 
 <template>
-  <div class="normal-header" :style="{
-    '--top-height': `${mediaQueryInfo.top}px`
-  }">
+  <div
+    class="normal-header"
+    :class="{ 'no-background': background }"
+    :style="{
+      '--top-height': `${mediaQueryInfo.top}px`
+    }"
+  >
     <div class="header-box">
       <!-- <van-icon v-if="showBack" name="arrow-left" size="18" class="arrow-left" @click="goBack" /> -->
-      <van-image v-if="showBack" name="arrow-left" width="18" height="18" :src="backIcon" />
+      <van-image
+        v-if="showBack"
+        name="arrow-left"
+        width="18"
+        height="18"
+        :src="backIcon"
+        @click="goBack"
+      />
       <div v-else style="width: 30px; height: 1px"></div>
       <div class="title">{{ title }}</div>
       <slot name="right">
@@ -39,6 +55,10 @@ function goBack() {
 </template>
 
 <style lang="scss" scoped>
+.no-background {
+  background-color: transparent !important;
+}
+
 .normal-header {
   width: 100%;
   padding-top: var(--top-height);

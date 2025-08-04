@@ -1,11 +1,14 @@
 <script setup name="HomeHeader" lang="ts">
 import { useCommonStore } from '@/stores/common'
+import bg02 from '@/assets/images/background/bg-2.png'
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
 const isFixed = ref(false)
 
 const slots = useSlots()
+
+const props = defineProps(['imgSrc'])
 </script>
 
 <template>
@@ -16,7 +19,8 @@ const slots = useSlots()
     class="home-header"
     :class="{ 'is-fixed': isFixed }"
     :style="{
-      '--top-height': `${mediaQueryInfo.top}px`
+      '--top-height': `${mediaQueryInfo.top}px`,
+      backgroundImage: isFixed ? `url(${props.imgSrc || bg02})` : 'unset'
     }"
   >
     <slot name="box">
@@ -28,7 +32,7 @@ const slots = useSlots()
 <style lang="scss" scoped>
 .is-fixed {
   background-color: var(--main-bg-color);
-  background-image: url('@/assets/images/background/bg-2.png');
+  // background-image: url('@/assets/images/background/bg-2.png');
   background-size: 100% auto;
 }
 

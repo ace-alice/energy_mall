@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { getLocal } from './storage'
 
 export function getSystemLang() {

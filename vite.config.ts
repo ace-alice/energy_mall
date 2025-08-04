@@ -95,7 +95,7 @@ export default ({ mode, command }: any) => {
       preprocessorOptions: {
         scss: {
           additionalData: scssResources.join(''),
-          quietDeps: true,
+          quietDeps: true
         }
       }
     }

@@ -4,36 +4,28 @@ import usernameIcon from '@/assets/images/icons/username.png'
 import loginLogo from '@/assets/images/common/login_logo.png'
 import openEyeIcon from '@/assets/images/icons/open_eye.png'
 import closeEyeIcon from '@/assets/images/icons/close_eye.png'
+import loginHook from '@/hooks/loginHook'
 
-const formData = reactive({
-  username: '',
-  password: ''
-})
-
-const openEye = ref(false)
-
-const checked = ref(true)
-const onSubmit = (values: any) => {
-  console.log('submit', values)
-}
-
-const router = useRouter()
+const { onSubmit, formData, router, checked, openEye } = loginHook()
 </script>
 
 <template>
   <div class="normal-page">
     <HeaderPlaceholder />
-    <NormalBackground />
+    <NormalBackground router="Login" />
     <img :src="loginLogo" width="75" style="margin-top: 80px; margin-left: 8px" alt="" />
     <div class="welcome-text">Welcome To Use Iberdrola</div>
     <van-form @submit="onSubmit" required class="login-form">
       <van-field
-        v-model="formData.username"
+        v-model="formData.phone"
         name="username"
         type="number"
         maxlength="11"
         placeholder="请输入手机号"
-        :rules="[{ required: true, message: '请输入手机号' }]"
+        :rules="[
+          { required: true, message: '请输入手机号' },
+          { pattern: /\d{11}/, message: '请输入正确手机号' }
+        ]"
       >
         <template #left-icon>
           <img :src="usernameIcon" width="24" height="24" alt="" />
@@ -62,6 +54,7 @@ const router = useRouter()
         block
         type="primary"
         native-type="submit"
+        :disabled="!checked"
         style="margin-top: 48px"
       >
         提交
@@ -129,6 +122,7 @@ const router = useRouter()
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  margin-bottom: 40px;
 
   & > div {
     cursor: pointer;

@@ -3,48 +3,44 @@ import passwordIcon from '@/assets/images/icons/password.png'
 import usernameIcon from '@/assets/images/icons/username.png'
 import loginLogo from '@/assets/images/common/login_logo.png'
 import invitationIcon from '@/assets/images/icons/invitation.png'
-import validCodeIcon from '@/assets/images/icons/valid_code.png'
+// import validCodeIcon from '@/assets/images/icons/valid_code.png'
 import openEyeIcon from '@/assets/images/icons/open_eye.png'
 import closeEyeIcon from '@/assets/images/icons/close_eye.png'
+import registerHook from '@/hooks/registerHook'
 
-const username = ref('')
-const password = ref('')
-const checked = ref(true)
-const onSubmit = (values: any) => {
-  console.log('submit', values)
-}
-
-const openEye = ref(false)
-
-const openEye2 = ref(false)
-
-const router = useRouter()
+const { formData, onSubmit, openEye, openEye2, openEye3, openEye4, checked, router } =
+  registerHook()
 </script>
 
 <template>
   <div class="normal-page">
     <NormalHeader />
-    <NormalBackground />
+    <NormalBackground router="Register" />
     <div class="re-box">
       <img :src="loginLogo" width="75" style="margin-left: 8px" alt="" />
       <div class="welcome-text">注册<span style="font-weight: 600">账号</span></div>
       <van-form @submit="onSubmit" required class="login-form">
         <van-field
-          v-model="username"
-          name="username"
+          v-model="formData.phone"
+          name="phone"
           placeholder="请输入手机号"
-          :rules="[{ required: true, message: '请输入手机号' }]"
+          :rules="[
+            { required: true, message: '请输入手机号' },
+            { pattern: /\d{11}/, message: '请输入正确手机号' }
+          ]"
+          autocomplete="off"
         >
           <template #left-icon>
             <img :src="usernameIcon" width="24" height="24" alt="" />
           </template>
         </van-field>
         <van-field
-          v-model="password"
+          v-model="formData.password"
           :type="openEye ? 'text' : 'password'"
           name="password"
           placeholder="请输入密码"
           :rules="[{ required: true, message: '请输入密码' }]"
+          autocomplete="off"
         >
           <template #left-icon>
             <img :src="passwordIcon" width="24" height="24" alt="" />
@@ -57,11 +53,19 @@ const router = useRouter()
           </template>
         </van-field>
         <van-field
-          v-model="password"
+          v-model="formData.password1"
           :type="openEye2 ? 'text' : 'password'"
-          name="password"
+          name="password1"
           placeholder="请再次输入密码"
-          :rules="[{ required: true, message: '请再次输入密码' }]"
+          :rules="[
+            { required: true, message: '请再次输入密码' },
+            {
+              validator: (val) => {
+                return formData.password != formData.password1 ? '两次输入的密码不一致' : ''
+              },
+              message: '两次输入的密码不一致'
+            }
+          ]"
         >
           <template #left-icon>
             <img :src="passwordIcon" width="24" height="24" alt="" />
@@ -74,9 +78,57 @@ const router = useRouter()
           </template>
         </van-field>
         <van-field
-          v-model="password"
+          v-model="formData.withdraw"
+          :type="openEye3 ? 'number' : 'password'"
+          name="withdraw"
+          :maxlength="6"
+          placeholder="请输入支付密码"
+          :rules="[
+            { required: true, message: '请输入支付密码' },
+            { pattern: /\d{6}/, message: '请输入6位数字作为支付密码' }
+          ]"
+        >
+          <template #left-icon>
+            <img :src="passwordIcon" width="24" height="24" alt="" />
+          </template>
+          <template #right-icon>
+            <div style="cursor: pointer; margin-top: 4px" @click="openEye3 = !openEye3">
+              <img :src="openEyeIcon" v-if="openEye3" width="24" height="24" alt="" />
+              <img :src="closeEyeIcon" v-else width="24" height="24" alt="" />
+            </div>
+          </template>
+        </van-field>
+        <van-field
+          v-model="formData.withdraw1"
+          :type="openEye4 ? 'number' : 'password'"
+          :maxlength="6"
+          name="withdraw1"
+          placeholder="请再次输入支付密码"
+          :rules="[
+            { required: true, message: '请再次输入支付密码' },
+            { pattern: /\d{6}/, message: '请输入6位数字作为支付密码' },
+            {
+              validator: (val) => {
+                return formData.withdraw != formData.withdraw1 ? '两次输入的密码不一致' : ''
+              },
+              message: '两次输入的密码不一致'
+            }
+          ]"
+        >
+          <template #left-icon>
+            <img :src="passwordIcon" width="24" height="24" alt="" />
+          </template>
+          <template #right-icon>
+            <div style="cursor: pointer; margin-top: 4px" @click="openEye4 = !openEye4">
+              <img :src="openEyeIcon" v-if="openEye4" width="24" height="24" alt="" />
+              <img :src="closeEyeIcon" v-else width="24" height="24" alt="" />
+            </div>
+          </template>
+        </van-field>
+        <van-field
+          v-model="formData.invite"
           type="text"
-          name="password"
+          name="invite"
           placeholder="请输入邀请码"
           :rules="[{ required: true, message: '请输入邀请码' }]"
         >
@@ -84,7 +136,7 @@ const router = useRouter()
             <img :src="invitationIcon" width="24" height="24" alt="" />
           </template>
         </van-field>
-        <van-field
+        <!-- <van-field
           v-model="password"
           type="text"
           name="password"
@@ -97,7 +149,7 @@ const router = useRouter()
           <template #right-icon>
             <div style="cursor: pointer; margin-top: 4px">45215</div>
           </template>
-        </van-field>
+        </van-field> -->
         <van-button
           class="submit-button"
           size="large"
@@ -105,6 +157,7 @@ const router = useRouter()
           type="primary"
           native-type="submit"
           style="margin-top: 48px"
+          :disabled="!checked"
         >
           注册
         </van-button>
@@ -150,7 +203,7 @@ const router = useRouter()
 
 .login-form {
   margin-top: 24px;
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
 }
 
 .custom {
@@ -171,6 +224,7 @@ const router = useRouter()
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  margin-bottom: 40px;
 
   .center {
     height: 12px;

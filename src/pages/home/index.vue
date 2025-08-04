@@ -4,12 +4,13 @@ import HomeHeaderBox from './components/home-header-box.vue'
 
 <template>
   <div class="normal-page">
-    <BgTwo />
+    <BgTwo router="Home" />
     <HomeHeader>
       <template #box>
         <HomeHeaderBox />
       </template>
     </HomeHeader>
+    <div style="height: 2000px; width: 100%">ascascasc</div>
   </div>
 </template>
 

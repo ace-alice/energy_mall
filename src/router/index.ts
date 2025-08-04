@@ -15,38 +15,46 @@ const router = createRouter({
     })
   },
   routes: [
-    { path: '/', name: 'Index', redirect: '/login' },
+    { path: '/', name: 'Index', redirect: '/home' },
     {
-      path: '/index',
-      name: 'Layout',
-      redirect: '/index/home',
-      component: () => import('@/layouts/index-layout.vue'),
-      children: [
-        {
-          path: 'home',
-          name: 'Home',
-          component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
-          meta: {
-            keepAlive: true
-          }
-        },
-        {
-          path: 'shopping',
-          name: 'Shopping',
-          component: () => import(/* webpackChunkName: "shopcart" */ '@/pages/shopcart/index.vue'),
-          meta: {
-            keepAlive: true
-          }
-        },
-        {
-          path: 'me',
-          name: 'Me',
-          component: () => import(/* webpackChunkName: "me" */ '@/pages/me/index.vue'),
-          meta: {
-            keepAlive: true
-          }
-        },
-      ]
+      path: '/home',
+      name: 'Home',
+      component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/shopping',
+      name: 'Shopping',
+      component: () => import(/* webpackChunkName: "shopcart" */ '@/pages/shopcart/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/me-normal',
+      name: 'MeNormal',
+      component: () => import(/* webpackChunkName: "me-normal" */ '@/pages/me/index-normal.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/me-vip',
+      name: 'MeVip',
+      component: () => import(/* webpackChunkName: "me-vip" */ '@/pages/me/index-vip.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/setting',
+      name: 'Setting',
+      component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/index.vue'),
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/service',

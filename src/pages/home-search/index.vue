@@ -4,7 +4,7 @@
 
 <template>
   <div class="normal-page">
-    <BgTwo />
+    <BgTwo router="HomeSearch" />
     <HomeHeader>
       <template #box>
         <!-- <HomeHeaderBox /> -->

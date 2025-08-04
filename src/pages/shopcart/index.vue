@@ -2,7 +2,7 @@
 
 <template>
   <div class="normal-page">
-    <BgTwo />
+    <BgTwo router="Shopping" />
     <HomeHeader>
       <template #box>
         <!-- <HomeHeaderBox /> -->

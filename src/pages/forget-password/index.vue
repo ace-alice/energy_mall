@@ -2,60 +2,61 @@
 import passwordIcon from '@/assets/images/icons/password.png'
 import usernameIcon from '@/assets/images/icons/username.png'
 import loginLogo from '@/assets/images/common/login_logo.png'
-import invitationIcon from '@/assets/images/icons/invitation.png'
 import validCodeIcon from '@/assets/images/icons/valid_code.png'
 import openEyeIcon from '@/assets/images/icons/open_eye.png'
 import closeEyeIcon from '@/assets/images/icons/close_eye.png'
+import forgetPasswordHook from '@/hooks/forgetPasswordHook'
 
-const username = ref('')
-const password = ref('')
-const checked = ref(true)
-const onSubmit = (values: any) => {
-  console.log('submit', values)
-}
-
-const openEye = ref(false)
-
-const openEye2 = ref(false)
-
-const router = useRouter()
+const { onSubmit, formData, openEye1, openEye2, router, getCode, counter } = forgetPasswordHook()
 </script>
 
 <template>
   <div class="normal-page">
     <NormalHeader />
-    <NormalBackground />
+    <NormalBackground router="ForgetPassword" />
     <div class="re-box">
       <img :src="loginLogo" width="75" style="margin-left: 8px" alt="" />
       <div class="welcome-text">忘记<span style="font-weight: 600">密码</span></div>
       <van-form @submit="onSubmit" required class="login-form">
         <van-field
-          v-model="username"
+          v-model="formData.phone"
           name="username"
           placeholder="请输入手机号"
-          :rules="[{ required: true, message: '请输入手机号' }]"
+          :rules="[
+            { required: true, message: '请输入手机号' },
+            { pattern: /\d{11}/, message: '请输入正确手机号' }
+          ]"
         >
           <template #left-icon>
             <img :src="usernameIcon" width="24" height="24" alt="" />
           </template>
         </van-field>
+        <div class="code-form">
+          <van-field
+            v-model="formData.code"
+            type="number"
+            :maxlength="6"
+            name="code"
+            placeholder="请输入验证码"
+            :rules="[{ required: true, message: '请输入验证码' }]"
+          >
+            <template #left-icon>
+              <img :src="validCodeIcon" width="24" height="24" alt="" />
+            </template>
+          </van-field>
+          <van-button
+            size="large"
+            round
+            @click="getCode"
+            :type="counter ? 'success' : 'default'"
+            :disabled="!!counter"
+            style="width: 120px; height: 54px; border: none; margin-left: 16px; font-size: 12px"
+            >{{ counter ? `${counter}s` : '获取验证码' }}</van-button
+          >
+        </div>
         <van-field
-          v-model="password"
-          type="text"
-          name="password"
-          placeholder="请输入验证码"
-          :rules="[{ required: true, message: '请输入验证码' }]"
-        >
-          <template #left-icon>
-            <img :src="validCodeIcon" width="24" height="24" alt="" />
-          </template>
-          <template #right-icon>
-            <div style="cursor: pointer; margin-top: 4px">45215</div>
-          </template>
-        </van-field>
-        <van-field
-          v-model="password"
-          :type="openEye ? 'text' : 'password'"
+          v-model="formData.password"
+          :type="openEye1 ? 'text' : 'password'"
           name="password"
           placeholder="请输入密码"
           :rules="[{ required: true, message: '请输入密码' }]"
@@ -64,18 +65,26 @@ const router = useRouter()
             <img :src="passwordIcon" width="24" height="24" alt="" />
           </template>
           <template #right-icon>
-            <div style="cursor: pointer; margin-top: 4px" @click="openEye = !openEye">
-              <img :src="openEyeIcon" v-if="openEye" width="24" height="24" alt="" />
+            <div style="cursor: pointer; margin-top: 4px" @click="openEye1 = !openEye1">
+              <img :src="openEyeIcon" v-if="openEye1" width="24" height="24" alt="" />
               <img :src="closeEyeIcon" v-else width="24" height="24" alt="" />
             </div>
           </template>
         </van-field>
         <van-field
-          v-model="password"
+          v-model="formData.password1"
           :type="openEye2 ? 'text' : 'password'"
-          name="password"
+          name="password1"
           placeholder="请再次输入密码"
-          :rules="[{ required: true, message: '请再次输入密码' }]"
+          :rules="[
+            { required: true, message: '请再次输入密码' },
+            {
+              validator: (val) => {
+                return formData.password != formData.password1 ? '两次输入的密码不一致' : ''
+              },
+              message: '两次输入的密码不一致'
+            }
+          ]"
         >
           <template #left-icon>
             <img :src="passwordIcon" width="24" height="24" alt="" />
@@ -108,6 +117,9 @@ const router = useRouter()
 </template>
 
 <style lang="scss" scoped>
+.code-form {
+  display: flex;
+}
 .re-box {
   padding: 0 28px;
 }

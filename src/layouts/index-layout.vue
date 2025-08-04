@@ -18,6 +18,8 @@ const router = useRouter()
         active-color="#000"
         route
         safe-area-inset-bottom
+        :fixed="false"
+        class="van-tabbar-index"
       >
         <van-tabbar-item to="/index/home">
           <span>首页</span>
@@ -50,4 +52,11 @@ const router = useRouter()
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.van-tabbar-index {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+</style>

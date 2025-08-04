@@ -2,7 +2,7 @@
 
 <template>
   <div class="normal-page">
-    <BgTwo />
+    <BgTwo router="Service" />
     <HomeHeader>
       <template #box>
         <!-- <HomeHeaderBox /> -->

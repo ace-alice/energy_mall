@@ -3,8 +3,8 @@ import MeHeaderBox from './components/me-header-box.vue'
 import bg03 from '@/assets/images/background/bg-3.png'
 import UserInfoBox from './components/user-info.vue'
 import VipMoneyInfoBox from './components/vip-money-info.vue'
-import OrderEnterBox from './components/order-enter.vue'
-import MenuRouterBox from './components/menu-router.vue'
+import VipServerEnterBox from './components/vip-server-enter.vue'
+import VipMenuRouterBox from './components/vip-menu-router.vue'
 </script>
 
 <template>
@@ -18,8 +18,8 @@ import MenuRouterBox from './components/menu-router.vue'
     <div class="me-box">
       <UserInfoBox />
       <VipMoneyInfoBox />
-      <OrderEnterBox />
-      <MenuRouterBox />
+      <VipServerEnterBox />
+      <VipMenuRouterBox />
     </div>
   </div>
 </template>

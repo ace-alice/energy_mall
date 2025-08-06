@@ -5,9 +5,14 @@ import { useCommonStore } from '@/stores/common'
 import home_se from '@/assets/images/tabs/home_se.png'
 import home_un from '@/assets/images/tabs/home_un.png'
 import shopping_un from '@/assets/images/tabs/shopping_un.png'
+import shopping_se from '@/assets/images/tabs/shopping_se.png'
 import service_un from '@/assets/images/tabs/service_un.png'
 import me_un from '@/assets/images/tabs/me_un.png'
 import me_se from '@/assets/images/tabs/me_se.png'
+import team_un from '@/assets/images/tabs/team_un.png'
+import team_se from '@/assets/images/tabs/team_se.png'
+import order_un from '@/assets/images/tabs/order_un.png'
+import dayjs from 'dayjs'
 
 const commonStore = useCommonStore()
 commonStore.$persist()
@@ -17,9 +22,25 @@ const route = useRoute()
 
 const active = ref(0)
 
-const { token } = storeToRefs(useCommonStore())
+const { token, isVip, vipExpiredDate } = storeToRefs(useCommonStore())
+
+const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+  // 触发刷新/关闭前逻辑
+  console.log('⛔ 页面即将刷新或关闭')
+
+  if (isVip.value) {
+    vipExpiredDate.value = dayjs().unix() + 10
+  }
+
+  window.removeEventListener('beforeunload', handleBeforeUnload)
+
+  // 如果你想提示用户（不推荐用于自动保存）
+  event.preventDefault()
+  event.returnValue = '' // Chrome 要设置这个才有效
+}
 
 onMounted(async () => {
+  window.addEventListener('beforeunload', handleBeforeUnload)
   commonStore.initMediaQuery()
   window.WebViewJSBridge.registerHandler(
     ChannelType.routeBack,
@@ -34,6 +55,10 @@ onMounted(async () => {
     }
   )
 })
+
+onBeforeUnmount(() => {
+  window.removeEventListener('beforeunload', handleBeforeUnload)
+})
 </script>
 
 <template>
@@ -44,61 +69,99 @@ onMounted(async () => {
       </keep-alive>
     </transition>
   </router-view>
-  <teleport to="#app" v-if="token">
-    <van-tabbar
-      v-if="
-        ['Home', 'MeNormal', 'Shopping', 'MeVip'].includes(
-          (router.currentRoute?.value.name as any) || ''
-        )
-      "
-      v-model="active"
-      active-color="#000"
-      route
-      safe-area-inset-bottom
-      class="van-tabbar-index"
-      z-index="10000"
-      :fixed="false"
-    >
-      <van-tabbar-item to="/home">
-        <span>首页</span>
-        <template #icon="props">
-          <img :src="home_se" v-show="props.active" />
-          <img :src="home_un" v-show="!props.active" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item to="/shopping">
-        <span>购物车</span>
-        <template #icon="props">
-          <img :src="shopping_un" v-show="props.active" />
-          <img :src="shopping_un" v-show="!props.active" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item to="/service">
-        <span>客服</span>
-        <template #icon="props">
-          <img :src="service_un" v-show="props.active" />
-          <img :src="service_un" v-show="!props.active" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item to="/team">
-        <span>客服</span>
-        <template #icon="props">
-          <img :src="service_un" v-show="props.active" />
-          <img :src="service_un" v-show="!props.active" />
-        </template>
-      </van-tabbar-item>
-      <van-tabbar-item to="/me-normal">
-        <span>我的</span>
-        <template #icon="props">
-          <img :src="me_se" v-show="props.active" />
-          <img :src="me_un" v-show="!props.active" />
-        </template>
-      </van-tabbar-item>
-    </van-tabbar>
-  </teleport>
+  <van-tabbar
+    v-if="
+      ['Home', 'MeNormal', 'Shopping', 'MeVip', 'TeamVip'].includes(
+        (router.currentRoute?.value.name as any) || ''
+      )
+    "
+    v-model="active"
+    active-color="#000"
+    route
+    safe-area-inset-bottom
+    class="van-tabbar-index"
+    z-index="10"
+  >
+    <van-tabbar-item to="/home">
+      <span>首页</span>
+      <template #icon="props">
+        <img :src="home_se" v-show="props.active" />
+        <img :src="home_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/shopping" v-if="!isVip">
+      <span>购物车</span>
+      <template #icon="props">
+        <img :src="shopping_se" v-show="props.active" />
+        <img :src="shopping_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/shopping" v-if="isVip">
+      <span>我的订单</span>
+      <template #icon="props">
+        <img :src="shopping_se" v-show="props.active" />
+        <img :src="order_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/service" v-if="isVip">
+      <span>Iberdrola</span>
+      <template #icon="props">
+        <div class="iberdrola">
+          <div></div>
+        </div>
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/team" v-if="!isVip">
+      <span>客服</span>
+      <template #icon="props">
+        <img :src="service_un" v-show="props.active" />
+        <img :src="service_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/team-vip" v-if="isVip">
+      <span>团队</span>
+      <template #icon="props">
+        <img :src="team_se" v-show="props.active" />
+        <img :src="team_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/me-normal" v-if="!isVip">
+      <span>我的</span>
+      <template #icon="props">
+        <img :src="me_se" v-show="props.active" />
+        <img :src="me_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/me-vip" v-if="isVip">
+      <span>我的</span>
+      <template #icon="props">
+        <img :src="me_se" v-show="props.active" />
+        <img :src="me_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+  </van-tabbar>
 </template>
 
-<style>
+<style lang="scss">
+.iberdrola {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  overflow: visible;
+  & > div {
+    position: absolute;
+    height: 48px;
+    width: 48px;
+    border: 3px solid white;
+    border-radius: 50%;
+    top: -28px;
+    left: -14px;
+    z-index: 10;
+    background-color: rgb(255, 136, 0);
+    background-image: url('@/assets/images/icons/iberdrola.png');
+    background-size: 100% 100%;
+  }
+}
 .fade-enter-from,
 .fade-leave-to {
   /*定义进入开始和离开结束的透明度为0*/

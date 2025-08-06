@@ -49,6 +49,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/team-vip',
+      name: 'TeamVip',
+      component: () => import(/* webpackChunkName: "team-vip" */ '@/pages/team/index-vip.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/setting',
       name: 'Setting',
       component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/index.vue'),

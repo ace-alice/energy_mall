@@ -1,29 +1,37 @@
 <template>
   <div class="menu-router">
     <van-cell-group :border="false">
-      <van-cell
-        title="会员专属商场"
-        :border="false"
-        :icon="mall"
-        is-link
-        to="/me-vip"
-        @click="toVipPage"
-      >
+      <van-cell title="我的卡券" :border="false" :icon="mall" is-link to="/me-vip">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="充值" :border="false" :icon="recharge" is-link to="index">
+      <van-cell title="资金明细" :border="false" :icon="recharge" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="提现" :border="false" :icon="withdraw" is-link to="index">
+      <van-cell title="充值/兑换记录" :border="false" :icon="transfer" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="转账" :border="false" :icon="transfer" is-link to="index">
+      <van-cell title="用户指南" :border="false" :icon="guide" is-link to="index">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
+      <van-cell title="贷款" :border="false" :icon="withdraw" is-link to="index">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
+      <van-cell title="特殊积分" :border="false" :icon="points" is-link to="index">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
+      <van-cell title="会员等级说明" :border="false" :icon="level_notice" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
@@ -32,19 +40,19 @@
   </div>
 </template>
 
-<script name="MenuRouterBox" setup lang="ts">
+<script name="VipMenuRouterBox" setup lang="ts">
 import allowRight from '@/assets/images/icons/allow-right.png'
 import recharge from '@/assets/images/icons/recharge.png'
 import mall from '@/assets/images/icons/mall.png'
 import withdraw from '@/assets/images/icons/withdraw.png'
 import transfer from '@/assets/images/icons/transfer.png'
+import guide from '@/assets/images/icons/guide.png'
+import level_notice from '@/assets/images/icons/level_notice.png'
+import points from '@/assets/images/icons/points.png'
+
 import { useCommonStore } from '@/stores/common'
 
 const { isVip } = storeToRefs(useCommonStore())
-
-function toVipPage() {
-  isVip.value = true
-}
 
 const router = useRouter()
 </script>

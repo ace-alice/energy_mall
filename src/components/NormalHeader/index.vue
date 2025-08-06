@@ -30,7 +30,7 @@ function goBack() {
 <template>
   <div
     class="normal-header"
-    :class="{ 'no-background': background }"
+    :class="{ 'no-background': !background }"
     :style="{
       '--top-height': `${mediaQueryInfo.top}px`
     }"
@@ -71,7 +71,7 @@ function goBack() {
   top: 0;
 
   .header-box {
-    height: 72px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;

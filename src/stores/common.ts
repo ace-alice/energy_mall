@@ -8,10 +8,13 @@ import { getLocal, removeLocal, setLocal } from '@/utils/storage'
 import { userInfoApi } from '@/api'
 import { useRouter } from 'vue-router'
 import { Base64 } from 'js-base64'
+import dayjs from 'dayjs'
 
 export const useCommonStore = defineStore(
   'common',
   () => {
+    const isVip = ref(false)
+    const vipExpiredDate = ref<number>(0)
     const lang = ref(initLang())
     const token = ref(getLocal('token'))
     const mediaQueryInfo = reactive(Object.assign({}, defaultMediaQueryInfo))
@@ -70,7 +73,17 @@ export const useCommonStore = defineStore(
       })
     }
 
-    return { token, showLangChar, setToken, initMediaQuery, loginOut, mediaQueryInfo, userInfo }
+    return {
+      token,
+      showLangChar,
+      setToken,
+      initMediaQuery,
+      loginOut,
+      mediaQueryInfo,
+      userInfo,
+      isVip,
+      vipExpiredDate
+    }
   },
   {
     // 配置持久化
@@ -85,6 +98,18 @@ export const useCommonStore = defineStore(
         // 自定义反序列化
         deserialize: (storedValue: any) => {
           return JSON.parse(Base64.decode(storedValue))
+        }
+      },
+      afterHydrate: (context) => {
+        console.log('vipExpiredDate', context.store.$state.vipExpiredDate)
+        if (
+          !context.store.$state.vipExpiredDate ||
+          !context.store.$state.isVip ||
+          !(context.store.$state.vipExpiredDate > dayjs().unix())
+        ) {
+          context.store.$state.isVip = false
+        } else {
+          context.store.$state.vipExpiredDate = 0
         }
       },
       debug: true

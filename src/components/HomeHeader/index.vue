@@ -34,6 +34,7 @@ const props = defineProps(['imgSrc'])
   background-color: var(--main-bg-color);
   // background-image: url('@/assets/images/background/bg-2.png');
   background-size: 100% auto;
+  background-repeat: no-repeat;
 }
 
 .home-header {

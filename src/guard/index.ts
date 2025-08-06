@@ -1,6 +1,8 @@
 // 引入 router 实例
 import router from '@/router'
 import { getLocal } from '@/utils/storage'
+import { useCommonStore } from '@/stores/common'
+import { storeToRefs } from 'pinia'
 
 const noAuthRoutes = ['Login', 'Register']
 
@@ -12,7 +14,14 @@ router.beforeEach(async (to, from, next) => {
   } else if (noAuthRoutes.includes(to.name?.toString() || '') && token) {
     next('/home')
   } else {
-    next()
+    const { isVip } = storeToRefs(useCommonStore())
+    if (!isVip.value && to.name?.toString().includes('Vip')) {
+      next({ name: 'MeNormal' })
+    } else if (isVip.value && to.name?.toString().includes('Normal')) {
+      next({ name: 'MeVip' })
+    } else {
+      next()
+    }
   }
 })
 

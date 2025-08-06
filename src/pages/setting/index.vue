@@ -1,26 +1,17 @@
 <script setup name="Setting" lang="ts">
-import MeHeaderBox from './components/me-header-box.vue'
-import bg03 from '@/assets/images/background/bg-3.png'
-import UserInfoBox from './components/user-info.vue'
-import MoneyInfoBox from './components/money-info.vue'
-import OrderEnterBox from './components/order-enter.vue'
-import MenuRouterBox from './components/menu-router.vue'
+import AvatarUsernameBox from './components/avatar-username.vue'
+import RealNamePhoneBox from './components/real-name-phone.vue'
+import SetMenuRouterBox from './components/set-menu-router.vue'
+import LoginOutBox from './components/logout.vue'
 </script>
 
 <template>
   <div class="normal-page">
-    <BgTwo :imgSrc="bg03" router="MeVip" />
-    <HomeHeader :imgSrc="bg03">
-      <template #box>
-        <MeHeaderBox />
-      </template>
-    </HomeHeader>
-    <div class="me-box">
-      <UserInfoBox />
-      <MoneyInfoBox />
-      <OrderEnterBox />
-      <MenuRouterBox />
-    </div>
+    <NormalHeader title="账号设置" />
+    <AvatarUsernameBox />
+    <RealNamePhoneBox />
+    <SetMenuRouterBox />
+    <LoginOutBox />
   </div>
 </template>
 

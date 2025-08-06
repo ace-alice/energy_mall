@@ -13,7 +13,50 @@
         <van-icon name="arrow" />
       </div>
     </div>
-    <div class="money-box">acasc</div>
+    <div class="money-box">
+      <van-grid :border="false" column-num="3" :center="false">
+        <van-grid-item class="direction">
+          <div>
+            <div>
+              <VueCountTo :end-val="Number(userInfo.money)" :start-val="moneyStartVal" />
+            </div>
+            <div class="label">账户A积分</div>
+          </div>
+        </van-grid-item>
+        <van-grid-item class="direction">
+          <div>
+            <div>22345.00</div>
+            <div class="label">账户B积分</div>
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>
+            <div>
+              <VueCountTo :end-val="Number(userInfo.user_points)" :start-val="pointStartVal" />
+            </div>
+            <div class="label">累计收益B积分</div>
+          </div>
+        </van-grid-item>
+        <van-grid-item class="direction">
+          <div>
+            <div>22345.00</div>
+            <div class="label">可用余额(USDT)</div>
+          </div>
+        </van-grid-item>
+        <van-grid-item class="direction">
+          <div>
+            <div>22345.00</div>
+            <div class="label">投资中(USDT)</div>
+          </div>
+        </van-grid-item>
+        <van-grid-item>
+          <div>
+            <div>22345.00</div>
+            <div class="label">总余额(USDT)</div>
+          </div>
+        </van-grid-item>
+      </van-grid>
+    </div>
   </div>
 </template>
 
@@ -61,6 +104,23 @@ watch(
     background-color: white;
     border-radius: 12px;
     padding: 12px;
+  }
+  .direction {
+    position: relative;
+    &::after {
+      content: '/';
+      position: absolute;
+      font-size: 12px;
+      color: #8d9196;
+      opacity: 0.6;
+      top: 20px;
+      right: 0;
+    }
+  }
+  .label {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #999999;
   }
 }
 </style>

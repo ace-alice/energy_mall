@@ -88,3 +88,14 @@
     margin-top: 2px;
   }
 }
+
+.van-cell {
+  align-items: center;
+  .van-cell__title span {
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .van-cell__right-icon {
+    color: var(--main-text-color);
+  }
+}

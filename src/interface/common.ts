@@ -82,3 +82,15 @@ export interface TeamInfo {
   month_recharge: number
   total_earn: number
 }
+
+export interface BannerItem {
+  id: number
+  title: string
+  img: string
+  url: string
+  content: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}

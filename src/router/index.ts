@@ -15,11 +15,19 @@ const router = createRouter({
     })
   },
   routes: [
-    { path: '/', name: 'Index', redirect: '/home' },
+    { path: '/', name: 'Index', redirect: '/home-normal' },
     {
-      path: '/home',
-      name: 'Home',
+      path: '/home-normal',
+      name: 'HomeNormal',
       component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/home-vip',
+      name: 'HomeVip',
+      component: () => import(/* webpackChunkName: "home-vip" */ '@/pages/home/index-vip.vue'),
       meta: {
         keepAlive: true
       }

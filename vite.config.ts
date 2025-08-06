@@ -19,10 +19,10 @@ export default ({ mode, command }: any) => {
       open: true,
       port: Number(env.VITE_APP_PORT),
       proxy: {
-        '/api': {
+        '/prev': {
           target: env.VITE_APP_API_BASEURL,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/\/api/, '')
+          rewrite: (path) => path.replace(/\/prev/, '')
         }
       }
     },

@@ -1,16 +1,21 @@
 <script setup name="Home" lang="ts">
 import HomeHeaderBox from './components/home-header-box.vue'
+import BannerBox from './components/banner-box.vue'
+import ComIntroduceBox from './components/com-introduce.vue'
 </script>
 
 <template>
   <div class="normal-page">
-    <BgTwo router="HomeNormal" />
+    <BgTwo router="HomeVip" />
     <HomeHeader>
       <template #box>
         <HomeHeaderBox />
       </template>
     </HomeHeader>
-    <div style="height: 2000px; width: 100%">ascascasc</div>
+    <div style="padding: 0 16px">
+      <BannerBox />
+      <ComIntroduceBox />
+    </div>
   </div>
 </template>
 

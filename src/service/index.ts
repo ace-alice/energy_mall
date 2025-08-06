@@ -10,7 +10,7 @@ import 'vant/lib/toast/style'
 
 import { useCommonStore } from '@/stores/common'
 
-const baseURL = window.location.origin + '/api'
+const baseURL = window.location.origin + '/prev'
 
 // 配置新建一个 axios 实例
 const service = axios.create({

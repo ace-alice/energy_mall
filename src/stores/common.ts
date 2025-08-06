@@ -19,6 +19,8 @@ export const useCommonStore = defineStore(
     const token = ref(getLocal('token'))
     const mediaQueryInfo = reactive(Object.assign({}, defaultMediaQueryInfo))
 
+    const serviceUrl = ref('')
+
     const router = useRouter()
 
     const userInfo = reactive<UserInfo>(Object.assign({}, defaultUserInfo))
@@ -36,6 +38,7 @@ export const useCommonStore = defineStore(
 
     function loginOut() {
       setToken('')
+      isVip.value = false
       Object.assign(userInfo, defaultUserInfo)
     }
 
@@ -82,7 +85,8 @@ export const useCommonStore = defineStore(
       mediaQueryInfo,
       userInfo,
       isVip,
-      vipExpiredDate
+      vipExpiredDate,
+      serviceUrl
     }
   },
   {

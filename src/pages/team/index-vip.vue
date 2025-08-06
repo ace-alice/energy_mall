@@ -52,11 +52,11 @@
         color="#13B756"
         title-active-color="#fff"
         title-inactive-color="#13B756"
-        offset-top="104"
+        :offset-top="104 + mediaQueryInfo.top"
       >
-        <van-tab title="查看一级下层"> <div style="height: 1000px"></div> </van-tab>
-        <van-tab title="查看二级下层"> 内容 </van-tab>
-        <van-tab title="查看三级下层"> 内容 </van-tab>
+        <van-tab title="查看一级下层"><TeamList /></van-tab>
+        <van-tab title="查看二级下层"> <TeamList /> </van-tab>
+        <van-tab title="查看三级下层"> <TeamList /> </van-tab>
       </van-tabs>
     </div>
   </div>
@@ -68,12 +68,23 @@ import homeLogo from '@/assets/images/common/home_logo.png'
 import WithThreeInfoBox from './components/with-three-info.vue'
 import TeamCommissionBox from './components/team-commission.vue'
 import TeamOverviewBox from './components/team-overview.vue'
+import TeamList from './components/team-list.vue'
+import { useCommonStore } from '@/stores/common'
 
 const searchText = ref('')
+
+const { mediaQueryInfo } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>
 :deep(.team-tabs.van-tabs--card) {
+  .van-sticky--fixed {
+    .van-tabs__nav--card {
+      border-radius: unset;
+      background-color: #222;
+    }
+  }
+
   .van-tabs__nav--card {
     padding: 4px;
   }

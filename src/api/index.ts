@@ -84,3 +84,28 @@ export function resetLoginPassword(data: ResetLoginForm) {
     data
   })
 }
+
+/**
+ * 获取设置信息
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function settingApi(params: { key: string }) {
+  return service({
+    url: '/api/setting',
+    method: 'GET',
+    params
+  })
+}
+
+/**
+ * 获取banners
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function bannerApi() {
+  return service({
+    url: '/api/banner/',
+    method: 'GET'
+  })
+}

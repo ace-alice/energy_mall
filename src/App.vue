@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
   </router-view>
   <van-tabbar
     v-if="
-      ['Home', 'MeNormal', 'Shopping', 'MeVip', 'TeamVip'].includes(
+      ['HomeVip', 'HomeNormal', 'MeNormal', 'Shopping', 'MeVip', 'TeamVip'].includes(
         (router.currentRoute?.value.name as any) || ''
       )
     "
@@ -82,7 +82,14 @@ onBeforeUnmount(() => {
     class="van-tabbar-index"
     z-index="10"
   >
-    <van-tabbar-item to="/home">
+    <van-tabbar-item to="/home-normal" v-if="!isVip">
+      <span>首页</span>
+      <template #icon="props">
+        <img :src="home_se" v-show="props.active" />
+        <img :src="home_un" v-show="!props.active" />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item to="/home-vip" v-if="isVip">
       <span>首页</span>
       <template #icon="props">
         <img :src="home_se" v-show="props.active" />

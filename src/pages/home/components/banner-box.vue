@@ -3,7 +3,11 @@
     <van-swipe :autoplay="3000" lazy-render height="360" class="home-swipe">
       <van-swipe-item v-for="image in images" :key="image.id">
         <div class="item-box">
-          <img :src="image.img" width="100%" />
+          <van-image width="100%" height="100%" radius="8" fit="scale-down" :src="image.img">
+            <template #error>
+              <img :src="bg2" alt="" srcset="" />
+            </template>
+          </van-image>
           <div class="info">
             <div>{{ image.title }}</div>
             <div>{{ image.content }}</div>
@@ -17,6 +21,7 @@
 <script setup lang="ts" name="BannerBox">
 import { bannerApi } from '@/api/index'
 import type { BannerItem } from '@/interface/common'
+import bg2 from '@/assets/images/background/bg_1.png'
 
 const images = ref<BannerItem[]>([])
 

@@ -33,6 +33,24 @@ const router = createRouter({
       }
     },
     {
+      path: '/project-detail-normal/:id',
+      name: 'ProjectDetailNormal',
+      component: () =>
+        import(/* webpackChunkName: "project-detail-normal" */ '@/pages/project-detail/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/project-detail-vip',
+      name: 'ProjectDetailVip',
+      component: () =>
+        import(/* webpackChunkName: "project-detail-vip" */ '@/pages/project-detail/index-vip.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/shopping',
       name: 'Shopping',
       component: () => import(/* webpackChunkName: "shopcart" */ '@/pages/shopcart/index.vue'),

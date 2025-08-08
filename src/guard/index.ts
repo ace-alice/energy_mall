@@ -9,10 +9,11 @@ const noAuthRoutes = ['Login', 'Register']
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
   const token = getLocal('token')
+  console.log('to.name?.toString()', to.name?.toString())
   if (!(to.meta?.noAuth || false) && !token) {
     next(`/login`)
   } else if (noAuthRoutes.includes(to.name?.toString() || '') && token) {
-    next('/home')
+    next('/home-normal')
   } else {
     const { isVip } = storeToRefs(useCommonStore())
     if (!isVip.value && to.name?.toString().includes('Vip')) {

@@ -2,6 +2,8 @@
 import HomeHeaderBox from './components/home-header-box.vue'
 import BannerBox from './components/banner-box.vue'
 import ComIntroduceBox from './components/com-introduce.vue'
+import ComVideoBox from './components/com-video.vue'
+import NewsListBox from './components/news-list.vue'
 </script>
 
 <template>
@@ -15,6 +17,8 @@ import ComIntroduceBox from './components/com-introduce.vue'
     <div style="padding: 0 16px">
       <BannerBox />
       <ComIntroduceBox />
+      <ComVideoBox />
+      <NewsListBox />
     </div>
   </div>
 </template>

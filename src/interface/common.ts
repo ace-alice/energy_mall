@@ -94,3 +94,66 @@ export interface BannerItem {
   create_at: string
   update_at: string
 }
+
+export interface NewsItemType {
+  id: number
+  title: string
+  img: string
+  code: string
+  desc: string
+  release_time: string
+  content: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  class_id: number
+  class_name: string
+}
+
+export interface GroupClassType {
+  id: number
+  title: string
+  img: string
+  remark: string
+  sort: number
+  type: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface ProjectItemType {
+  id: number
+  title: string
+  class_id: number
+  class_name: string
+  is_recommend: number
+  good_id: number
+  good_name: string
+  good_img: string
+  sort: number
+  price: string
+  people: number
+  people_add: number
+  people_time: number
+  process_time: number
+  process_num: string
+  process_update_time: number
+  fail_money: string
+  limit: number
+  level: number
+  item_money: string
+  status: number
+  next_time: string
+  cycle: number
+  desc: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  good_price: string
+  good_content: string
+  period: string
+}

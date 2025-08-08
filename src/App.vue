@@ -42,6 +42,7 @@ const handleBeforeUnload = (event: BeforeUnloadEvent) => {
 onMounted(async () => {
   window.addEventListener('beforeunload', handleBeforeUnload)
   commonStore.initMediaQuery()
+  commonStore.getGroupClasses()
   window.WebViewJSBridge.registerHandler(
     ChannelType.routeBack,
     function (data: any, success: Function, fail: Function) {
@@ -118,7 +119,7 @@ onBeforeUnmount(() => {
         </div>
       </template>
     </van-tabbar-item>
-    <van-tabbar-item to="/team" v-if="!isVip">
+    <van-tabbar-item to="/service" v-if="!isVip">
       <span>客服</span>
       <template #icon="props">
         <img :src="service_un" v-show="props.active" />

@@ -2,10 +2,10 @@ import { defineStore } from 'pinia'
 import { ref, reactive, computed, watch } from 'vue'
 import { initLang } from '@/utils/common'
 import { AppChannelType } from '@/tools/jsBridge/interface'
-import type { MediaQueryInfo, UserInfo } from '@/interface/common'
+import type { GroupClassType, MediaQueryInfo, UserInfo } from '@/interface/common'
 import { defaultMediaQueryInfo, defaultUserInfo } from '@/defaultValue'
-import { getLocal, removeLocal, setLocal } from '@/utils/storage'
-import { userInfoApi } from '@/api'
+import { getLocal, setLocal } from '@/utils/storage'
+import { groupClassesApi, settingApi, userInfoApi } from '@/api'
 import { useRouter } from 'vue-router'
 import { Base64 } from 'js-base64'
 import dayjs from 'dayjs'
@@ -17,13 +17,17 @@ export const useCommonStore = defineStore(
     const vipExpiredDate = ref<number>(0)
     const lang = ref(initLang())
     const token = ref(getLocal('token'))
-    const mediaQueryInfo = reactive(Object.assign({}, defaultMediaQueryInfo))
+    const mediaQueryInfo = reactive<MediaQueryInfo>(Object.assign({}, defaultMediaQueryInfo))
 
     const serviceUrl = ref('')
+
+    const comVideoUrl = ref('')
 
     const router = useRouter()
 
     const userInfo = reactive<UserInfo>(Object.assign({}, defaultUserInfo))
+
+    const groupClasses = ref<GroupClassType[]>([])
 
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
@@ -76,6 +80,24 @@ export const useCommonStore = defineStore(
       })
     }
 
+    function geServiceUrl() {
+      settingApi({ key: 'kefu' }).then((res) => {
+        serviceUrl.value = res.data.data.val || ''
+      })
+    }
+
+    function getComVideoUrl() {
+      settingApi({ key: 'home_video_link' }).then((res) => {
+        comVideoUrl.value = res.data.data.val || ''
+      })
+    }
+
+    function getGroupClasses() {
+      groupClassesApi().then((res) => {
+        groupClasses.value = res.data.data.data || []
+      })
+    }
+
     return {
       token,
       showLangChar,
@@ -86,7 +108,12 @@ export const useCommonStore = defineStore(
       userInfo,
       isVip,
       vipExpiredDate,
-      serviceUrl
+      serviceUrl,
+      getComVideoUrl,
+      comVideoUrl,
+      geServiceUrl,
+      groupClasses,
+      getGroupClasses
     }
   },
   {

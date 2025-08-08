@@ -9,7 +9,14 @@
         alt=""
         @click="router.push({ name: 'HomeSearch' })"
       />
-      <div class="right-img" @click="router.push({ name: 'Signin' })">
+      <img
+        v-if="isVip"
+        :src="service_un"
+        width="22"
+        alt=""
+        @click="router.push({ name: 'Service' })"
+      />
+      <div class="right-img" @click="router.push({ name: 'Signin' })" v-if="!isVip">
         <img :src="signinIcon" class="arrow-left" width="20" alt="" />
         <img :src="priceIcon" class="price" width="20" alt="" />
       </div>
@@ -22,6 +29,11 @@ import homeLogo from '@/assets/images/common/home_logo.png'
 import searchIcon from '@/assets/images/icons/search.png'
 import signinIcon from '@/assets/images/icons/signin.png'
 import priceIcon from '@/assets/images/icons/price.png'
+import service_un from '@/assets/images/tabs/service_un.png'
+
+import { useCommonStore } from '@/stores/common'
+
+const { isVip } = storeToRefs(useCommonStore())
 
 const router = useRouter()
 </script>

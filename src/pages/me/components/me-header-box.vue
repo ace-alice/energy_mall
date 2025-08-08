@@ -3,7 +3,7 @@
     <img :src="homeLogo" height="32" alt="" />
     <div class="box-right">
       <img
-        v-if="userInfo.level == 0"
+        v-if="isVip"
         :src="service_un"
         width="22"
         alt=""
@@ -11,7 +11,7 @@
         style="margin-right: 24px"
       />
       <img :src="settingIcon" width="22" alt="" @click="router.push({ name: 'Setting' })" />
-      <div class="right-img" @click="router.push({ name: 'Signin' })" v-if="userInfo.level != 0">
+      <div class="right-img" @click="router.push({ name: 'Signin' })" v-if="!isVip">
         <img :src="signinIcon" class="arrow-left" width="20" alt="" />
         <img :src="priceIcon" class="price" width="20" alt="" />
       </div>
@@ -27,7 +27,7 @@ import priceIcon from '@/assets/images/icons/price.png'
 import service_un from '@/assets/images/tabs/service_un.png'
 import { useCommonStore } from '@/stores/common'
 
-const { userInfo } = storeToRefs(useCommonStore())
+const { userInfo, isVip } = storeToRefs(useCommonStore())
 
 const router = useRouter()
 </script>

@@ -18,3 +18,16 @@ export function initLang(): string {
 export const getImageUrl = (imageName: string, type = '.png') => {
   return new URL(`/src/assets/images/pay_type/${imageName}${type}`, import.meta.url).href
 }
+
+export const htmlDecodeByRegExp = (str: string) => {
+  var temp = ''
+  if (str.length == 0) return ''
+  temp = str.replace(/&amp;/g, '&')
+  temp = temp.replace(/&lt;/g, '<')
+  temp = temp.replace(/&gt;/g, '>')
+  temp = temp.replace(/&nbsp;/g, ' ')
+  temp = temp.replace(/&#39;/g, "'")
+  temp = temp.replace(/&quot;/g, '"')
+  temp = temp.replace(/↵/g, '')
+  return temp
+}

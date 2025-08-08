@@ -109,3 +109,54 @@ export function bannerApi() {
     method: 'GET'
   })
 }
+
+/**
+ * 获取文章列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getArticles(data: { class_id: number; page: number }) {
+  return service({
+    url: '/article/lists',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取产品分类
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function groupClassesApi() {
+  return service({
+    url: '/groupBy/classes',
+    method: 'GET'
+  })
+}
+
+/**
+ * 获取产品列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function projectListApi(data: any) {
+  return service({
+    url: '/groupBy/lists',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取产品详情
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getProjectDetailApi(data: any) {
+  return service({
+    url: '/groupBy/info',
+    method: 'POST',
+    params: data
+  })
+}

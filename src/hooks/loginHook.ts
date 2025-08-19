@@ -2,7 +2,7 @@ import { loginApi } from '@/api'
 import { useCommonStore } from '@/stores/common'
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { showLoadingToast } from 'vant'
+import { showLoadingToast, closeToast } from 'vant'
 
 export default function () {
   const { setToken } = useCommonStore()
@@ -22,7 +22,7 @@ export default function () {
       .then((res) => {
         if (res.data.code == 0) {
           setToken(res.data.data.token)
-          router.push({ name: 'Home' })
+          router.push({ name: 'HomeNormal' })
         }
       })
       .finally(() => {

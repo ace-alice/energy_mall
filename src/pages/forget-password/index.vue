@@ -12,12 +12,12 @@ const { onSubmit, formData, openEye1, openEye2, router, getCode, counter } = for
 
 <template>
   <div class="normal-page">
-    <NormalHeader />
+    <NormalHeader :background="false" />
     <NormalBackground router="ForgetPassword" />
     <div class="re-box">
       <img :src="loginLogo" width="75" style="margin-left: 8px" alt="" />
       <div class="welcome-text">忘记<span style="font-weight: 600">密码</span></div>
-      <van-form @submit="onSubmit" required class="login-form">
+      <van-form @submit="onSubmit" required class="login-form self-form">
         <van-field
           v-model="formData.phone"
           name="username"

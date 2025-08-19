@@ -91,6 +91,67 @@ const router = createRouter({
       }
     },
     {
+      path: '/recharge',
+      name: 'Recharge',
+      component: () => import(/* webpackChunkName: "recharge" */ '@/pages/recharge/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/transfer',
+      name: 'Transfer',
+      component: () => import(/* webpackChunkName: "transfer" */ '@/pages/transfer/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/withdraw',
+      name: 'Withdraw',
+      component: () => import(/* webpackChunkName: "withdraw" */ '@/pages/withdraw/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/recharge-process',
+      name: 'RechargeProcess',
+      component: () =>
+        import(/* webpackChunkName: "recharge-process" */ '@/pages/recharge-process/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/recharge-order-list',
+      name: 'RechargeOrderList',
+      component: () =>
+        import(
+          /* webpackChunkName: "recharge-order-list" */ '@/pages/recharge-order-list/index.vue'
+        ),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/address',
+      name: 'Address',
+      component: () => import(/* webpackChunkName: "address" */ '@/pages/address/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/address/:type',
+      name: 'AddressEditAdd',
+      component: () =>
+        import(/* webpackChunkName: "address-edit-add" */ '@/pages/address/add-edit.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/service',
       name: 'Service',
       component: () => import(/* webpackChunkName: "service" */ '@/pages/service/index.vue'),
@@ -130,6 +191,15 @@ const router = createRouter({
       path: '/signin',
       name: 'Signin',
       component: () => import(/* webpackChunkName: "signin" */ '@/pages/signin/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/signin-history',
+      name: 'SigninHistory',
+      component: () =>
+        import(/* webpackChunkName: "signin-history" */ '@/pages/signin-history/index.vue'),
       meta: {
         keepAlive: true
       }

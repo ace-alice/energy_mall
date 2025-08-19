@@ -24,8 +24,9 @@
 import hiIcon from '@/assets/images/icons/hi.png'
 import { useCommonStore } from '@/stores/common'
 import avatarIcon from '@/assets/images/common/avatar.png'
-const { userInfo } = storeToRefs(useCommonStore())
 import { getIconByLevel } from '@/utils/level'
+
+const { userInfo } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

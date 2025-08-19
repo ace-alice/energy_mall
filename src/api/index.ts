@@ -160,3 +160,78 @@ export function getProjectDetailApi(data: any) {
     params: data
   })
 }
+
+/**
+ * 获取收货地址
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getAddressListApi() {
+  return service({
+    url: '/address/info',
+    method: 'POST'
+  })
+}
+
+/**
+ * 添加收货地址
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function addAddressApi(data: any) {
+  return service({
+    url: '/address/add',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 编辑收货地址
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function editAddressApi(data: any) {
+  return service({
+    url: '/address/info',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 删除收货地址
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function delAddressApi(data: any) {
+  return service({
+    url: '/address/delete',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取已经签到的列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getSigninListApi() {
+  return service({
+    url: '/signIn/record',
+    method: 'GET'
+  })
+}
+
+/**
+ * 签到
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function signinApi() {
+  return service({
+    url: `/signIn/sign`,
+    method: 'GET'
+  })
+}

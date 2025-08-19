@@ -42,6 +42,7 @@ const handleBeforeUnload = (event: BeforeUnloadEvent) => {
 onMounted(async () => {
   window.addEventListener('beforeunload', handleBeforeUnload)
   commonStore.initMediaQuery()
+  commonStore.getAddressList()
   commonStore.getGroupClasses()
   window.WebViewJSBridge.registerHandler(
     ChannelType.routeBack,

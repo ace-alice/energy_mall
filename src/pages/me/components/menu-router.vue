@@ -13,17 +13,17 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="充值" :border="false" :icon="recharge" is-link to="index">
+      <van-cell title="充值" :border="false" :icon="recharge" is-link to="/recharge">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="提现" :border="false" :icon="withdraw" is-link to="index">
+      <van-cell title="提现" :border="false" :icon="withdraw" is-link to="/withdraw">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="转账" :border="false" :icon="transfer" is-link to="index">
+      <van-cell title="转账" :border="false" :icon="transfer" is-link to="/transfer">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>

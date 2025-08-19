@@ -4,7 +4,7 @@ import BannerBox from './components/banner-box.vue'
 import ProjectListBox from './components/project-list.vue'
 import { useCommonStore } from '@/stores/common'
 
-const { mediaQueryInfo } = storeToRefs(useCommonStore())
+const { mediaQueryInfo, groupClasses } = storeToRefs(useCommonStore())
 </script>
 
 <template>
@@ -26,11 +26,11 @@ const { mediaQueryInfo } = storeToRefs(useCommonStore())
       color="#27B6AD"
       title-active-color="#333333"
       title-inactive-color="#333333"
-      :offset-top="68 + mediaQueryInfo.top"
+      :offset-top="70 + mediaQueryInfo.top"
     >
-      <van-tab title="全部"><ProjectListBox /></van-tab>
-      <van-tab title="VIP升级区"> <ProjectListBox /> </van-tab>
-      <van-tab title="综合商品区"> <ProjectListBox /> </van-tab>
+      <van-tab v-for="tab in groupClasses" :title="tab.title"
+        ><ProjectListBox :type="tab.id"
+      /></van-tab>
     </van-tabs>
   </div>
 </template>
@@ -52,7 +52,11 @@ const { mediaQueryInfo } = storeToRefs(useCommonStore())
     }
   }
   .van-tabs__wrap {
-    height: 56px;
+    height: 44px;
+    .van-tabs__line {
+      height: 6px;
+      background: linear-gradient(to right, #27b6ad, #f3b546);
+    }
   }
 }
 </style>

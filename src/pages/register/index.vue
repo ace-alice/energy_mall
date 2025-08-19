@@ -14,12 +14,12 @@ const { formData, onSubmit, openEye, openEye2, openEye3, openEye4, checked, rout
 
 <template>
   <div class="normal-page">
-    <NormalHeader />
+    <NormalHeader :background="false" />
     <NormalBackground router="Register" />
     <div class="re-box">
       <img :src="loginLogo" width="75" style="margin-left: 8px" alt="" />
       <div class="welcome-text">注册<span style="font-weight: 600">账号</span></div>
-      <van-form @submit="onSubmit" required class="login-form">
+      <van-form @submit="onSubmit" required class="login-form self-form">
         <van-field
           v-model="formData.phone"
           name="phone"

@@ -10,7 +10,7 @@
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="地址管理" is-link>
+    <van-cell title="地址管理" is-link to="/address">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>

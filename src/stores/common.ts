@@ -5,7 +5,7 @@ import { AppChannelType } from '@/tools/jsBridge/interface'
 import type { GroupClassType, MediaQueryInfo, UserInfo } from '@/interface/common'
 import { defaultMediaQueryInfo, defaultUserInfo } from '@/defaultValue'
 import { getLocal, setLocal } from '@/utils/storage'
-import { groupClassesApi, settingApi, userInfoApi } from '@/api'
+import { getAddressListApi, groupClassesApi, settingApi, userInfoApi } from '@/api'
 import { useRouter } from 'vue-router'
 import { Base64 } from 'js-base64'
 import dayjs from 'dayjs'
@@ -28,6 +28,8 @@ export const useCommonStore = defineStore(
     const userInfo = reactive<UserInfo>(Object.assign({}, defaultUserInfo))
 
     const groupClasses = ref<GroupClassType[]>([])
+
+    const addressList = ref<any[]>([])
 
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
@@ -98,6 +100,12 @@ export const useCommonStore = defineStore(
       })
     }
 
+    async function getAddressList() {
+      await getAddressListApi().then((res) => {
+        addressList.value = [res.data.data]
+      })
+    }
+
     return {
       token,
       showLangChar,
@@ -113,7 +121,9 @@ export const useCommonStore = defineStore(
       comVideoUrl,
       geServiceUrl,
       groupClasses,
-      getGroupClasses
+      getGroupClasses,
+      getAddressList,
+      addressList
     }
   },
   {

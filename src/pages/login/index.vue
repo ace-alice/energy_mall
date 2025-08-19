@@ -15,7 +15,7 @@ const { onSubmit, formData, router, checked, openEye } = loginHook()
     <NormalBackground router="Login" />
     <img :src="loginLogo" width="75" style="margin-top: 80px; margin-left: 8px" alt="" />
     <div class="welcome-text">Welcome To Use Iberdrola</div>
-    <van-form @submit="onSubmit" required class="login-form">
+    <van-form @submit="onSubmit" required class="login-form self-form">
       <van-field
         v-model="formData.phone"
         name="username"

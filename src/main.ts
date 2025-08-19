@@ -8,13 +8,12 @@ import router from './router'
 import mitt from 'mitt'
 import { i18n } from '@/locale'
 import { Locale } from 'vant'
-import enUS from 'vant/es/locale/lang/en-US'
+import zhCN from 'vant/es/locale/lang/zh-CN'
 import 'vant/lib/index.css'
 import '@/tools/jsBridge/index'
 
-
 // 设置 Vant 语言为英文
-Locale.use('en-US', enUS)
+Locale.use('zh-CN', zhCN)
 
 // 引入字体
 import './assets/fonts/index.scss'

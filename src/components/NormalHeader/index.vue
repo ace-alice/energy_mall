@@ -2,16 +2,19 @@
 const {
   title,
   showBack = true,
-  background = true
+  background = true,
+  backIconTag = 1
 } = defineProps<{
   title?: string
   showBack?: boolean
   background?: boolean
+  backIconTag?: number
 }>()
 
 import { useCommonStore } from '@/stores/common'
 import { useSlots } from 'vue'
 import backIcon from '@/assets/images/icons/back_icon.png'
+import backIcon2 from '@/assets/images/icons/back_white_icon.png'
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 const slots = useSlots()
@@ -42,7 +45,7 @@ function goBack() {
         name="arrow-left"
         width="18"
         height="18"
-        :src="backIcon"
+        :src="backIconTag == 1 ? backIcon : backIcon2"
         @click="goBack"
       />
       <div v-else style="width: 30px; height: 1px"></div>

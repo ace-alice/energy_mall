@@ -201,3 +201,19 @@ export interface userDetailType {
   create_at: string
   update_at: string
 }
+
+export interface ArticleInfoType {
+  id: number
+  title: string
+  img: string
+  code: string
+  desc: string
+  release_time: number
+  content: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  class_id: number
+  class_name: string
+}

@@ -1,11 +1,11 @@
 <template>
   <div class="set-menu-router">
-    <van-cell title="修改登录密码" is-link>
+    <van-cell title="修改登录密码" is-link to="/service">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="修改支付密码" is-link>
+    <van-cell title="修改支付密码" is-link to="/pay-pass">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
@@ -15,12 +15,12 @@
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="意见反馈" is-link>
+    <van-cell title="意见反馈" is-link to="/feedback">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="隐私政策" is-link>
+    <van-cell title="隐私政策" is-link to="/service-reg">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>

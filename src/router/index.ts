@@ -152,6 +152,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/good-order-list',
+      name: 'GoodOrderList',
+      component: () =>
+        import(/* webpackChunkName: "good-order-list" */ '@/pages/good-order-list/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/service',
       name: 'Service',
       component: () => import(/* webpackChunkName: "service" */ '@/pages/service/index.vue'),
@@ -164,6 +173,45 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: () => import(/* webpackChunkName: "login" */ '@/pages/login/index.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/service-reg',
+      name: 'ServiceReg',
+      component: () =>
+        import(/* webpackChunkName: "service-reg" */ '@/pages/service-reg/index.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/service-private',
+      name: 'ServicePrivate',
+      component: () =>
+        import(/* webpackChunkName: "service-private" */ '@/pages/service-reg/service-private.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/reg-private',
+      name: 'RegPrivate',
+      component: () =>
+        import(/* webpackChunkName: "reg-private" */ '@/pages/service-reg/reg-private.vue'),
+      meta: {
+        keepAlive: true,
+        noAuth: true
+      }
+    },
+    {
+      path: '/feedback',
+      name: 'Feedback',
+      component: () => import(/* webpackChunkName: "feedback" */ '@/pages/feedback/index.vue'),
       meta: {
         keepAlive: true,
         noAuth: true
@@ -191,6 +239,23 @@ const router = createRouter({
       path: '/signin',
       name: 'Signin',
       component: () => import(/* webpackChunkName: "signin" */ '@/pages/signin/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/real',
+      name: 'Real',
+      component: () => import(/* webpackChunkName: "real" */ '@/pages/real/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/pay-pass',
+      name: 'PayPass',
+      component: () =>
+        import(/* webpackChunkName: "pay-pass" */ '@/pages/change-pay-password/index.vue'),
       meta: {
         keepAlive: true
       }

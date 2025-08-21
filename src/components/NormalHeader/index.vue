@@ -3,12 +3,16 @@ const {
   title,
   showBack = true,
   background = true,
-  backIconTag = 1
+  backIconTag = 1,
+  textColor = '#222',
+  bgColor = '#fff'
 } = defineProps<{
   title?: string
   showBack?: boolean
   background?: boolean
   backIconTag?: number
+  textColor?: string
+  bgColor?: string
 }>()
 
 import { useCommonStore } from '@/stores/common'
@@ -21,6 +25,8 @@ const slots = useSlots()
 
 const router = useRouter()
 
+const isFixed = ref(false)
+
 function goBack() {
   if (window.history.state?.back) {
     router.back()
@@ -31,11 +37,16 @@ function goBack() {
 </script>
 
 <template>
+  <van-sticky :offset-top="0" @change="(fixed) => (isFixed = fixed)">
+    <div></div>
+  </van-sticky>
   <div
     class="normal-header"
-    :class="{ 'no-background': !background }"
+    :class="{ 'no-background': isFixed ? false : !background }"
     :style="{
-      '--top-height': `${mediaQueryInfo.top}px`
+      '--top-height': `${mediaQueryInfo.top}px`,
+      '--bg-color': bgColor,
+      '--text-color': textColor
     }"
   >
     <div class="header-box">
@@ -54,6 +65,7 @@ function goBack() {
         <div v-if="!slots.right" style="width: 30px; height: 1px"></div>
       </slot>
     </div>
+    <slot name="bottom"> </slot>
   </div>
 </template>
 
@@ -65,7 +77,8 @@ function goBack() {
 .normal-header {
   width: 100%;
   padding-top: var(--top-height);
-  background-color: white;
+  background: var(--bg-color);
+  color: var(--text-color);
   position: sticky;
   z-index: 999;
   /* 避免被其他内容遮挡 */

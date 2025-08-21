@@ -86,6 +86,19 @@ export function resetLoginPassword(data: ResetLoginForm) {
 }
 
 /**
+ * 重置支付密码
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function resetPayPasswordApi(data: any) {
+  return service({
+    url: '/user/editPin',
+    method: 'POST',
+    data
+  })
+}
+
+/**
  * 获取设置信息
  * @param data 查询参数
  * @returns Promise
@@ -233,5 +246,70 @@ export function signinApi() {
   return service({
     url: `/signIn/sign`,
     method: 'GET'
+  })
+}
+
+/**
+ * 实名认证
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function realNameAuthApi(data: any) {
+  return service({
+    url: `/user/realName`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 编辑昵称
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function editNickNameApi(data: any) {
+  return service({
+    url: `/user/editNickName`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取article
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function articleInfoApi(params: { code: string }) {
+  return service({
+    url: `/article/info`,
+    method: 'GET',
+    params
+  })
+}
+
+/**
+ * 上传图片
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function uploadApi(data: any) {
+  return service({
+    url: `/api/upload`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 商城订单
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getGoodsRecordApi(data: any) {
+  return service({
+    url: `/groupBy/record`,
+    method: 'POST',
+    data
   })
 }

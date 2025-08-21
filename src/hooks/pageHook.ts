@@ -25,7 +25,7 @@ export default function <T>({
 
         page.value = page.value + 1
         list.value = [...list.value, ...res.data.data.data]
-        if (res.data.data.current_page == res.data.data.last_page) {
+        if (res.data.data.current_page >= res.data.data.last_page) {
           finished.value = true
         }
       })

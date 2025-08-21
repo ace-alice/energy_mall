@@ -2,13 +2,16 @@
   <div class="order-enter">
     <div class="menu">
       <div>我的订单</div>
-      <div>
+      <div @click="router.push({ name: 'GoodOrderList' })">
         <div>全部订单</div>
         <van-icon name="arrow" />
       </div>
     </div>
     <div>
-      <div v-for="enter in enterList">
+      <div
+        v-for="enter in enterList"
+        @click="router.push({ name: 'GoodOrderList', query: { tab: enter.tab } })"
+      >
         <img :src="enter.img" alt="" srcset="" height="28" width="28" />
         <div>{{ enter.text }}</div>
       </div>
@@ -22,6 +25,8 @@ import already from '@/assets/images/icons/already.png'
 import will_dev from '@/assets/images/icons/will_dev.png'
 import will_pay from '@/assets/images/icons/will_pay.png'
 import will_send from '@/assets/images/icons/will_send.png'
+
+const router = useRouter()
 
 const enterList = [
   { text: '待付款', img: will_pay, tab: 1 },

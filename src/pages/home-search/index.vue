@@ -46,7 +46,7 @@ watch(
           }"
           @click="activeId = item.id"
         >
-          {{ item.title.slice(0, 4) }}
+          {{ item.title }}
         </div>
       </div>
       <div class="box-right">

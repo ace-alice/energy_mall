@@ -1,9 +1,9 @@
 <template>
   <div class="project-item">
-    <van-image width="100%" height="140" lazy-load :src="item.img" />
+    <van-image width="100%" height="140" lazy-load :src="item.good_img" />
     <div class="p-info">
       <div>{{ item.title }}</div>
-      <div>¥{{ item.item_money || '0.00' }}</div>
+      <div>¥{{ item.price || '0.00' }}</div>
     </div>
   </div>
 </template>

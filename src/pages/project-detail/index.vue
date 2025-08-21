@@ -14,7 +14,7 @@
       '--height': `${mediaQueryInfo.top + 20}px`
     }"
   >
-    <div class="back" @click="router.push({ name: 'HomeSearch' })">
+    <div class="back" @click="router.back()">
       <img :src="backIcon" height="20" width="20" alt="" />
     </div>
     <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.good_img" />
@@ -43,7 +43,7 @@
     <div style="padding: 0 16px 60px">
       <div v-html="content"></div>
     </div>
-    <NormalBuy />
+    <NormalBuy :item="projectDetail" />
   </div>
 </template>
 

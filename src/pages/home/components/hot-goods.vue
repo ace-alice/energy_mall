@@ -5,11 +5,11 @@
     <van-grid :border="false" :column-num="2" gutter="8" v-else>
       <van-grid-item v-for="item in list" :key="item.id" :to="`/project-detail-normal/${item.id}`">
         <div class="project-item">
-          <van-image width="100%" height="170" lazy-load :src="item.img" />
+          <van-image width="100%" height="170" lazy-load :src="item.good_img" />
           <div class="p-info">
             <div>{{ item.title }}</div>
             <div style="display: flex; justify-content: space-between; margin-top: 8px">
-              <div>¥{{ item.item_money || '0.00' }}</div>
+              <div>¥{{ item.price || '0.00' }}</div>
               <van-icon name="play-circle" />
             </div>
           </div>

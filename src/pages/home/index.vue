@@ -28,6 +28,7 @@ const { mediaQueryInfo, groupClasses } = storeToRefs(useCommonStore())
       title-inactive-color="#333333"
       :offset-top="70 + mediaQueryInfo.top"
     >
+      <van-tab title="全部"><ProjectListBox type="" /></van-tab>
       <van-tab v-for="tab in groupClasses" :title="tab.title"
         ><ProjectListBox :type="tab.id"
       /></van-tab>

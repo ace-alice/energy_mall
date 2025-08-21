@@ -123,7 +123,8 @@ export const useCommonStore = defineStore(
       groupClasses,
       getGroupClasses,
       getAddressList,
-      addressList
+      addressList,
+      getUserInfo
     }
   },
   {

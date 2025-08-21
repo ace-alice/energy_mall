@@ -1,11 +1,11 @@
 <template>
   <div class="real-name-phone">
-    <van-cell title="手机号码" is-link :value="userInfo.nickname || '暂无昵称'">
+    <van-cell title="手机号码" is-link :value="userInfo.phone2">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="实名认证" is-link :value="userInfo.nickname || '暂无昵称'">
+    <van-cell title="实名认证" is-link :value="alreadyReal ? '已实名' : '未实名'" to="/real">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
@@ -17,6 +17,8 @@
 import allowRight from '@/assets/images/icons/allow-right.png'
 import { useCommonStore } from '@/stores/common'
 const { userInfo } = storeToRefs(useCommonStore())
+
+const alreadyReal = computed(() => userInfo.value.sfz_name && userInfo.value.sfz_number)
 </script>
 
 <style lang="scss" scoped>

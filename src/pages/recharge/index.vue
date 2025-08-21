@@ -15,10 +15,12 @@
       </template>
     </NormalHeader>
     <BalanceBox />
+    <PaymentMethod />
   </div>
 </template>
 
 <script setup lang="ts" name="Recharge">
 import BalanceBox from './components/balance-box.vue'
+import PaymentMethod from './components/payment-method.vue'
 const router = useRouter()
 </script>

@@ -13,9 +13,12 @@ import team_un from '@/assets/images/tabs/team_un.png'
 import team_se from '@/assets/images/tabs/team_se.png'
 import order_un from '@/assets/images/tabs/order_un.png'
 import dayjs from 'dayjs'
+import { useShopCartStore } from './stores/shopCart'
 
 const commonStore = useCommonStore()
+const shopCartStore = useShopCartStore()
 commonStore.$persist()
+shopCartStore.$persist()
 
 const router = useRouter()
 const route = useRoute()
@@ -39,11 +42,19 @@ const handleBeforeUnload = (event: BeforeUnloadEvent) => {
   event.returnValue = '' // Chrome 要设置这个才有效
 }
 
+watch(
+  () => token.value,
+  (newVal) => {
+    if (newVal) {
+      commonStore.getAddressList()
+      commonStore.getGroupClasses()
+    }
+  }
+)
+
 onMounted(async () => {
   window.addEventListener('beforeunload', handleBeforeUnload)
   commonStore.initMediaQuery()
-  commonStore.getAddressList()
-  commonStore.getGroupClasses()
   window.WebViewJSBridge.registerHandler(
     ChannelType.routeBack,
     function (data: any, success: Function, fail: Function) {

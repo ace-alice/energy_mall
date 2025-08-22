@@ -24,9 +24,9 @@ const active = ref(0)
       color="#F3B546"
     >
       <van-tab title="全部"> <GoodItemList /></van-tab>
-      <van-tab title="待付款"> <GoodItemList status="0" /></van-tab>
-      <van-tab title="待收货"> <GoodItemList status="1" /></van-tab>
-      <van-tab title="已完成"> <GoodItemList status="2" /></van-tab>
+      <!-- <van-tab title="待付款"> <GoodItemList status="0" /></van-tab> -->
+      <van-tab title="待收货"> <GoodItemList status="0" /></van-tab>
+      <van-tab title="已完成"> <GoodItemList status="1" /></van-tab>
     </van-tabs>
   </div>
 </template>

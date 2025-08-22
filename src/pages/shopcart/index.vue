@@ -9,7 +9,13 @@ const router = useRouter()
 const { searchText, filterCart, checkedCart, allCheck, totalPrice } =
   storeToRefs(useShopCartStore())
 
-const { onSubmit, changeCheck } = useShopCartStore()
+const { onSubmit, changeCheck, delMoreShopCart } = useShopCartStore()
+
+const checkedCartItems = computed(() => {
+  return filterCart.value.filter((item) => {
+    return checkedCart.value.includes(item.id.toString())
+  })
+})
 </script>
 
 <template>
@@ -52,14 +58,18 @@ const { onSubmit, changeCheck } = useShopCartStore()
           总计¥
           <VueCountTo style="font-size: 16px; font-weight: 600" :end-val="totalPrice" />
         </div>
-        <van-button
-          style="width: 80px"
-          type="primary"
-          round
-          size="small"
-          :disabled="checkedCart.length < 1"
-          >结算({{ checkedCart.length }})</van-button
-        >
+        <NormalPayAction :items="checkedCartItems" @callBack="delMoreShopCart">
+          <template #btn>
+            <van-button
+              style="width: 80px"
+              type="primary"
+              round
+              size="small"
+              :disabled="checkedCart.length < 1"
+              >结算({{ checkedCart.length }})</van-button
+            >
+          </template>
+        </NormalPayAction>
       </div>
     </van-sticky>
   </div>

@@ -14,7 +14,7 @@ export default function ({ callBack }: { callBack?: Function }) {
         file.status = 'success'
         file.message = '上传成功'
         if (callBack) {
-          callBack(res.data.url)
+          callBack(res.data.data.url)
         }
       })
       .catch((e) => {

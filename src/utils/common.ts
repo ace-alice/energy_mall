@@ -31,3 +31,10 @@ export const htmlDecodeByRegExp = (str: string) => {
   temp = temp.replace(/↵/g, '')
   return temp
 }
+
+export const isNative = () => {
+  if (window.navigator.userAgent.match(/android_client/)) return true
+  if (window.navigator.userAgent.match(/ios_client/)) return true
+  if (window.navigator.userAgent.match(/flutter_client/)) return true
+  return false
+}

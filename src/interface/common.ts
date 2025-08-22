@@ -217,3 +217,80 @@ export interface ArticleInfoType {
   class_id: number
   class_name: string
 }
+
+export interface AddressItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  address_name: string
+  address_phone: string
+  address_city: string
+  address_place: string
+  default: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface Account_info {
+  id: number
+  title: string
+  status: number
+  type: number
+  show: number
+  bank_name: string
+  bank_owner: string
+  bank_branch: string
+  bank_account: string
+  coin_name: string
+  coin_blockchain: string
+  coin_account: string
+  alipay_account: string
+  img: string
+  remark: string
+  rate: string
+  admin_id: number
+  admin_name: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface RechargeMethodType {
+  id: number
+  title: string
+  code: string
+  status: number
+  upper: string
+  upper_id: number
+  upper_name: string
+  upper_status: number
+  upper_img: string
+  class_id: number
+  class_name: string
+  class_status: number
+  class_img: string
+  class_rate: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  min: string
+  max: string
+  style: number
+  accounts: string
+  accounts_name: string
+  sort: number
+  desc: string
+  account_info: Account_info
+}
+
+export interface MethodLisFilterType {
+  class_id: number
+  class_name: string
+  children: RechargeMethodType[]
+}

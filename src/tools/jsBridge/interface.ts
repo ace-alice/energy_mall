@@ -11,5 +11,6 @@ export enum AppChannelType {
   'toNamed' = 'toNamed',
   'getLocation' = 'getLocation',
   'openFaceCamera' = 'openFaceCamera',
-  'downloadImage' = 'downloadImage'
+  'downloadImage' = 'downloadImage',
+  'openWindow' = 'openWindow'
 }

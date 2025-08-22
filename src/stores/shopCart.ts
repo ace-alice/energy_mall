@@ -36,7 +36,7 @@ export const useShopCartStore = defineStore(
     }
 
     function delMoreShopCart(ids: string[]) {
-      shopCartList.value = shopCartList.value.filter((item) => ids.includes(item.id.toString()))
+      shopCartList.value = shopCartList.value.filter((item) => !ids.includes(item.id.toString()))
     }
 
     const filterCart = computed(() => {

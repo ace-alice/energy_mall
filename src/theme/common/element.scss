@@ -82,6 +82,14 @@
   }
 }
 
+.recharge-form {
+  margin-top: 12px;
+  .van-field {
+    background-color: #edf8f2;
+    margin-bottom: 0;
+  }
+}
+
 .van-tabbar {
   --van-tabbar-height: 60px;
   box-shadow: 0 0 10px #00000008;
@@ -106,4 +114,8 @@
   .van-button--default {
     border: none !important;
   }
+}
+
+.van-toast {
+  background: #222222 !important;
 }

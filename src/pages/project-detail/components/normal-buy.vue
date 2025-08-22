@@ -18,9 +18,20 @@
     >
       {{ !!hasCart ? '查看' : '加入' }}购物车
     </van-button>
-    <van-button class="submit-button" round size="large" block type="primary">
-      立即购买
-    </van-button>
+    <NormalPayAction :items="[item]">
+      <template #btn>
+        <van-button
+          class="submit-button"
+          round
+          size="large"
+          block
+          type="primary"
+          style="width: 120px"
+        >
+          立即购买
+        </van-button>
+      </template>
+    </NormalPayAction>
   </div>
 </template>
 

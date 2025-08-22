@@ -48,6 +48,7 @@ watch(
     if (newVal) {
       commonStore.getAddressList()
       commonStore.getGroupClasses()
+      commonStore.getUserDetail()
     }
   }
 )
@@ -77,7 +78,7 @@ onBeforeUnmount(() => {
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <keep-alive>
+      <keep-alive :exclude="['Recharge']">
         <component :is="Component" :key="route.path" />
       </keep-alive>
     </transition>

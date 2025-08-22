@@ -2,10 +2,22 @@ import { defineStore } from 'pinia'
 import { ref, reactive, computed, watch } from 'vue'
 import { initLang } from '@/utils/common'
 import { AppChannelType } from '@/tools/jsBridge/interface'
-import type { GroupClassType, MediaQueryInfo, UserInfo } from '@/interface/common'
-import { defaultMediaQueryInfo, defaultUserInfo } from '@/defaultValue'
+import type {
+  AddressItemType,
+  GroupClassType,
+  MediaQueryInfo,
+  UserDetail,
+  UserInfo
+} from '@/interface/common'
+import { defaultMediaQueryInfo, defaultUserDetail, defaultUserInfo } from '@/defaultValue'
 import { getLocal, setLocal } from '@/utils/storage'
-import { getAddressListApi, groupClassesApi, settingApi, userInfoApi } from '@/api'
+import {
+  getAddressListApi,
+  getUserDetailApi,
+  groupClassesApi,
+  settingApi,
+  userInfoApi
+} from '@/api'
 import { useRouter } from 'vue-router'
 import { Base64 } from 'js-base64'
 import dayjs from 'dayjs'
@@ -29,7 +41,9 @@ export const useCommonStore = defineStore(
 
     const groupClasses = ref<GroupClassType[]>([])
 
-    const addressList = ref<any[]>([])
+    const addressList = ref<AddressItemType[]>([])
+
+    const userDetail = reactive<UserDetail>(Object.assign({}, defaultUserDetail))
 
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
@@ -106,6 +120,12 @@ export const useCommonStore = defineStore(
       })
     }
 
+    function getUserDetail() {
+      getUserDetailApi().then((res) => {
+        Object.assign(userDetail, res.data.data)
+      })
+    }
+
     return {
       token,
       showLangChar,
@@ -124,7 +144,9 @@ export const useCommonStore = defineStore(
       getGroupClasses,
       getAddressList,
       addressList,
-      getUserInfo
+      getUserInfo,
+      getUserDetail,
+      userDetail
     }
   },
   {

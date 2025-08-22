@@ -65,6 +65,7 @@ service.interceptors.response.use(
         showToast({
           type: 'fail',
           message: '登录失效,请重新登录',
+          className: '',
           duration: 3000
         })
         loginOut()
@@ -74,6 +75,7 @@ service.interceptors.response.use(
           showToast({
             type: 'fail',
             message: response.data.msg,
+            className: '',
             duration: 3000
           })
         }, 300)

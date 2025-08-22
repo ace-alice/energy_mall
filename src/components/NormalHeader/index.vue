@@ -31,7 +31,7 @@ function goBack() {
   if (window.history.state?.back) {
     router.back()
   } else {
-    router.replace({ name: 'Home' })
+    router.push({ name: 'HomeNormal' })
   }
 }
 </script>

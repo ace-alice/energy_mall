@@ -206,7 +206,7 @@ export function addAddressApi(data: any) {
  */
 export function editAddressApi(data: any) {
   return service({
-    url: '/address/info',
+    url: '/address/edit',
     method: 'POST',
     data
   })
@@ -309,6 +309,56 @@ export function uploadApi(data: any) {
 export function getGoodsRecordApi(data: any) {
   return service({
     url: `/groupBy/record`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 购买外部商城
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function buyOutGoodsApi(data: any) {
+  return service({
+    url: `/GroupBy/pay`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取会员详情
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getUserDetailApi() {
+  return service({
+    url: `/user/detail`,
+    method: 'GET'
+  })
+}
+
+/**
+ * 获取会员详情
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getRechargeMethodApi() {
+  return service({
+    url: `/recharge/method`,
+    method: 'POST'
+  })
+}
+
+/**
+ * 充值
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function rechargeApi(data: any) {
+  return service({
+    url: '/recharge/recharge',
     method: 'POST',
     data
   })

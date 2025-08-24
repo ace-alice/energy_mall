@@ -1,4 +1,11 @@
-import type { MediaQueryInfo, TeamInfo, UserDetail, UserInfo } from '@/interface/common'
+import type {
+  ArticleInfoType,
+  BankItemType,
+  MediaQueryInfo,
+  TeamInfo,
+  UserDetail,
+  UserInfo
+} from '@/interface/common'
 
 export const defaultMediaQueryInfo: MediaQueryInfo = {
   height: 815,
@@ -84,4 +91,44 @@ export const defaultTeamInfo: TeamInfo = {
   today_recharge: 0,
   month_recharge: 0,
   total_earn: 0
+}
+
+export const defaultBankItem: BankItemType = {
+  id: 0,
+  uid: 0,
+  username: '',
+  phone: '',
+  is_test: 0,
+  type: 0,
+  default: 0,
+  name: '',
+  bank_name: '',
+  bank_branch: '',
+  bank_account: '',
+  coin_name: '',
+  coin_blockchain: '',
+  coin_account: '',
+  alipay_account: '',
+  alipay_img: '',
+  wx_img: '',
+  create_time: 0,
+  update_time: 0,
+  create_at: '',
+  update_at: ''
+}
+
+export const defaultArticleInfo: ArticleInfoType = {
+  id: 0,
+  title: '',
+  img: '',
+  code: '',
+  desc: '',
+  release_time: 0,
+  content: '',
+  create_time: 0,
+  update_time: 0,
+  create_at: '',
+  update_at: '',
+  class_id: 0,
+  class_name: ''
 }

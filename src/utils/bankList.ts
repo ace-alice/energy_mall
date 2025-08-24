@@ -1,3 +1,7 @@
+export function formatBankCard(num: string) {
+  return num.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
 export const allBanks = [
   { text: '中国人民银行', code: 'PBOC' },
   { text: '国家开发银行', code: 'CDB' },

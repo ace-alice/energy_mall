@@ -3,6 +3,7 @@ import { articleInfoApi } from '@/api'
 import bankBg from '@/assets/images/background/back_bg.png'
 import bankIcon from '@/assets/images/icons/bank.png'
 import usdtIcon from '@/assets/images/icons/usdt.png'
+import { defaultArticleInfo } from '@/defaultValue'
 import type { ArticleInfoType } from '@/interface/common'
 import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp } from '@/utils/common'
@@ -13,21 +14,7 @@ const { getBankList } = useCommonStore()
 
 const { bankList } = storeToRefs(useCommonStore())
 
-const rules = ref<ArticleInfoType>({
-  id: 0,
-  title: '',
-  img: '',
-  code: '',
-  desc: '',
-  release_time: 0,
-  content: '',
-  create_time: 0,
-  update_time: 0,
-  create_at: '',
-  update_at: '',
-  class_id: 0,
-  class_name: ''
-})
+const rules = ref<ArticleInfoType>(Object.assign({}, defaultArticleInfo))
 
 function getRules() {
   articleInfoApi({ code: 'withdraw_rules' }).then((res) => {
@@ -37,6 +24,24 @@ function getRules() {
 
 const content = computed(() => {
   return htmlDecodeByRegExp(rules.value.content || '').replace(/<img/g, '<img  width="100%"')
+})
+
+const usdtItems = computed(() => {
+  return bankList.value.filter((item) => {
+    return item.type == 1
+  })
+})
+
+const bankItems = computed(() => {
+  return bankList.value.filter((item) => {
+    return item.type == 0
+  })
+})
+
+const alipayItems = computed(() => {
+  return bankList.value.filter((item) => {
+    return item.type == 2
+  })
 })
 
 onActivated(() => {
@@ -69,6 +74,9 @@ onMounted(() => {
           >
         </template>
       </van-cell>
+      <van-cell v-for="item in usdtItems" :key="item.id">
+        <UsdtCard :item="item" />
+      </van-cell>
     </van-cell-group>
     <van-cell-group inset style="margin-top: 12px; border-radius: 16px">
       <van-cell title="银行卡" size="large">
@@ -80,6 +88,9 @@ onMounted(() => {
             >去添加</van-button
           >
         </template>
+      </van-cell>
+      <van-cell v-for="item in bankItems" :key="item.id">
+        <BankCard :item="item" />
       </van-cell>
     </van-cell-group>
 

@@ -51,20 +51,36 @@
       </template> -->
     </div>
     <div class="normal-card" v-if="channelType == 'bank'">
-      <div v-waves class="select-cell">
+      <div v-waves class="select-cell" @click="selectHandle">
         银行卡
         <van-icon name="arrow" size="16" color="#13B756" />
       </div>
-      <van-button plain block icon="plus" type="primary" color="#13B756"
+      <BankCard v-if="currentMethod.id && currentMethod.type == 0" :item="currentMethod" />
+      <van-button
+        v-if="bankItems.length == 0"
+        plain
+        block
+        icon="plus"
+        type="primary"
+        color="#13B756"
+        to="/bank-add"
         >暂无收款银行账号，去添加</van-button
       >
     </div>
     <div class="normal-card" v-if="channelType == 'usdt'">
-      <div v-waves class="select-cell">
+      <div v-waves class="select-cell" @click="selectHandle">
         USDT
         <van-icon name="arrow" size="16" color="#13B756" />
       </div>
-      <van-button plain block icon="plus" type="primary" color="#13B756"
+      <UsdtCard v-if="currentMethod.id && currentMethod.type == 1" :item="currentMethod" />
+      <van-button
+        v-if="usdtItems.length == 0"
+        plain
+        block
+        icon="plus"
+        type="primary"
+        color="#13B756"
+        to="/usdt-add"
         >暂无收款USDT账号，去添加</van-button
       >
     </div>
@@ -74,6 +90,59 @@
       </div>
     </van-sticky>
     <!-- :disabled="disabled" @click="submit" -->
+
+    <van-popup
+      v-model:show="showSelect"
+      round
+      :style="{ 'max-height': '60%', width: '100%' }"
+      :close-on-click-overlay="false"
+    >
+      <div class="box">
+        <div class="radio-group">
+          <van-radio-group v-model="checked">
+            <van-cell-group inset>
+              <van-cell
+                :title="
+                  channelType == 'bank' ? '选择银行卡' : channelType == 'usdt' ? '选择USDT' : ''
+                "
+              >
+                <template #right-icon>
+                  <van-button
+                    plain
+                    icon="plus"
+                    type="primary"
+                    color="#13B756"
+                    style="border: none; padding: 0; height: unset"
+                    :to="
+                      channelType == 'bank' ? '/bank-add' : channelType == 'usdt' ? '/usdt-add' : ''
+                    "
+                    >新增</van-button
+                  >
+                </template>
+              </van-cell>
+              <van-cell
+                v-for="(item, index) in channelType == 'bank'
+                  ? bankItems
+                  : channelType == 'usdt'
+                    ? usdtItems
+                    : []"
+              >
+                <van-radio :name="item.id"
+                  >{{ channelType == 'bank' ? '银行卡' : channelType == 'usdt' ? 'USDT' : '支付宝'
+                  }}{{ index + 1 }}</van-radio
+                >
+                <BankCard style="margin-top: 8px" v-if="channelType == 'bank'" :item="item" />
+                <UsdtCard style="margin-top: 8px" v-if="channelType == 'usdt'" :item="item" />
+              </van-cell>
+            </van-cell-group>
+          </van-radio-group>
+        </div>
+        <div class="submit">
+          <div v-waves @click="cancelChecked">取消</div>
+          <div v-waves @click="submitChecked">确定</div>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -81,10 +150,47 @@
 import withdrawalHook from '@/hooks/withdrawalHook'
 import BalanceBox from './components/balance-box.vue'
 const router = useRouter()
-const { channelType, amount } = withdrawalHook()
+const {
+  channelType,
+  amount,
+  usdtItems,
+  bankItems,
+  currentMethod,
+  showSelect,
+  selectHandle,
+  checked,
+  submitChecked,
+  cancelChecked
+} = withdrawalHook()
 </script>
 
 <style lang="scss" scoped>
+.box {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .radio-group {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
+.submit {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  div {
+    height: 40px;
+    width: 45%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+  }
+}
 .select-cell {
   height: 36px;
   display: flex;

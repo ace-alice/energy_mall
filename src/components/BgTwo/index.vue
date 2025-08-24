@@ -7,6 +7,7 @@
         width: '100%'
       }"
       v-if="isColor"
+      v-show="props.router && props.router == router.currentRoute.value.name"
       class="normal-bg"
     >
       <div style="width: 100%" class="is-color"></div>

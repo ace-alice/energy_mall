@@ -363,3 +363,54 @@ export function rechargeApi(data: any) {
     data
   })
 }
+
+/**
+ * 获取充值记录
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function rechargeRecordApi(data: any) {
+  return service({
+    url: '/recharge/record',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取提现记录
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function withdrawRecordApi(data: any) {
+  return service({
+    url: '/withdraw/record',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取银行列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getBankListApi() {
+  return service({
+    url: '/bank/lists',
+    method: 'POST'
+  })
+}
+
+/**
+ * 添加银行
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function addBankApi(data: any) {
+  return service({
+    url: `/bank/add`,
+    method: 'POST',
+    data
+  })
+}

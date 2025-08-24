@@ -18,7 +18,7 @@
     <div class="normal-card">
       <div class="select-method">
         选择充值方式
-        <div v-waves>充值记录</div>
+        <div v-waves @click="router.push({ name: 'RechargeOrderList' })">充值记录</div>
       </div>
       <van-tabs color="#000" animated @change="currentClassChange" v-model:active="active">
         <van-tab
@@ -70,7 +70,7 @@
         @change="(a) => (amount = a)"
       />
     </div>
-    <div class="normal-card">
+    <div class="normal-card" v-if="currentMethod.style == 2 || currentMethod.style == 3">
       <div class="select-method">付款信息</div>
       <div class="self-form recharge-form">
         <van-field v-model="rechargeName" type="text" placeholder="请输入汇款人名称">

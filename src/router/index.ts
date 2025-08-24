@@ -135,6 +135,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/withdraw-order',
+      name: 'WithdrawOrder',
+      component: () =>
+        import(/* webpackChunkName: "withdraw-record" */ '@/pages/withdraw-order/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/address',
       name: 'Address',
       component: () => import(/* webpackChunkName: "address" */ '@/pages/address/index.vue'),
@@ -273,6 +282,30 @@ const router = createRouter({
       path: '/home-search',
       name: 'HomeSearch',
       component: () => import(/* webpackChunkName: "search" */ '@/pages/home-search/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/bank-list',
+      name: 'BankList',
+      component: () => import(/* webpackChunkName: "bank" */ '@/pages/bank/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/bank-add',
+      name: 'BankAdd',
+      component: () => import(/* webpackChunkName: "bank-add" */ '@/pages/bank/bank-add.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/usdt-add',
+      name: 'UsdtAdd',
+      component: () => import(/* webpackChunkName: "usdt-add" */ '@/pages/bank/usdt-add.vue'),
       meta: {
         keepAlive: true
       }

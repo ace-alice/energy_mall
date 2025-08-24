@@ -1,0 +1,7 @@
+<script setup lang="ts" name="BankCard"></script>
+
+<template>
+  <div></div>
+</template>
+
+<style lang="scss" scoped></style>

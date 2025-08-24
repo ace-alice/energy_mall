@@ -6,6 +6,7 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
+      <van-empty description="暂无数据" v-if="!list.length" />
       <van-grid :border="false" :column-num="2" gutter="8">
         <van-grid-item
           v-for="item in list"

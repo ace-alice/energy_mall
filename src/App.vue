@@ -42,16 +42,33 @@ const handleBeforeUnload = (event: BeforeUnloadEvent) => {
   event.returnValue = '' // Chrome 要设置这个才有效
 }
 
+const timer = ref<NodeJS.Timeout | null>(null)
+
 watch(
   () => token.value,
   (newVal) => {
     if (newVal) {
-      commonStore.getAddressList()
       commonStore.getGroupClasses()
-      commonStore.getUserDetail()
+      if (!timer.value) {
+        timer.value = setTimeout(() => {
+          commonStore.getAddressList()
+          commonStore.getUserDetail()
+        }, 1000)
+      }
+    } else {
+      timer.value && clearTimeout(timer.value)
+      timer.value = null
     }
+  },
+  {
+    immediate: true
   }
 )
+
+onUnmounted(() => {
+  timer.value && clearTimeout(timer.value)
+  timer.value = null
+})
 
 onMounted(async () => {
   window.addEventListener('beforeunload', handleBeforeUnload)
@@ -78,7 +95,7 @@ onBeforeUnmount(() => {
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <keep-alive :exclude="['Recharge']">
+      <keep-alive :exclude="['Recharge', 'UsdtAdd', 'BankAdd', 'Withdraw']">
         <component :is="Component" :key="route.path" />
       </keep-alive>
     </transition>

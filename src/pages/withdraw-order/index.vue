@@ -1,14 +1,14 @@
 <template>
   <div class="normal-page">
     <BgTwo
-      router="RechargeOrderList"
+      router="WithdrawOrder"
       bg-color="linear-gradient( 180deg, #13B756 0%, #FFFFFF 100%)"
       :is-color="true"
       height="320px"
     />
     <NormalHeader
       :background="false"
-      title="充值记录"
+      title="提现记录"
       text-color="#fff"
       :back-icon-tag="2"
       bg-color="linear-gradient( 180deg, #13B756 0%, #A8E1C2 100%)"
@@ -16,9 +16,9 @@
       <template #bottom>
         <div class="normal-card money-info-box">
           <div>
-            <div style="color: #9b5230; margin-bottom: 10px">充值成功金额(RMB)</div>
+            <div style="color: #9b5230; margin-bottom: 10px">提现成功金额(RMB)</div>
             <div style="color: #5e0000; font-size: 28px; font-weight: 600">
-              {{ userDetail.recharge_money }}
+              {{ userDetail.withdraw_money }}
             </div>
           </div>
         </div>
@@ -67,13 +67,13 @@
 </template>
 
 <script setup lang="ts" name="RechargeOrderList">
-import { rechargeRecordApi } from '@/api'
+import { withdrawRecordApi } from '@/api'
 import pageHook from '@/hooks/pageHook'
 import type { RechargeOrderItemType } from '@/interface/common'
 import { useCommonStore } from '@/stores/common'
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<RechargeOrderItemType>({
-  api: rechargeRecordApi,
+  api: withdrawRecordApi,
   otherForm: {}
 })
 

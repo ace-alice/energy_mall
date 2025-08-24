@@ -126,14 +126,14 @@ export default function () {
     }).then((res) => {
       showToast({ type: 'success', message: '请尽快完成支付', overlay: true })
       setTimeout(() => {
-        router.push({ name: 'Home' })
-        if (currentMethod.value.style != 2 && res.data.url) {
+        router.push({ name: 'RechargeOrderList' })
+        if (currentMethod.value.style == 1 && !res.data.data.url) {
           if (isNative()) {
             window.WebViewJSBridge.callHandler(AppChannelType.openWindow, {
-              data: res.data.url
+              data: res.data.data.url
             })
           } else {
-            window.open(res.data.url, '_black')
+            window.open(res.data.data.url || 'http://www.baidu.com', '_blank')
           }
         }
       }, 500)

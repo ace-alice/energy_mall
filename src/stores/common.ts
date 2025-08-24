@@ -4,6 +4,7 @@ import { initLang } from '@/utils/common'
 import { AppChannelType } from '@/tools/jsBridge/interface'
 import type {
   AddressItemType,
+  BankItemType,
   GroupClassType,
   MediaQueryInfo,
   UserDetail,
@@ -13,6 +14,7 @@ import { defaultMediaQueryInfo, defaultUserDetail, defaultUserInfo } from '@/def
 import { getLocal, setLocal } from '@/utils/storage'
 import {
   getAddressListApi,
+  getBankListApi,
   getUserDetailApi,
   groupClassesApi,
   settingApi,
@@ -44,6 +46,8 @@ export const useCommonStore = defineStore(
     const addressList = ref<AddressItemType[]>([])
 
     const userDetail = reactive<UserDetail>(Object.assign({}, defaultUserDetail))
+
+    const bankList = ref<BankItemType[]>([])
 
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
@@ -126,6 +130,12 @@ export const useCommonStore = defineStore(
       })
     }
 
+    function getBankList() {
+      getBankListApi().then((res) => {
+        bankList.value = res.data.data
+      })
+    }
+
     return {
       token,
       showLangChar,
@@ -146,7 +156,9 @@ export const useCommonStore = defineStore(
       addressList,
       getUserInfo,
       getUserDetail,
-      userDetail
+      userDetail,
+      bankList,
+      getBankList
     }
   },
   {

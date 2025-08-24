@@ -294,3 +294,56 @@ export interface MethodLisFilterType {
   class_name: string
   children: RechargeMethodType[]
 }
+
+export interface RechargeOrderItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  is_voice: number
+  status: number
+  channel_id: number
+  channel_name: string
+  class_id: number
+  class_name: string
+  account_id: number
+  account_name: string
+  order_no: string
+  account: string
+  img: string
+  name: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  amount: string
+  amount_real: string
+  remark: string
+  rate: string
+  style: number
+}
+
+export interface BankItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  type: number
+  default: number
+  name: string
+  bank_name: string
+  bank_branch: string
+  bank_account: string
+  coin_name: string
+  coin_blockchain: string
+  coin_account: string
+  alipay_account: string
+  alipay_img: string
+  wx_img: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}

@@ -41,11 +41,11 @@
               <div v-else class="tag load">待审核</div>
             </div>
             <div>
-              <div>充值金额(元)</div>
-              <div>{{ item.amount_real }}</div>
+              <div>提现金额(元)</div>
+              <div>{{ item.amount }}</div>
             </div>
             <div>
-              <div>充值时间</div>
+              <div>提现时间</div>
               <div>{{ item.create_at }}</div>
             </div>
             <div>

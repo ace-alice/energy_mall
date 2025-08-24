@@ -86,7 +86,9 @@
     </div>
     <van-sticky :offset-bottom="50" position="bottom">
       <div style="margin-top: 40px; padding: 16px">
-        <van-button block round type="primary">提交充值订单</van-button>
+        <van-button block round type="primary" :disabled="disabled" @click="toOpenPin"
+          >提交充值订单</van-button
+        >
       </div>
     </van-sticky>
     <!-- :disabled="disabled" @click="submit" -->
@@ -143,6 +145,7 @@
         </div>
       </div>
     </van-popup>
+    <NormalPinAction ref="normalPinActionRef" @submit="toWithdraw" />
   </div>
 </template>
 
@@ -160,7 +163,11 @@ const {
   selectHandle,
   checked,
   submitChecked,
-  cancelChecked
+  cancelChecked,
+  toWithdraw,
+  disabled,
+  normalPinActionRef,
+  toOpenPin
 } = withdrawalHook()
 </script>
 
@@ -198,5 +205,23 @@ const {
   align-items: center;
   border-radius: 8px;
   margin-bottom: 8px;
+}
+.select-method {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    font-size: 14px;
+    color: #13b756;
+    padding: 8px 12px;
+    background-color: #edf8f2;
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    transform: translateX(16px);
+    cursor: pointer;
+  }
 }
 </style>

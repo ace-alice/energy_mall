@@ -414,3 +414,29 @@ export function addBankApi(data: any) {
     data
   })
 }
+
+/**
+ * 提现
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function doWithdrawApi(data: any) {
+  return service({
+    url: '/withdraw/withdraw',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 转账
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function doTransferApi(data: any) {
+  return service({
+    url: '/Transfer/operate',
+    method: 'POST',
+    data
+  })
+}

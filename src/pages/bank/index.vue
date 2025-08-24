@@ -75,7 +75,7 @@ onMounted(() => {
         </template>
       </van-cell>
       <van-cell v-for="item in usdtItems" :key="item.id">
-        <UsdtCard :item="item" />
+        <UsdtCard :delAble="true" :item="item" />
       </van-cell>
     </van-cell-group>
     <van-cell-group inset style="margin-top: 12px; border-radius: 16px">

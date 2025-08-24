@@ -1,12 +1,21 @@
 <script setup lang="ts" name="UsdtCard">
-const props = defineProps(['item'])
+const props = defineProps(['item', 'delAble'])
+
+function del() {
+  showConfirmDialog({
+    title: '提示',
+    message: '您确定删除该账户吗？'
+  }).then(() => {
+    // on confirm
+  })
+}
 </script>
 
 <template>
   <div class="usdt-card">
     <div>{{ item.coin_blockchain }}</div>
     <div>{{ item.coin_account }}</div>
-    <van-icon class="name" name="delete-o" />
+    <!-- <van-icon v-if="delAble" class="name" name="delete-o" @click="del" /> -->
   </div>
 </template>
 

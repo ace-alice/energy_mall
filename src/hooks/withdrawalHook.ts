@@ -1,8 +1,7 @@
-import {} from '@/api'
+import { doWithdrawApi } from '@/api'
 import type { BankItemType } from '@/interface/common'
-import { ref, computed, onMounted, watch } from 'vue'
-import { showToast, showLoadingToast } from 'vant'
-import { AppChannelType } from '@/tools/jsBridge/interface'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
+import { showToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
 import { storeToRefs } from 'pinia'
@@ -15,7 +14,11 @@ export default function () {
 
   const showSelect = ref(false)
 
+  const router = useRouter()
+
   const checked = ref(-1)
+
+  const normalPinActionRef = ref()
 
   function selectHandle() {
     if (channelType.value == 'bank' && bankItems.value.length > 0) {
@@ -28,9 +31,9 @@ export default function () {
 
   const amount = ref<undefined | number>(undefined)
 
-  const { bankList } = storeToRefs(useCommonStore())
+  const { bankList, userInfo } = storeToRefs(useCommonStore())
 
-  const { getBankList } = useCommonStore()
+  const { getBankList, getUserInfo, getUserDetail } = useCommonStore()
 
   onMounted(() => {
     getBankList()
@@ -114,6 +117,37 @@ export default function () {
     }
   )
 
+  function toOpenPin() {
+    nextTick(() => {
+      if (normalPinActionRef.value) {
+        normalPinActionRef.value.toOpenPin()
+      }
+    })
+  }
+
+  const disabled = computed(() => {
+    return !!(
+      !amount.value ||
+      (+userInfo.value.money || 0) < (amount.value || 0) ||
+      !currentMethod.value.id
+    )
+  })
+
+  function toWithdraw(pin: string) {
+    showToast({ type: 'loading', overlay: true })
+    doWithdrawApi({ money: amount.value, pin: pin, id: currentMethod.value.id })
+      .then((res) => {
+        closeToast()
+        getUserInfo()
+        getUserDetail()
+        showToast({ type: 'text', message: '提现申请已成功发送' })
+        setTimeout(() => {
+          router.push({ name: 'WithdrawOrder' })
+        }, 200)
+      })
+      .catch((e) => {})
+  }
+
   return {
     channelType,
     amount,
@@ -126,6 +160,10 @@ export default function () {
     selectHandle,
     checked,
     submitChecked,
-    cancelChecked
+    cancelChecked,
+    toWithdraw,
+    disabled,
+    normalPinActionRef,
+    toOpenPin
   }
 }

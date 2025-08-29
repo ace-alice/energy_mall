@@ -42,7 +42,7 @@ export const useShopCartStore = defineStore(
     const filterCart = computed(() => {
       return shopCartList.value.filter((item) => {
         if (searchText.value.trim()) {
-          return item.good_name.includes(searchText.value)
+          return item.class_name.includes(searchText.value)
         } else {
           return true
         }

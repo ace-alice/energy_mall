@@ -2,7 +2,8 @@
 import { showConfirmDialog, showLoadingToast, closeToast } from 'vant'
 import { useCommonStore } from '@/stores/common'
 import { setLocal } from '@/utils/storage'
-import { delAddressApi } from '@/api'
+import { delAddressApi, editAddressApi } from '@/api'
+import type { AddressItemType } from '@/interface/common'
 
 const { addressList } = storeToRefs(useCommonStore())
 const { getAddressList } = useCommonStore()
@@ -29,6 +30,16 @@ function beforeClose(id: number) {
   delAddressApi({ id }).then(() => {
     getAddressList()
     closeToast()
+  })
+}
+
+const changeDefaultLoad = ref(false)
+
+function changeDefault(item: AddressItemType) {
+  changeDefaultLoad.value = true
+  editAddressApi(item).finally(() => {
+    changeDefaultLoad.value = false
+    getAddressList()
   })
 }
 
@@ -65,6 +76,12 @@ function onAdd() {
                 v-model="item.default"
                 style="margin-right: 12px"
                 checked-color="#000"
+                :disabled="changeDefaultLoad"
+                @click="
+                  () => {
+                    changeDefault(Object.assign({}, item, { default: item.default }))
+                  }
+                "
               ></van-checkbox>
             </template>
             <template #right-icon>

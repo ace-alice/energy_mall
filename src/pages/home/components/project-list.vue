@@ -25,7 +25,7 @@ const props = defineProps(['type'])
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<ProjectItemType>({
   api: projectListApi,
-  otherForm: { type: props.type }
+  otherForm: { class_id: props.type }
 })
 </script>
 

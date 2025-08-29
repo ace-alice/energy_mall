@@ -20,20 +20,16 @@
 </template>
 
 <script setup lang="ts" name="OrderEnterBox">
-import after_shell from '@/assets/images/icons/after_shell.png'
 import already from '@/assets/images/icons/already.png'
 import will_dev from '@/assets/images/icons/will_dev.png'
-import will_pay from '@/assets/images/icons/will_pay.png'
 import will_send from '@/assets/images/icons/will_send.png'
 
 const router = useRouter()
 
 const enterList = [
-  { text: '待付款', img: will_pay, tab: 1 },
-  { text: '待发货', img: will_send, tab: 2 },
-  { text: '待收货', img: will_dev, tab: 3 },
-  { text: '已完成', img: already, tab: 4 },
-  { text: '售后', img: after_shell, tab: 5 }
+  { text: '待发货', img: will_send, tab: 0 },
+  { text: '待收货', img: will_dev, tab: 1 },
+  { text: '已完成', img: already, tab: 2 }
 ]
 </script>
 

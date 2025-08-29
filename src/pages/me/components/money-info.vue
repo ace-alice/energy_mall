@@ -1,12 +1,14 @@
 <template>
   <div class="money-info">
     <div>
-      <div>商城余额(元)</div>
-      <div><VueCountTo :end-val="Number(userInfo.money)" :start-val="moneyStartVal" /></div>
+      <div>可提余额(元)</div>
+      <div><VueCountTo :end-val="Number(userInfo.outside_money)" :start-val="moneyStartVal" /></div>
     </div>
     <div>
-      <div>商城积分</div>
-      <div><VueCountTo :end-val="Number(userInfo.user_points)" :start-val="pointStartVal" /></div>
+      <div>可用余额(元)</div>
+      <div>
+        <VueCountTo :end-val="Number(userInfo.outside_frozen_money)" :start-val="pointStartVal" />
+      </div>
     </div>
   </div>
 </template>
@@ -20,13 +22,13 @@ const moneyStartVal = ref(0)
 const pointStartVal = ref(0)
 
 watch(
-  () => userInfo.value.money,
+  () => userInfo.value.outside_money,
   (newVal, oldVal) => {
     moneyStartVal.value = +oldVal
   }
 )
 watch(
-  () => userInfo.value.user_points,
+  () => userInfo.value.outside_frozen_money,
   (newVal, oldVal) => {
     pointStartVal.value = +oldVal
   }

@@ -2,6 +2,13 @@
 import GoodItemList from './components/tab-item-list.vue'
 
 const active = ref(0)
+
+const enterList = [
+  { text: '全部', tab: null },
+  { text: '待发货', tab: 0 },
+  { text: '待收货', tab: 1 },
+  { text: '已完成', tab: 2 }
+]
 </script>
 
 <template>
@@ -23,10 +30,9 @@ const active = ref(0)
       line-height="5px"
       color="#F3B546"
     >
-      <van-tab title="全部"> <GoodItemList /></van-tab>
-      <!-- <van-tab title="待付款"> <GoodItemList status="0" /></van-tab> -->
-      <van-tab title="待收货"> <GoodItemList status="0" /></van-tab>
-      <van-tab title="已完成"> <GoodItemList status="1" /></van-tab>
+      <van-tab v-for="tab in enterList" :title="tab.text">
+        <GoodItemList :status="tab.tab"
+      /></van-tab>
     </van-tabs>
   </div>
 </template>

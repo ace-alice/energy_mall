@@ -141,10 +141,11 @@ export function getArticles(data: { class_id: number; page: number }) {
  * @param data 查询参数
  * @returns Promise
  */
-export function groupClassesApi() {
+export function groupClassesApi(data: any) {
   return service({
-    url: '/groupBy/classes',
-    method: 'GET'
+    url: '/goods/classes',
+    method: 'POST',
+    data
   })
 }
 
@@ -155,7 +156,7 @@ export function groupClassesApi() {
  */
 export function projectListApi(data: any) {
   return service({
-    url: '/groupBy/lists',
+    url: '/goods/lists',
     method: 'POST',
     data
   })
@@ -168,7 +169,7 @@ export function projectListApi(data: any) {
  */
 export function getProjectDetailApi(data: any) {
   return service({
-    url: '/groupBy/info',
+    url: '/goods/info',
     method: 'POST',
     params: data
   })
@@ -181,7 +182,7 @@ export function getProjectDetailApi(data: any) {
  */
 export function getAddressListApi() {
   return service({
-    url: '/address/info',
+    url: '/address/lists',
     method: 'POST'
   })
 }
@@ -308,7 +309,7 @@ export function uploadApi(data: any) {
  */
 export function getGoodsRecordApi(data: any) {
   return service({
-    url: `/groupBy/record`,
+    url: `/goods/record`,
     method: 'POST',
     data
   })

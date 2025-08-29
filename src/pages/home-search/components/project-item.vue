@@ -1,6 +1,6 @@
 <template>
   <div class="project-item">
-    <van-image width="100%" height="140" lazy-load :src="item.good_img" />
+    <van-image width="100%" height="140" lazy-load :src="item.img" />
     <div class="p-info">
       <div>{{ item.title }}</div>
       <div>¥{{ item.price || '0.00' }}</div>

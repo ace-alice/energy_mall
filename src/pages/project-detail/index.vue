@@ -17,23 +17,23 @@
     <div class="back" @click="router.back()">
       <img :src="backIcon" height="20" width="20" alt="" />
     </div>
-    <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.good_img" />
+    <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
     <div class="good-price">
       <div>¥</div>
       <div>{{ projectDetail.price }}</div>
-      <div>¥{{ projectDetail.good_price }}</div>
-      <div>已出售{{ projectDetail.people }}+</div>
+      <div>¥{{ projectDetail.original_price }}</div>
+      <div>已出售{{ '100' }}+</div>
     </div>
     <div style="padding: 0 16px">
-      <div class="title">{{ projectDetail.good_name }}</div>
+      <div class="title">{{ projectDetail.title }}</div>
     </div>
-    <div class="ways">
+    <div class="ways" v-if="projectDetail.type != 2">
       <img :src="send_way" width="20" height="20" alt="" />
       <div style="flex-grow: 1; font-weight: 600">配送方式</div>
       <div style="font-size: 14px">物流配送</div>
       <van-icon name="play" />
     </div>
-    <div class="ways">
+    <div class="ways" v-if="false">
       <img :src="mallIcon" width="20" height="20" alt="" />
       <div style="flex-grow: 1; font-weight: 600">优惠券</div>
       <div style="font-size: 14px">2张</div>
@@ -71,7 +71,7 @@ function getProjectDetail(id: string) {
 }
 
 const content = computed(() => {
-  return htmlDecodeByRegExp(projectDetail.good_content).replace(/<img/g, '<img  width="100%"')
+  return htmlDecodeByRegExp(projectDetail.content).replace(/<img/g, '<img  width="100%"')
 })
 
 onMounted(() => {

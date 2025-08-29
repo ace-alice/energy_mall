@@ -1,8 +1,10 @@
 <template>
   <div class="money-info">
     <div>
-      <div>商城余额(元)</div>
-      <div><VueCountTo :end-val="Number(userInfo.money)" :start-val="moneyStartVal" /></div>
+      <div>可用余额(元)</div>
+      <div>
+        <VueCountTo :end-val="Number(userInfo.outside_frozen_money)" :start-val="moneyStartVal" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,7 +16,7 @@ const { userInfo } = storeToRefs(useCommonStore())
 const moneyStartVal = ref(0)
 
 watch(
-  () => userInfo.value.money,
+  () => userInfo.value.outside_frozen_money,
   (newVal, oldVal) => {
     moneyStartVal.value = +oldVal
   }

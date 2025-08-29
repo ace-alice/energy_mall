@@ -1,6 +1,11 @@
 <template>
   <div class="menu-router">
     <van-cell-group :border="false">
+      <van-cell title="外部商城" :border="false" :icon="mall" is-link @click="backMall">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
       <van-cell title="我的卡券" :border="false" :icon="mall" is-link to="/me-vip">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
@@ -11,7 +16,12 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="充值/兑换记录" :border="false" :icon="transfer" is-link to="index">
+      <van-cell title="充值记录" :border="false" :icon="transfer" is-link to="index">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
+      <van-cell title="兑换记录" :border="false" :icon="transfer" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
@@ -55,6 +65,11 @@ import { useCommonStore } from '@/stores/common'
 const { isVip } = storeToRefs(useCommonStore())
 
 const router = useRouter()
+
+function backMall() {
+  isVip.value = false
+  router.push({ name: 'MeNormal' })
+}
 </script>
 
 <style lang="scss" scoped>

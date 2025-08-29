@@ -26,6 +26,10 @@ export interface UserInfo {
   invite: string
   level_team: number
   level_team_name: string
+  outside_money: string
+  outside_frozen_money: string
+  outside_level_name: string
+  outside_level_img: string
 }
 
 export interface UserDetail {
@@ -126,36 +130,23 @@ export interface GroupClassType {
 
 export interface ProjectItemType {
   id: number
-  title: string
   class_id: number
   class_name: string
-  is_recommend: number
-  good_id: number
-  good_name: string
-  good_img: string
+  class_type: number
+  title: string
   sort: number
   price: string
-  people: number
-  people_add: number
-  people_time: number
-  process_time: number
-  process_num: string
-  process_update_time: number
-  fail_money: string
-  limit: number
-  level: number
-  item_money: string
-  status: number
-  next_time: string
-  cycle: number
-  desc: string
+  original_price: string
+  img: string
+  type: number
+  is_hot: number
+  valid_day: number
+  sign_amount: number
+  content: string
   create_time: number
   update_time: number
   create_at: string
   update_at: string
-  good_price: string
-  good_content: string
-  period: string
 }
 
 export interface userDetailType {
@@ -342,6 +333,36 @@ export interface BankItemType {
   alipay_account: string
   alipay_img: string
   wx_img: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface GoodsOrderItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  img: string
+  from_id: string
+  goods_id: number
+  goods_type: number
+  goods_title: string
+  order_no: string
+  money: string
+  remark: string
+  deliver_title: string
+  deliver_order_no: string
+  deliver_time: string
+  status: number
+  is_cash: number
+  address_name: string
+  address_phone: string
+  address_city: string
+  address_place: string
+  desc: string
   create_time: number
   update_time: number
   create_at: string

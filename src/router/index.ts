@@ -295,6 +295,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/invite',
+      name: 'Invite',
+      component: () => import(/* webpackChunkName: "invite" */ '@/pages/invite/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/bank-add',
       name: 'BankAdd',
       component: () => import(/* webpackChunkName: "bank-add" */ '@/pages/bank/bank-add.vue'),

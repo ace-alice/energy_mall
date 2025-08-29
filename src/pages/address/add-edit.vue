@@ -1,5 +1,5 @@
 <script setup name="Address" lang="ts">
-import { addAddressApi } from '@/api'
+import { addAddressApi, editAddressApi } from '@/api'
 import { useCommonStore } from '@/stores/common'
 import { getLocal } from '@/utils/storage'
 import { areaList } from '@vant/area-data'
@@ -12,7 +12,7 @@ const router = useRouter()
 function onSave(info: AddressEditInfo) {
   if (route.params.type && route.params.type == 'edit') {
     const editInfo = getLocal('editAddress')
-    addAddressApi({
+    editAddressApi({
       id: editInfo.id,
       address_name: info.name,
       address_phone: info.tel,

@@ -1,14 +1,14 @@
 <script setup name="GoodItemList" lang="ts">
 import { getGoodsRecordApi } from '@/api/index'
-import type { ProjectItemType } from '@/interface/common'
+import type { GoodsOrderItemType, ProjectItemType } from '@/interface/common'
 import GoodOrderItem from './order-item.vue'
 import pageHook from '@/hooks/pageHook'
 
 const props = defineProps(['status'])
 
-const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<ProjectItemType>({
+const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<GoodsOrderItemType>({
   api: getGoodsRecordApi,
-  otherForm: { status: props.status, tab: '1' }
+  otherForm: { status: props.status }
 })
 
 onActivated(() => {

@@ -21,7 +21,7 @@ const routerList = [
   {
     title: '签到有礼',
     icon: sigin,
-    router: '/me-vip'
+    router: '/signin'
   },
   {
     title: '公司介绍',
@@ -31,7 +31,7 @@ const routerList = [
   {
     title: '邀请好友',
     icon: intIcon,
-    router: ''
+    router: '/invite'
   },
   {
     title: '幸运抽奖',

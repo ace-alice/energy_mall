@@ -113,14 +113,14 @@ export const useCommonStore = defineStore(
     }
 
     function getGroupClasses() {
-      groupClassesApi().then((res) => {
-        groupClasses.value = res.data.data.data || []
+      groupClassesApi({ type: 1 }).then((res) => {
+        groupClasses.value = res.data.data || []
       })
     }
 
     async function getAddressList() {
       await getAddressListApi().then((res) => {
-        addressList.value = [res.data.data]
+        addressList.value = res.data.data
       })
     }
 

@@ -8,14 +8,14 @@
         <img :src="hiIcon" width="22" style="margin-right: 4px" alt="" />
         <div>{{ userInfo.username || userInfo.phone2 }}</div>
         <img
-          :src="getIconByLevel(userInfo.level)"
+          :src="userInfo.outside_level_img || getIconByLevel(userInfo.level)"
           height="20"
           style="margin-left: 4px"
           alt=""
           srcset=""
         />
       </div>
-      <div class="level">等级: {{ userInfo.level_name }}</div>
+      <div class="level">等级: {{ userInfo.outside_level_name }}</div>
     </div>
   </div>
 </template>

@@ -13,7 +13,7 @@ const showKeyboard = ref(false)
 
 const showKeySheet = ref(false)
 
-const { addressList } = storeToRefs(useCommonStore())
+const { addressList, userInfo } = storeToRefs(useCommonStore())
 
 const { getAddressList } = useCommonStore()
 
@@ -25,13 +25,6 @@ onMounted(() => {
   getAddressList()
 })
 
-watch(
-  () => pins.value,
-  () => {
-    console.log(pins)
-  }
-)
-
 const selectAddress = ref(0)
 
 const totalPrice = computed(() => {
@@ -39,6 +32,10 @@ const totalPrice = computed(() => {
 })
 
 function toPins() {
+  if (userInfo.value.outside_frozen_money < totalPrice.value) {
+    showToast({ type: 'fail', message: '可用余额不足' })
+    return
+  }
   if (selectAddress.value) {
     showSheet.value = false
     showKeySheet.value = true
@@ -108,12 +105,11 @@ watch(
             @click="selectAddress = item.id"
           >
             <template #icon>
-              <van-checkbox
-                v-model="selectAddress"
+              <van-radio
                 style="margin-right: 12px"
                 checked-color="#000"
                 :name="item.id"
-              ></van-checkbox>
+              ></van-radio>
             </template>
           </van-cell>
           <van-cell title="添加收货地址" icon="add-o" size="large" clickable to="/address/add" />

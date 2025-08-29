@@ -128,7 +128,7 @@ export default function () {
   const disabled = computed(() => {
     return !!(
       !amount.value ||
-      (+userInfo.value.money || 0) < (amount.value || 0) ||
+      (+userInfo.value.outside_money || 0) < (amount.value || 0) ||
       !currentMethod.value.id
     )
   })

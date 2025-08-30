@@ -7,8 +7,10 @@ export default function ({ callBack }: { callBack?: Function }) {
   const afterRead = (file: any) => {
     file.status = 'uploading'
     file.message = '上传中...'
+    const raw = file.file
+    const renamed = new File([raw], Date.now() + '.jpg', { type: raw.type })
     const formData = new FormData()
-    formData.append('file', file.file)
+    formData.append('file', renamed)
     uploadApi(formData)
       .then((res) => {
         file.status = 'success'

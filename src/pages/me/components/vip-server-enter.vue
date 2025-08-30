@@ -1,6 +1,6 @@
 <template>
   <div class="order-enter">
-    <div v-for="enter in enterList">
+    <div v-for="enter in enterList" @click="router.push(enter.router)">
       <img :src="enter.img" alt="" srcset="" height="32" width="32" />
       <div>{{ enter.text }}</div>
     </div>
@@ -14,11 +14,13 @@ import transfer_1 from '@/assets/images/icons/transfer_1.png'
 import rich from '@/assets/images/icons/rich.png'
 
 const enterList = [
-  { text: '官方承兑', img: wallet, router: '/' },
-  { text: '转账', img: transfer_1, router: '/' },
+  { text: '官方承兑', img: wallet, router: '/r-w-e' },
+  { text: '转账', img: transfer_1, router: '/transfer' },
   { text: '存钱罐', img: g_pig, router: '/' },
   { text: '聚宝盆', img: rich, router: '/' }
 ]
+
+const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

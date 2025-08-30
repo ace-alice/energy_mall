@@ -6,6 +6,7 @@ import type {
   AddressItemType,
   BankItemType,
   GroupClassType,
+  InvestClassItemType,
   MediaQueryInfo,
   UserDetail,
   UserInfo
@@ -15,6 +16,7 @@ import { getLocal, setLocal } from '@/utils/storage'
 import {
   getAddressListApi,
   getBankListApi,
+  getInvestClassesApi,
   getUserDetailApi,
   groupClassesApi,
   settingApi,
@@ -42,6 +44,8 @@ export const useCommonStore = defineStore(
     const userInfo = reactive<UserInfo>(Object.assign({}, defaultUserInfo))
 
     const groupClasses = ref<GroupClassType[]>([])
+
+    const investClasses = ref<InvestClassItemType[]>([])
 
     const addressList = ref<AddressItemType[]>([])
 
@@ -136,6 +140,12 @@ export const useCommonStore = defineStore(
       })
     }
 
+    function getInvestClasses() {
+      getInvestClassesApi().then((res) => {
+        investClasses.value = res.data.data
+      })
+    }
+
     return {
       token,
       showLangChar,
@@ -158,7 +168,9 @@ export const useCommonStore = defineStore(
       getUserDetail,
       userDetail,
       bankList,
-      getBankList
+      getBankList,
+      getInvestClasses,
+      investClasses
     }
   },
   {

@@ -73,7 +73,7 @@ const onInput = (e: any) => {
         type="number"
         placeholder="请输入充值金额"
         :min="+method.min || 0"
-        :max="+method.min || 999999999"
+        :max="+method.max || 999999999"
       >
         <template #left-icon>
           <div>自定义 |</div>

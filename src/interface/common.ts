@@ -30,6 +30,9 @@ export interface UserInfo {
   outside_frozen_money: string
   outside_level_name: string
   outside_level_img: string
+  outside_level_start_time: string
+  outside_level_end_time: string
+  outside_level_sign_amount: string
 }
 
 export interface UserDetail {
@@ -367,4 +370,76 @@ export interface GoodsOrderItemType {
   update_time: number
   create_at: string
   update_at: string
+}
+
+export interface SigninHistoryItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  amount: string
+  is_test: number
+  is_agent: number
+  sign_date: string
+  continuous: number
+  continuous_days: number
+  continuous_days_total: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface InvestClassItemType {
+  id: number
+  title: string
+  desc: string
+  sort: number
+  pid: number
+  img: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface InvestItemType {
+  id: number
+  title: string
+  img: string
+  status: number
+  sort: number
+  level: number
+  class_id: number
+  class_name: string
+  invest: number
+  invest_scale: number
+  invest_limit: number
+  profit_type: number
+  profit_rate: string
+  profit_more: string
+  profit_extra: string
+  profit_cycle: number
+  profit_cycle_time: number
+  gift_points: number
+  gift_raffle: number
+  gift_bonus: string
+  content: string
+  desc: string
+  progress: string
+  progress_cycle: number
+  progress_rate: string
+  progress_time: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  home_display: number
+  product_release_time: string
+  product_insurance_time: string
+  gift_goods: number
+  level_income: number
+  gift_product_expires: number
+  video_link: string
+  is_rebate: number
 }

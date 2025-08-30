@@ -26,7 +26,7 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="用户指南" :border="false" :icon="guide" is-link to="index">
+      <van-cell title="用户指南" :border="false" :icon="guide" is-link to="/user-guide">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>

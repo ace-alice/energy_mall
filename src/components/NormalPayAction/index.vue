@@ -48,7 +48,7 @@ function toPins() {
 function toPay() {
   showToast({ type: 'loading', overlay: true })
   const ids: string = props.items.map((item: any) => item.id).join(',')
-  buyOutGoodsApi({ id: ids, pin: pins.value })
+  buyOutGoodsApi({ ids: ids, pin: pins.value })
     .then((res) => {
       closeToast()
       getUserInfo()

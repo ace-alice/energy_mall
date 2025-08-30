@@ -124,6 +124,22 @@ const router = createRouter({
       }
     },
     {
+      path: '/user-guide',
+      name: 'UserGuide',
+      component: () => import(/* webpackChunkName: "user-guide" */ '@/pages/user-guide/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/legend/:code',
+      name: 'Legend',
+      component: () => import(/* webpackChunkName: "legend" */ '@/pages/legend/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/recharge-order-list',
       name: 'RechargeOrderList',
       component: () =>
@@ -303,6 +319,17 @@ const router = createRouter({
       }
     },
     {
+      path: '/r-w-e',
+      name: 'RechargeWithdrawVip',
+      component: () =>
+        import(
+          /* webpackChunkName: "recharge-withdraw-enter" */ '@/pages/recharge-withdraw-enter/index.vue'
+        ),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/bank-add',
       name: 'BankAdd',
       component: () => import(/* webpackChunkName: "bank-add" */ '@/pages/bank/bank-add.vue'),
@@ -319,9 +346,26 @@ const router = createRouter({
       }
     },
     {
+      path: '/invest',
+      name: 'InvestVip',
+      component: () => import(/* webpackChunkName: "invest" */ '@/pages/invest/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/invest-detail/:id',
+      name: 'InvestDetailVip',
+      component: () =>
+        import(/* webpackChunkName: "invest-detail" */ '@/pages/invest-detail/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
-      redirect: '/index'
+      redirect: '/'
     }
   ]
 })

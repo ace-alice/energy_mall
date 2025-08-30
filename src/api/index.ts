@@ -322,7 +322,7 @@ export function getGoodsRecordApi(data: any) {
  */
 export function buyOutGoodsApi(data: any) {
   return service({
-    url: `/GroupBy/pay`,
+    url: `/goods/pay`,
     method: 'POST',
     data
   })
@@ -439,5 +439,43 @@ export function doTransferApi(data: any) {
     url: '/Transfer/operate',
     method: 'POST',
     data
+  })
+}
+
+/**
+ * 投资类型列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getInvestClassesApi() {
+  return service({
+    url: '/Item/classes',
+    method: 'GET'
+  })
+}
+
+/**
+ * 获取投资项目列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getInvestApi(data: any) {
+  return service({
+    url: '/item/lists',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取投资产品详情
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getInvestDetailApi(data: any) {
+  return service({
+    url: '/item/info',
+    method: 'POST',
+    params: data
   })
 }

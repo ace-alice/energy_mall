@@ -126,3 +126,21 @@
     padding: 4px 16px !important;
   }
 }
+.team-tabs {
+  .van-tabs__nav {
+    background: var(--main-bg-color);
+  }
+  .van-sticky--fixed {
+    .van-tabs__nav--card {
+      border-radius: unset;
+      background-color: white;
+    }
+  }
+  .van-tabs__wrap {
+    height: 44px;
+    .van-tabs__line {
+      height: 6px;
+      background: linear-gradient(to right, #27b6ad, #f3b546);
+    }
+  }
+}

@@ -3,6 +3,7 @@
     <img :src="homeLogo" height="32" alt="" />
     <div class="box-right">
       <img
+        v-if="!isVip"
         :src="searchIcon"
         style="margin-right: 24px"
         width="22"

@@ -12,6 +12,7 @@ import zhCN from 'vant/es/locale/lang/zh-CN'
 import 'vant/lib/index.css'
 import '@/tools/jsBridge/index'
 import { Lazyload } from 'vant'
+import VueLuckyCanvas from '@lucky-canvas/vue'
 
 // 设置 Vant 语言为英文
 Locale.use('zh-CN', zhCN)
@@ -57,5 +58,6 @@ loadCssById(import.meta.env.BASE_URL + 'styles/theme-01.css', () => {
   app.use(router).use(i18n)
   app.use(Lazyload)
   app.use(i18n)
+  app.use(VueLuckyCanvas)
   app.mount('#app')
 })

@@ -104,6 +104,10 @@ function goBack() {
   .title {
     font-size: 18px;
     font-weight: 600;
+    max-width: 280px;
+    overflow: hidden;
+    text-wrap: noWrap;
+    text-overflow: ellipsis;
   }
 }
 </style>

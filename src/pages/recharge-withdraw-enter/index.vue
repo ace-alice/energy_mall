@@ -7,7 +7,7 @@ const router = useRouter()
 </script>
 
 <template>
-  <div class="normal-bg invite">
+  <div class="normal-page invite">
     <NormalHeader :background="false" :backIconTag="2" />
     <div style="margin-top: 420px">
       <van-sticky :offset-bottom="260" position="bottom">

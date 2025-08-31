@@ -5,6 +5,7 @@ import ProjectListBox from './components/project-list.vue'
 import { useCommonStore } from '@/stores/common'
 
 const { mediaQueryInfo, groupClasses } = storeToRefs(useCommonStore())
+const active = ref(0)
 </script>
 
 <template>
@@ -20,6 +21,7 @@ const { mediaQueryInfo, groupClasses } = storeToRefs(useCommonStore())
     </div>
     <van-tabs
       class="team-tabs"
+      v-model:active="active"
       sticky
       swipeable
       shrink

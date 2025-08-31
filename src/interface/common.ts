@@ -443,3 +443,85 @@ export interface InvestItemType {
   video_link: string
   is_rebate: number
 }
+
+export interface InvestOrderItemType {
+  id: number
+  order_no: string
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  item_class_id: number
+  item_class_name: string
+  item_id: number
+  item_name: string
+  item_status: number
+  item_type: number
+  amount: string
+  gift_bonus: string
+  gift_points: number
+  gift_raffle: number
+  gift_coupon: number
+  cycle_start: number
+  cycle_end: number
+  cycle_time: number
+  profit_rate: string
+  profit_more: string
+  profit_extra: string
+  profit_now: string
+  profit_earn: string
+  profit_total: string
+  next_time: string
+  last_time: string
+  end_time: string
+  is_coupon: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  gift_goods: number
+  gift_product_expires: number
+  principal: string
+  img: string
+  profit_cycle_time: number
+  profit_cycle: number
+  profit_type: number
+  end_time2: number
+  item_invest_scale: string
+  product_release_time: string
+  product_insurance_time: string
+  profit_fake: number
+}
+
+export interface RaffleItemType {
+  id: number
+  title: string
+  money: string
+  chance: string
+  type: number
+  img: string
+  goods_id: number
+  goods_name: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
+export interface RaffleHistoryItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  type: number
+  raffle_id: number
+  raffle_name: string
+  desc: string
+  amount: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  img: string
+}

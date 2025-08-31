@@ -96,16 +96,25 @@ onBeforeUnmount(() => {
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
-      <keep-alive :exclude="['Recharge', 'UsdtAdd', 'BankAdd', 'Withdraw', 'Transfer']">
+      <keep-alive
+        :exclude="['Recharge', 'UsdtAdd', 'BankAdd', 'Withdraw', 'Transfer', 'ArticleDetail']"
+      >
         <component :is="Component" :key="route.path" />
       </keep-alive>
     </transition>
   </router-view>
   <van-tabbar
     v-if="
-      ['HomeVip', 'HomeNormal', 'MeNormal', 'Shopping', 'MeVip', 'TeamVip', 'InvestVip'].includes(
-        (router.currentRoute?.value.name as any) || ''
-      )
+      [
+        'HomeVip',
+        'HomeNormal',
+        'MeNormal',
+        'Shopping',
+        'MeVip',
+        'TeamVip',
+        'InvestVip',
+        'InvestOrderVip'
+      ].includes((router.currentRoute?.value.name as any) || '')
     "
     v-model="active"
     active-color="#000"
@@ -135,7 +144,7 @@ onBeforeUnmount(() => {
         <img :src="shopping_un" v-show="!props.active" />
       </template>
     </van-tabbar-item>
-    <van-tabbar-item to="/shopping" v-if="isVip">
+    <van-tabbar-item to="/invest-order" v-if="isVip">
       <span>我的订单</span>
       <template #icon="props">
         <img :src="shopping_se" v-show="props.active" />

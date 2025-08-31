@@ -1,23 +1,27 @@
 <template>
   <!-- @click="router.push(`/invest-detail/${item.id}`)" -->
-  <div class="normal-card project-item" @click="router.push(`/invest-detail/${item.id}`)">
+  <div class="normal-card project-item">
     <div class="top">
       <van-image width="90" height="65" lazy-load :src="item.img" />
       <div class="p-info">
-        <div>{{ item.title }}</div>
-        <van-progress
-          :pivot-text="`${item.progress}%`"
-          :color="Number(item.progress) == 100 ? '#FBC145' : '#13B756'"
-          track-color="#C7EED7"
-          :percentage="Number(item.progress)"
-        />
+        <div class="title">
+          <span>{{ item.item_name }}</span>
+          <van-tag
+            :color="currentStatus?.bgColor"
+            :text-color="currentStatus?.textColor"
+            size="large"
+            >{{ currentStatus?.text }}</van-tag
+          >
+        </div>
+        <div>投资日期 {{ item.create_at }}</div>
+        <div>收益日期 {{ item.end_time }}</div>
       </div>
     </div>
     <van-divider />
     <div class="bottom">
       <div>
-        <div>总投资额</div>
-        <div>{{ Number(item.profit_cycle) }}<span>USDT</span></div>
+        <div>投资金额</div>
+        <div>{{ Number(item.amount) }}<span>USDT</span></div>
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
@@ -34,6 +38,31 @@
 <script setup lang="ts" name="ProjectItem">
 const props = defineProps(['item'])
 const router = useRouter()
+
+const statusOptions = [
+  {
+    text: '进行中',
+    bgColor: '#E7F7EE',
+    textColor: '#13B756',
+    type: 0
+  },
+  {
+    text: '已完成',
+    bgColor: '#F4F4F4',
+    textColor: '#999',
+    type: 1
+  },
+  {
+    text: '待派本金',
+    bgColor: '#FFD57B',
+    textColor: '#FFD57B',
+    type: 2
+  }
+]
+
+const currentStatus = computed(() => {
+  return statusOptions.find((s) => props.item.item_status == s.type)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -79,10 +108,16 @@ const router = useRouter()
     justify-content: space-between;
     & > div:nth-child(1) {
       font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     & > div:nth-child(2) {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    & > div:nth-child(3) {
+      font-size: 12px;
       margin-top: 4px;
     }
   }

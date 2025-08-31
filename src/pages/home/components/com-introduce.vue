@@ -26,7 +26,7 @@ const routerList = [
   {
     title: '公司介绍',
     icon: intro,
-    router: ''
+    router: '/com-intro'
   },
   {
     title: '邀请好友',
@@ -36,12 +36,12 @@ const routerList = [
   {
     title: '幸运抽奖',
     icon: price_enter,
-    router: ''
+    router: '/lottery'
   },
   {
     title: '知识课堂',
     icon: book,
-    router: ''
+    router: '/knowledge'
   }
 ]
 </script>

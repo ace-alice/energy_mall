@@ -9,12 +9,12 @@ const router = useRouter()
 const enterList = [
   { text: '会员等级', icon: user_level, router: '/legend/user_level' },
   { text: '团队等级', icon: team_level, router: '/legend/team_level' },
-  { text: '市场制度', icon: market, router: '/legend/market' }
+  { text: '市场制度', icon: market, router: '/legend/market_rule' }
 ]
 </script>
 
 <template>
-  <div class="normal-bg invite">
+  <div class="normal-page invite">
     <NormalHeader :background="false" :backIconTag="2" />
     <div style="margin-top: 420px">
       <van-sticky :offset-bottom="200" position="bottom">

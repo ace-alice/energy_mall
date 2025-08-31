@@ -10,12 +10,13 @@
             type="number"
             name="searchText"
             placeholder="输入手机号查询"
+            style="height: 44px; padding: 0 16px"
           >
             <template #left-icon>
               <van-icon name="search" />
             </template>
             <template #right-icon>
-              <van-button type="success" round>查询</van-button>
+              <van-button type="success" size="small" style="width: 60px" round>查询</van-button>
             </template>
           </van-field>
         </div>
@@ -52,7 +53,7 @@
         color="#13B756"
         title-active-color="#fff"
         title-inactive-color="#13B756"
-        :offset-top="104 + mediaQueryInfo.top"
+        :offset-top="94 + mediaQueryInfo.top"
       >
         <van-tab title="查看一级下层"><TeamList /></van-tab>
         <van-tab title="查看二级下层"> <TeamList /> </van-tab>

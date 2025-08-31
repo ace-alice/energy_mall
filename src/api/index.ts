@@ -281,7 +281,7 @@ export function editNickNameApi(data: any) {
  * @param data 查询参数
  * @returns Promise
  */
-export function articleInfoApi(params: { code: string }) {
+export function articleInfoApi(params: any) {
   return service({
     url: `/article/info`,
     method: 'GET',
@@ -477,5 +477,56 @@ export function getInvestDetailApi(data: any) {
     url: '/item/info',
     method: 'POST',
     params: data
+  })
+}
+
+/**
+ * 获取产品订单列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function investOrderApi(data: any) {
+  return service({
+    url: '/item/record',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取抽奖奖励列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function raffleListApi() {
+  return service({
+    url: '/raffle/lists',
+    method: 'POST'
+  })
+}
+
+/**
+ * 获取抽奖奖励列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function raffleDrawApi(data: any) {
+  return service({
+    url: `/raffle/draw`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取抽奖记录列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function raffleRecordApi(data: any) {
+  return service({
+    url: `/raffle/record`,
+    method: 'POST',
+    data
   })
 }

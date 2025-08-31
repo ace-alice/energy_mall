@@ -12,20 +12,32 @@
     >
       <div style="width: 100%" class="is-color"></div>
     </div>
-    <img
+    <div
       v-else
-      class="normal-bg"
-      v-show="props.router && props.router == router.currentRoute.value.name"
-      :src="imgSrc || bgOne"
-      :alt="router.currentRoute.value.name?.toString()"
-    />
+      :style="{
+        '--top': `${mediaQueryInfo.top - 44}px`
+      }"
+    >
+      <img
+        class="normal-bg"
+        :class="{
+          'hidden-tool': hiddenTool
+        }"
+        v-show="props.router && props.router == router.currentRoute.value.name"
+        :src="imgSrc || bgOne"
+        :alt="router.currentRoute.value.name?.toString()"
+      />
+    </div>
   </teleport>
 </template>
 
 <script name="BgTwo" setup lang="ts">
 import bgOne from '@/assets/images/background/bg-2.png'
+import { useCommonStore } from '@/stores/common'
 
-const props = defineProps(['router', 'imgSrc', 'isColor', 'bgColor', 'height'])
+const props = defineProps(['router', 'imgSrc', 'isColor', 'bgColor', 'height', 'hiddenTool'])
+
+const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
 const router = useRouter()
 </script>
@@ -41,5 +53,8 @@ const router = useRouter()
 .is-color {
   height: var(--height);
   background: var(--bg-color);
+}
+.hidden-tool {
+  top: var(--top);
 }
 </style>

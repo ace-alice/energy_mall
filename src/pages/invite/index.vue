@@ -38,7 +38,7 @@ watch(inviteUrl, draw)
 </script>
 
 <template>
-  <div class="normal-bg invite">
+  <div class="normal-page invite">
     <NormalHeader :background="false" :backIconTag="2" />
     <div class="invite-card">
       <div class="card-top">

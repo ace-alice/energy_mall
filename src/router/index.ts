@@ -363,6 +363,57 @@ const router = createRouter({
       }
     },
     {
+      path: '/invest-order',
+      name: 'InvestOrderVip',
+      component: () =>
+        import(/* webpackChunkName: "invest-order" */ '@/pages/invest-order/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/com-intro',
+      name: 'ComIntro',
+      component: () => import(/* webpackChunkName: "com-intro" */ '@/pages/com-intro/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/knowledge',
+      name: 'Knowledge',
+      component: () => import(/* webpackChunkName: "knowledge" */ '@/pages/knowledge/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/lottery',
+      name: 'Lottery',
+      component: () => import(/* webpackChunkName: "lottery" */ '@/pages/lottery/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/lottery-history',
+      name: 'LotteryHistory',
+      component: () =>
+        import(/* webpackChunkName: "lottery-history" */ '@/pages/lottery-history/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/article-detail',
+      name: 'ArticleDetail',
+      component: () =>
+        import(/* webpackChunkName: "article-detail" */ '@/pages/article-detail/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
       redirect: '/'

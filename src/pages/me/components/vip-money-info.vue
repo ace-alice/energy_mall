@@ -1,12 +1,12 @@
 <template>
   <div class="vip-money-info">
     <div class="menu-top">
-      <div>
+      <div @click="router.push({ name: 'Wallet' })">
         <img src="" alt="" />
         我的钱包
         <van-icon name="arrow" />
       </div>
-      <div>
+      <div @click="router.push({ name: 'PointsMall' })">
         <img src="" alt="" />
         商城积分
         <span style="margin: 0 8px; font-weight: 600">{{ userInfo.user_points }}</span>
@@ -67,6 +67,8 @@ const { userInfo } = storeToRefs(useCommonStore())
 const moneyStartVal = ref(0)
 
 const pointStartVal = ref(0)
+
+const router = useRouter()
 
 watch(
   () => userInfo.value.money,

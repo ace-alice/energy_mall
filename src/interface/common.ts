@@ -1,3 +1,7 @@
+export interface Announcement {
+  [key: string]: any
+}
+
 export interface MediaQueryInfo {
   height: number
   width: number
@@ -524,4 +528,23 @@ export interface RaffleHistoryItemType {
   create_at: string
   update_at: string
   img: string
+}
+
+export interface MoneyLogType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  order_id: string
+  class_id: number
+  class_name: string
+  amount: string
+  before: string
+  after: string
+  desc: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
 }

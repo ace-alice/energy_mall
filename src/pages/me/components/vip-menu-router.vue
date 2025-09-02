@@ -11,12 +11,17 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="资金明细" :border="false" :icon="recharge" is-link to="index">
+      <van-cell title="资金明细" :border="false" :icon="recharge" is-link to="/fund-detail/in">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="充值记录" :border="false" :icon="transfer" is-link to="index">
+      <van-cell title="充值记录" :border="false" :icon="transfer" is-link to="/recharge-order-list">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
+      <van-cell title="提现记录" :border="false" :icon="transfer" is-link to="/withdraw-order">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
@@ -31,17 +36,23 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="贷款" :border="false" :icon="withdraw" is-link to="index">
+      <!-- <van-cell title="贷款" :border="false" :icon="withdraw" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
-      </van-cell>
+      </van-cell> -->
       <van-cell title="特殊积分" :border="false" :icon="points" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="会员等级说明" :border="false" :icon="level_notice" is-link to="index">
+      <van-cell
+        title="会员等级说明"
+        :border="false"
+        :icon="level_notice"
+        is-link
+        to="/legend/user_level"
+      >
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>

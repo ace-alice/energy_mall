@@ -50,6 +50,7 @@ watch(
     if (newVal) {
       commonStore.getGroupClasses()
       commonStore.getInvestClasses()
+      commonStore.getPointsClasses()
       if (!timer.value) {
         timer.value = setTimeout(() => {
           commonStore.getAddressList()

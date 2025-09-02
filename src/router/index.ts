@@ -414,6 +414,32 @@ const router = createRouter({
       }
     },
     {
+      path: '/fund-detail/:type',
+      name: 'FundDetail',
+      component: () =>
+        import(/* webpackChunkName: "fund-detail" */ '@/pages/fund-detail/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/wallet',
+      name: 'Wallet',
+      component: () => import(/* webpackChunkName: "wallet" */ '@/pages/wallet/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/points-mall',
+      name: 'PointsMall',
+      component: () =>
+        import(/* webpackChunkName: "points-mall" */ '@/pages/points-mall/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
       redirect: '/'

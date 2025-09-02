@@ -45,6 +45,8 @@ export const useCommonStore = defineStore(
 
     const groupClasses = ref<GroupClassType[]>([])
 
+    const pointsClasses = ref<GroupClassType[]>([])
+
     const investClasses = ref<InvestClassItemType[]>([])
 
     const addressList = ref<AddressItemType[]>([])
@@ -122,6 +124,12 @@ export const useCommonStore = defineStore(
       })
     }
 
+    function getPointsClasses() {
+      groupClassesApi({ type: 2 }).then((res) => {
+        pointsClasses.value = res.data.data || []
+      })
+    }
+
     async function getAddressList() {
       await getAddressListApi().then((res) => {
         addressList.value = res.data.data
@@ -170,7 +178,9 @@ export const useCommonStore = defineStore(
       bankList,
       getBankList,
       getInvestClasses,
-      investClasses
+      investClasses,
+      getPointsClasses,
+      pointsClasses
     }
   },
   {

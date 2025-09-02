@@ -530,3 +530,16 @@ export function raffleRecordApi(data: any) {
     data
   })
 }
+
+/**
+ * 获取资金明细
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getMoneyLogApi(data: any) {
+  return service({
+    url: `/Money/getMoneyLog`,
+    method: 'POST',
+    data
+  })
+}

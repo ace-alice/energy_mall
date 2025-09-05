@@ -13,7 +13,7 @@ export default function () {
 
   function onSubmit() {
     formData.money = Math.abs(formData.money || 0)
-    if ((+userInfo.value.money || 0) < +(formData.money || 0)) {
+    if ((+userInfo.value.outside_money || 0) < +(formData.money || 0)) {
       showToast({ type: 'fail', message: '您的余额不足' })
       return
     }

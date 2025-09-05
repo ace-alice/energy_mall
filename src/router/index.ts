@@ -34,7 +34,7 @@ const router = createRouter({
     },
     {
       path: '/project-detail-normal/:id',
-      name: 'ProjectDetailNormal',
+      name: 'ProjectDetail',
       component: () =>
         import(/* webpackChunkName: "project-detail-normal" */ '@/pages/project-detail/index.vue'),
       meta: {

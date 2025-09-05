@@ -14,7 +14,7 @@
       </div>
     </div>
     <van-divider />
-    <div class="bottom">
+    <div class="bottom three-del">
       <div>
         <div>总投资额</div>
         <div>{{ Number(item.profit_cycle) }}<span>USDT</span></div>
@@ -40,34 +40,6 @@ const router = useRouter()
 .project-item {
   .top {
     display: flex;
-  }
-  .bottom {
-    display: flex;
-    & > div {
-      width: 33%;
-      position: relative;
-      & + div {
-        &::before {
-          content: '/';
-          position: absolute;
-          color: #999;
-          left: -1px;
-          top: 12px;
-        }
-      }
-      & > div:nth-child(1) {
-        font-size: 12px;
-        color: #999;
-      }
-      & > div:nth-child(2) {
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 4px;
-        span {
-          font-size: 12px;
-        }
-      }
-    }
   }
   .p-info {
     height: 65px;

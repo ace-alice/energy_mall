@@ -18,43 +18,58 @@
       <img :src="backIcon" height="20" width="20" alt="" />
     </div>
     <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
-    <div class="good-price">
-      <div>¥</div>
-      <!-- <div>{{ projectDetail.price }}</div>
-      <div>¥{{ projectDetail.original_price }}</div> -->
-      <div>已出售{{ '100' }}+</div>
-    </div>
     <div style="padding: 0 16px">
       <div class="title">{{ projectDetail.title }}</div>
     </div>
-    <div class="ways">
+    <!-- <div class="ways">
       <img :src="send_way" width="20" height="20" alt="" />
       <div style="flex-grow: 1; font-weight: 600">配送方式</div>
       <div style="font-size: 14px">物流配送</div>
       <van-icon name="play" />
+    </div> -->
+    <!-- <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div> -->
+    <div class="normal-card item-info">
+      <div style="font-size: 16px">概况</div>
+      <div style="margin-top: 4px; color: #999">收益类型：每周返利到期返本</div>
+      <div style="margin-top: 4px; color: #999">积分赠送：20</div>
+      <div class="three-del">
+        <div>
+          <div>{{ Number(projectDetail.profit_cycle) }}<span>USDT</span></div>
+          <div>总投资额</div>
+        </div>
+        <div style="text-align: center">
+          <div>{{ projectDetail.profit_rate }}<span>%</span></div>
+          <div>项目利率</div>
+        </div>
+        <div style="text-align: right">
+          <div>{{ projectDetail.profit_cycle }}<span>天</span></div>
+          <div>持有时间</div>
+        </div>
+      </div>
     </div>
-    <div class="ways">
-      <img :src="send_way" width="20" height="20" alt="" />
-      <div style="flex-grow: 1; font-weight: 600">配送方式</div>
-      <div style="font-size: 14px">物流配送</div>
-      <van-icon name="play" />
-    </div>
-    <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div>
+    <TitleDel title="产品介绍" />
     <div style="padding: 0 16px 60px">
       <div v-html="content"></div>
     </div>
+    <div class="buy-box">
+      <van-button type="primary" round block @click="toPins">立即购买</van-button>
+    </div>
+    <NormalPinAction ref="normalPinActionRef" @submit="toBuy" />
   </div>
 </template>
 
 <script setup lang="ts" name="InvestDetailVip">
-import { getInvestDetailApi } from '@/api'
+import { getInvestDetailApi, investBuyApi } from '@/api'
 import type { InvestItemType } from '@/interface/common'
 import backIcon from '@/assets/images/icons/back_white_icon.png'
-import send_way from '@/assets/images/icons/send_way.png'
 import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp } from '@/utils/common'
 
+const normalPinActionRef = ref()
+
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
+
+const { getUserInfo, getUserDetail } = useCommonStore()
 
 const router = useRouter()
 const route = useRoute()
@@ -78,9 +93,63 @@ onMounted(() => {
     router.push({ name: 'HomeSearch' })
   }
 })
+
+function toPins() {
+  nextTick(() => {
+    if (normalPinActionRef.value) {
+      normalPinActionRef.value.toOpenPin()
+    }
+  })
+}
+
+function toBuy(pin: string) {
+  showToast({ type: 'loading', overlay: true })
+  investBuyApi({ id: projectDetail.id, pin: pin })
+    .then((res) => {
+      closeToast()
+      getUserInfo()
+      getUserDetail()
+      showToast({ type: 'text', message: '购买成功，请到订单页查看详情' })
+    })
+    .catch((e) => {})
+}
 </script>
 
 <style lang="scss" scoped>
+.three-del {
+  margin-top: 8px;
+  & > div {
+    width: 33%;
+    position: relative;
+    & > div:nth-child(1) {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 4px;
+      color: #fecd7f;
+      span {
+        font-size: 12px;
+      }
+    }
+    & > div:nth-child(2) {
+      font-size: 12px;
+      color: #999;
+    }
+  }
+}
+.item-info {
+  background-image: url('@/assets/images/background/item_info_bg.png');
+  background-size: 100% 100%;
+  color: #fff;
+  font-size: 12px;
+}
+.buy-box {
+  background-color: #fff;
+  padding: 8px 16px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
 .ways {
   margin: 0 16px 16px;
   background-color: #f9f9f9;
@@ -142,5 +211,8 @@ onMounted(() => {
 }
 .normal-page {
   background-color: #fff;
+  &:deep(.title img) {
+    filter: brightness(0) saturate(100%);
+  }
 }
 </style>

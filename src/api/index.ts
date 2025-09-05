@@ -494,6 +494,19 @@ export function investOrderApi(data: any) {
 }
 
 /**
+ * 投资项目
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function investBuyApi(data: any) {
+  return service({
+    url: '/item/pay',
+    method: 'POST',
+    data
+  })
+}
+
+/**
  * 获取抽奖奖励列表
  * @param data 查询参数
  * @returns Promise

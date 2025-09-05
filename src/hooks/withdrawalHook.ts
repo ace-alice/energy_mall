@@ -31,7 +31,7 @@ export default function () {
 
   const amount = ref<undefined | number>(undefined)
 
-  const { bankList, userInfo } = storeToRefs(useCommonStore())
+  const { bankList, userInfo, isVip } = storeToRefs(useCommonStore())
 
   const { getBankList, getUserInfo, getUserDetail } = useCommonStore()
 
@@ -135,7 +135,12 @@ export default function () {
 
   function toWithdraw(pin: string) {
     showToast({ type: 'loading', overlay: true })
-    doWithdrawApi({ money: amount.value, pin: pin, id: currentMethod.value.id })
+    doWithdrawApi({
+      money: amount.value,
+      pin: pin,
+      id: currentMethod.value.id,
+      type: isVip.value ? 2 : 1
+    })
       .then((res) => {
         closeToast()
         getUserInfo()

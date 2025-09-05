@@ -37,6 +37,7 @@ export interface UserInfo {
   outside_level_start_time: string
   outside_level_end_time: string
   outside_level_sign_amount: string
+  rate: string
 }
 
 export interface UserDetail {

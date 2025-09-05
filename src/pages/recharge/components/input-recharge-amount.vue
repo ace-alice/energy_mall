@@ -1,6 +1,14 @@
 <script setup lang="ts" name="InputRechargeAmount">
+import { useCommonStore } from '@/stores/common'
+
 const props = defineProps(['method', 'amount'])
 const emit = defineEmits(['change'])
+
+const { userInfo } = storeToRefs(useCommonStore())
+
+const currency = __VITE_CURRENCY
+
+const notionCurrency = __VITE_NATION_CURRENCY
 
 const amountList = [100, 500, 1000, 1500, 3000, 4000, 5000, 7000, 10000, 20000, 50000]
 
@@ -79,9 +87,7 @@ const onInput = (e: any) => {
           <div>自定义 |</div>
         </template>
         <template #right-icon>
-          <span style="font-size: 14px; margin-right: 4px">{{
-            method.account_info?.coin_name || 'RMB'
-          }}</span>
+          <span style="font-size: 14px; margin-right: 4px">{{ currency }}</span>
           <van-icon name="arrow" size="16" />
         </template>
       </van-field>
@@ -89,16 +95,16 @@ const onInput = (e: any) => {
         class="rate"
         v-if="
           method.account_info?.coin_name &&
-          method.account_info?.coin_name != 'RMB' &&
-          method.account_info?.rate
+          method.account_info?.coin_name == notionCurrency &&
+          userInfo.rate
         "
       >
         <div>
           <span style="opacity: 0.6; font-size: 14px">兑换结果</span>
-          {{ (amount * method.account_info?.rate).toFixed(0) }} RMB
+          {{ (amount * Number(userInfo.rate)).toFixed(0) }} {{ notionCurrency }}
         </div>
         <div style="color: #13b756">
-          1{{ method.account_info?.coin_name }}={{ method.account_info?.rate }}RMB
+          1{{ currency }}={{ Number(userInfo.rate) }}{{ notionCurrency }}
         </div>
       </div>
     </div>

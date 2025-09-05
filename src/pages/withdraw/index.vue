@@ -39,16 +39,20 @@
         <van-field v-model="amount" type="number" placeholder="请输入提现金额" :min="100">
           <template #left-icon> </template>
           <template #right-icon>
-            <span style="font-size: 14px; margin-right: 4px; color: #13b756">{{
-              channelType == 'usdt' ? 'USDT' : 'RMB'
-            }}</span>
+            <span style="font-size: 14px; margin-right: 4px; color: #13b756">{{ currency }}</span>
             <van-icon name="arrow" size="16" color="#13B756" />
           </template>
         </van-field>
       </div>
-      <!-- <template v-if="channelType == 'usdt'">
-        <div>兑换结果</div>
-      </template> -->
+      <div class="rate" v-if="channelType != 'usdt'">
+        <div>
+          <span style="opacity: 0.6; font-size: 14px">兑换结果</span>
+          {{ ((amount || 0) * Number(userInfo.rate)).toFixed(0) }} {{ notionCurrency }}
+        </div>
+        <div style="color: #13b756">
+          1{{ currency }}={{ Number(userInfo.rate) }}{{ notionCurrency }}
+        </div>
+      </div>
     </div>
     <div class="normal-card" v-if="channelType == 'bank'">
       <div v-waves class="select-cell" @click="selectHandle">
@@ -152,7 +156,12 @@
 <script setup lang="ts" name="Recharge">
 import withdrawalHook from '@/hooks/withdrawalHook'
 import BalanceBox from './components/balance-box.vue'
+import { useCommonStore } from '@/stores/common'
+const currency = __VITE_CURRENCY
+
+const notionCurrency = __VITE_NATION_CURRENCY
 const router = useRouter()
+const { userInfo } = storeToRefs(useCommonStore())
 const {
   channelType,
   amount,
@@ -172,6 +181,12 @@ const {
 </script>
 
 <style lang="scss" scoped>
+.rate {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 12px;
+}
 .box {
   height: 100%;
   width: 100%;

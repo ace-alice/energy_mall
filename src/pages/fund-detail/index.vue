@@ -4,8 +4,7 @@ import pageHook from '@/hooks/pageHook'
 import type { MoneyLogType } from '@/interface/common'
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<MoneyLogType>({
-  api: getMoneyLogApi,
-  otherForm: {}
+  api: getMoneyLogApi
 })
 </script>
 

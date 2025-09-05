@@ -3,10 +3,12 @@ import { ref } from 'vue'
 
 export default function <T>({
   api,
-  otherForm
+  otherForm = () => {
+    return {}
+  }
 }: {
   api: (data?: any) => Promise<AxiosResponse<any, any>>
-  otherForm: { [key: string]: any }
+  otherForm?: () => { [key: string]: any }
 }) {
   const list = ref<T[]>([])
   const loading = ref(false)
@@ -16,7 +18,7 @@ export default function <T>({
   const page = ref(0)
 
   const onLoad = () => {
-    api(Object.assign({ page: page.value + 1 }, otherForm))
+    api(Object.assign({ page: page.value + 1 }, otherForm()))
       .then((res) => {
         if (refreshing.value) {
           list.value = []

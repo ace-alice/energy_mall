@@ -32,12 +32,26 @@
     </NormalHeader>
     <InfoBox
       title="投资"
-      label1="可用金额(USDT)"
-      label2="可提金额(USDT)"
-      :value1="userInfo.money"
-      :value2="userInfo.frozen_money"
+      label1="累计投资(USDT)"
+      label2="在投金额(USDT)"
+      :value1="userDetail.invest_money"
+      :value2="userDetail.invest_not_finish"
     />
     <InfoBox
+      title="充值提现"
+      label1="累计充值(USDT)"
+      label2="累计提现(USDT)"
+      :value1="userDetail.recharge_money"
+      :value2="userDetail.withdraw_money"
+    />
+    <InfoBox
+      title="投资收益"
+      label1="待收收益(USDT)"
+      label2="累计收益(USDT)"
+      :value1="userDetail.invest_not_earn"
+      :value2="userInfo.invite"
+    />
+    <!-- <InfoBox
       title="投资"
       label1="可用金额(USDT)"
       label2="可提金额(USDT)"
@@ -57,21 +71,7 @@
       label2="可提金额(USDT)"
       :value1="userInfo.money"
       :value2="userInfo.frozen_money"
-    />
-    <InfoBox
-      title="投资"
-      label1="可用金额(USDT)"
-      label2="可提金额(USDT)"
-      :value1="userInfo.money"
-      :value2="userInfo.frozen_money"
-    />
-    <InfoBox
-      title="投资"
-      label1="可用金额(USDT)"
-      label2="可提金额(USDT)"
-      :value1="userInfo.money"
-      :value2="userInfo.frozen_money"
-    />
+    /> -->
   </div>
 </template>
 

@@ -17,7 +17,7 @@ const enterList = [
   { text: '官方承兑', img: wallet, router: '/r-w-e' },
   { text: '转账', img: transfer_1, router: '/transfer' },
   // { text: '存钱罐', img: g_pig, router: '/' },
-  { text: '聚宝盆', img: rich, router: '/' }
+  { text: '聚宝盆', img: rich, router: '/savings' }
 ]
 
 const router = useRouter()

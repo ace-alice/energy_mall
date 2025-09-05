@@ -440,6 +440,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/savings',
+      name: 'SavingsVip',
+      component: () => import(/* webpackChunkName: "savings" */ '@/pages/savings/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
       redirect: '/'

@@ -8,7 +8,9 @@ const props = defineProps(['status'])
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<GoodsOrderItemType>({
   api: getGoodsRecordApi,
-  otherForm: { status: props.status }
+  otherForm: () => ({
+    status: props.status
+  })
 })
 
 onActivated(() => {

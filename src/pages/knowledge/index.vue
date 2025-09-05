@@ -9,7 +9,7 @@ const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<ArticleInfoType>({
   api: getArticles,
-  otherForm: { class_id: 4 }
+  otherForm: () => ({ class_id: 4 })
 })
 
 const router = useRouter()

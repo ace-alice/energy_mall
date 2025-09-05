@@ -4,8 +4,7 @@ import pageHook from '@/hooks/pageHook'
 import type { RaffleHistoryItemType } from '@/interface/common'
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<RaffleHistoryItemType>({
-  api: raffleRecordApi,
-  otherForm: {}
+  api: raffleRecordApi
 })
 </script>
 

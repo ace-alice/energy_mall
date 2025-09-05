@@ -25,3 +25,6 @@ interface Window {
   WebViewJSBridge: any
   WVJBCallbacks: any
 }
+
+declare const __VITE_CURRENCY: string
+declare const __VITE_NATION_CURRENCY: string

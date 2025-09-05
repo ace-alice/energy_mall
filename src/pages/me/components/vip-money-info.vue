@@ -20,39 +20,45 @@
             <div>
               <VueCountTo :end-val="Number(userInfo.money)" :start-val="moneyStartVal" />
             </div>
-            <div class="label">账户A积分</div>
+            <div class="label">可用余额({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
-            <div>22345.00</div>
-            <div class="label">账户B积分</div>
+            <div><VueCountTo :end-val="Number(userInfo.frozen_money)" /></div>
+            <div class="label">可提余额({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>
             <div>
-              <VueCountTo :end-val="Number(userInfo.user_points)" :start-val="pointStartVal" />
+              <VueCountTo :end-val="Number(userDetail.invest_not_finish)" />
             </div>
-            <div class="label">累计收益B积分</div>
+            <div class="label">待收本金({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
-            <div>22345.00</div>
-            <div class="label">可用余额(USDT)</div>
+            <div>
+              <VueCountTo :end-val="Number(userDetail.invest_not_earn)" />
+            </div>
+            <div class="label">待收收益({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
-            <div>22345.00</div>
-            <div class="label">投资中(USDT)</div>
+            <div>
+              <VueCountTo :end-val="Number(userDetail.recharge_money)" />
+            </div>
+            <div class="label">累计充值({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>
-            <div>22345.00</div>
-            <div class="label">总余额(USDT)</div>
+            <div>
+              <VueCountTo :end-val="Number(userDetail.withdraw_money)" />
+            </div>
+            <div class="label">累计提现({{ currency }})</div>
           </div>
         </van-grid-item>
       </van-grid>
@@ -62,7 +68,9 @@
 
 <script setup lang="ts" name="VipMoneyInfoBox">
 import { useCommonStore } from '@/stores/common'
-const { userInfo } = storeToRefs(useCommonStore())
+const { userInfo, userDetail } = storeToRefs(useCommonStore())
+
+const currency = __VITE_CURRENCY
 
 const moneyStartVal = ref(0)
 

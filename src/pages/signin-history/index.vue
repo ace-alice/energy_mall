@@ -4,8 +4,7 @@ import pageHook from '@/hooks/pageHook'
 import type { SigninHistoryItemType } from '@/interface/common'
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<SigninHistoryItemType>({
-  api: getSigninListApi,
-  otherForm: {}
+  api: getSigninListApi
 })
 </script>
 

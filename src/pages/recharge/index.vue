@@ -60,9 +60,7 @@
       :method="currentMethod"
     />
     <div class="normal-card">
-      <div class="select-method">
-        选择金额({{ currentMethod.account_info?.coin_name || 'RMB' }})
-      </div>
+      <div class="select-method">选择金额({{ currency }})</div>
       <InputRechargeAmount
         v-if="currentMethod.id"
         :method="currentMethod"
@@ -117,6 +115,8 @@ const {
   disabled,
   submit
 } = rechargeHook()
+
+const currency = __VITE_CURRENCY
 </script>
 
 <style lang="scss" scoped>

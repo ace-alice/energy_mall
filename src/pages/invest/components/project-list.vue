@@ -27,7 +27,7 @@ const props = defineProps(['type'])
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<InvestItemType>({
   api: getInvestApi,
-  otherForm: { type: props.type }
+  otherForm: () => ({ type: props.type })
 })
 </script>
 

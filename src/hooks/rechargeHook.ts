@@ -6,8 +6,12 @@ import { showToast, showLoadingToast } from 'vant'
 import { isNative } from '@/utils/common'
 import { AppChannelType } from '@/tools/jsBridge/interface'
 import { useRouter } from 'vue-router'
+import { useCommonStore } from '@/stores/common'
+import { storeToRefs } from 'pinia'
 
 export default function () {
+  const { isVip } = storeToRefs(useCommonStore())
+
   const methodList = ref<RechargeMethodType[]>([])
 
   const currentClass = reactive({} as MethodLisFilterType)
@@ -122,7 +126,8 @@ export default function () {
       name: rechargeName.value,
       id: currentMethod.value.id,
       account: rechargeAccount.value,
-      img: certificateImg.value
+      img: certificateImg.value,
+      type: isVip.value ? 2 : 1
     }).then((res) => {
       showToast({ type: 'success', message: '请尽快完成支付', overlay: true })
       setTimeout(() => {

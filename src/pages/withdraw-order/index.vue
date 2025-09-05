@@ -16,7 +16,7 @@
       <template #bottom>
         <div class="normal-card money-info-box">
           <div>
-            <div style="color: #9b5230; margin-bottom: 10px">提现成功金额(RMB)</div>
+            <div style="color: #9b5230; margin-bottom: 10px">提现成功金额({{ currency }})</div>
             <div style="color: #5e0000; font-size: 28px; font-weight: 600">
               {{ userDetail.withdraw_money }}
             </div>
@@ -41,7 +41,7 @@
               <div v-else class="tag load">待审核</div>
             </div>
             <div>
-              <div>提现金额(元)</div>
+              <div>提现金额({{ currency }})</div>
               <div>{{ item.amount }}</div>
             </div>
             <div>
@@ -72,12 +72,14 @@ import pageHook from '@/hooks/pageHook'
 import type { RechargeOrderItemType } from '@/interface/common'
 import { useCommonStore } from '@/stores/common'
 
+const { userDetail, isVip } = storeToRefs(useCommonStore())
+
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<RechargeOrderItemType>({
   api: withdrawRecordApi,
-  otherForm: {}
+  otherForm: () => ({ type: isVip.value ? 2 : 1 })
 })
 
-const { userDetail } = storeToRefs(useCommonStore())
+const currency = __VITE_CURRENCY
 
 onActivated(() => {
   onRefresh()

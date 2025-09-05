@@ -82,7 +82,9 @@ export default ({ mode, command }: any) => {
           devDependencies: pkg.devDependencies
         },
         lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
-      })
+      }),
+      __VITE_CURRENCY: JSON.stringify('USDT'),
+      __VITE_NATION_CURRENCY: JSON.stringify('RMB')
     },
     plugins: createVitePlugins(env, command === 'build' || command === 'build:all', command),
     resolve: {

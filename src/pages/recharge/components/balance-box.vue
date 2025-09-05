@@ -1,7 +1,7 @@
 <template>
   <div class="money-info">
     <div>
-      <div>可用余额(元)</div>
+      <div>可用余额({{ currency }})</div>
       <div>
         <VueCountTo :end-val="Number(userInfo.outside_frozen_money)" :start-val="moneyStartVal" />
       </div>
@@ -11,6 +11,7 @@
 
 <script setup lang="ts" name="BalanceBox">
 import { useCommonStore } from '@/stores/common'
+const currency = __VITE_CURRENCY
 const { userInfo } = storeToRefs(useCommonStore())
 
 const moneyStartVal = ref(0)

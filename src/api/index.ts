@@ -231,10 +231,11 @@ export function delAddressApi(data: any) {
  * @param data 查询参数
  * @returns Promise
  */
-export function getSigninListApi() {
+export function getSigninListApi(data: any) {
   return service({
     url: '/signIn/record',
-    method: 'GET'
+    method: 'POST',
+    data
   })
 }
 
@@ -246,6 +247,18 @@ export function getSigninListApi() {
 export function signinApi() {
   return service({
     url: `/signIn/sign`,
+    method: 'GET'
+  })
+}
+
+/**
+ * 签到
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function signinTeamApi() {
+  return service({
+    url: `/signIn/signTeam`,
     method: 'GET'
   })
 }

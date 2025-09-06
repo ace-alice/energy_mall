@@ -13,8 +13,11 @@ const {
   prizes,
   userDetail,
   winInfo,
-  showPopup
+  showPopup,
+  userInfo
 } = drawHook()
+
+const currency = __VITE_CURRENCY
 </script>
 
 <template>
@@ -44,9 +47,14 @@ const {
     </div>
     <van-sticky :offset-bottom="0" position="bottom">
       <div class="bottom-btn">
-        <div v-waves class="btn-card fresh" @click="startCallback(1)">{{ '0' }}次</div>
-        <div v-waves class="btn-card vip" @click="startCallback(2)">
-          {{ userDetail.raffle_num }}次
+        <div v-waves class="btn-card fresh" @click="startCallback(1)">
+          {{ userInfo.new_user_draw }}次
+        </div>
+        <div v-waves class="btn-card points" @click="startCallback(2)">
+          {{ userInfo.raffle_num }}次
+        </div>
+        <div v-waves class="btn-card vip" @click="startCallback(3)">
+          {{ userInfo.level_team_draw }}次
         </div>
       </div>
     </van-sticky>
@@ -57,7 +65,7 @@ const {
     >
       <div class="signin-pop">
         <div class="signin-text">
-          恭喜您获得 <span>{{ winInfo.money || '0' }}</span
+          恭喜您获得 <span>{{ winInfo.money || '0' }} {{ +winInfo.type ? currency : '积分' }}</span
           >元
         </div>
       </div>
@@ -97,6 +105,10 @@ const {
   background-image: url('@/assets/images/draw/btn3.png');
   color: #4e0000;
 }
+.points {
+  background-image: url('@/assets/images/draw/btn1.png');
+  color: #fff;
+}
 .btn-card {
   width: 120px;
   height: 60px;
@@ -119,7 +131,7 @@ const {
   background-color: #00000020;
   color: #fff;
   font-size: 18px;
-  margin-bottom: 300px;
+  margin-bottom: 120px;
   &:deep(.title img) {
     filter: brightness(0) invert(1);
   }

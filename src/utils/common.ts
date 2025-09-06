@@ -38,3 +38,15 @@ export const isNative = () => {
   if (window.navigator.userAgent.match(/flutter_client/)) return true
   return false
 }
+
+const drawType = ['积分', '新人', '积分', '会员']
+
+const drawTheme = ['primary', 'warning', 'primary', 'success']
+
+export function getDrawType(type: number) {
+  return drawType[type] || '会员'
+}
+
+export function getDrawTheme(type: number): any {
+  return drawTheme[type] || '会员'
+}

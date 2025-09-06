@@ -38,6 +38,9 @@ export interface UserInfo {
   outside_level_end_time: string
   outside_level_sign_amount: string
   rate: string
+  new_user_draw: number
+  raffle_num: number
+  level_team_draw: number
 }
 
 export interface UserDetail {
@@ -49,12 +52,17 @@ export interface UserDetail {
   yuebao_num: number
   recharge_money: string
   recharge_num: number
+  outside_recharge_money: string
+  outside_recharge_num: number
   withdraw_money: string
   withdraw_num: number
   signin_money: string
   signin_num: number
+  outside_signin_num: number
+  outside_signin_money: string
   raffle_money: string
   raffle_num: number
+  new_user_draw: number
   team_invite: string
   team_item: string
   team_item_v1: string
@@ -529,6 +537,7 @@ export interface RaffleHistoryItemType {
   create_at: string
   update_at: string
   img: string
+  draw_type: number
 }
 
 export interface MoneyLogType {

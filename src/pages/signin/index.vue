@@ -1,15 +1,17 @@
 <script setup name="Home" lang="ts">
-import { articleInfoApi, getSigninListApi, signinApi } from '@/api'
+import { articleInfoApi, getSigninListApi, signinApi, signinTeamApi } from '@/api'
 import signinBg from '@/assets/images/background/signin_bg.png'
 import dayjs from 'dayjs'
 
 import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp } from '@/utils/common'
-import type { ArticleInfoType } from '@/interface/common'
+import type { ArticleInfoType, SigninHistoryItemType } from '@/interface/common'
 import { defaultArticleInfo } from '@/defaultValue'
 import starIcon from '@/assets/images/icons/star.png'
 
-const { userDetail, userInfo } = storeToRefs(useCommonStore())
+const currency = __VITE_CURRENCY
+
+const { userDetail, userInfo, isVip } = storeToRefs(useCommonStore())
 
 const { getUserInfo, getUserDetail } = useCommonStore()
 
@@ -19,7 +21,7 @@ const maxSigninDays = ref(0)
 
 const signinDays = ref(0)
 
-const signinList = ref<any[]>([])
+const signinList = ref<SigninHistoryItemType[]>([])
 
 const router = useRouter()
 
@@ -29,24 +31,35 @@ const rules = ref<ArticleInfoType>(Object.assign({}, defaultArticleInfo))
 
 const signinOk = computed(() => {
   var nowDate = dayjs().format('yyyy-mm-dd')
-  return signinList.value.some((item) => item.date === nowDate)
+  return signinList.value.some((item) => item.create_at.slice(0, 10) === nowDate)
 })
 
 function getSigninList() {
-  getSigninListApi().then((res) => {
+  getSigninListApi({ is_team: Number(isVip.value) }).then((res) => {
     // maxSigninDays.value = res.data.max
     signinList.value = res.data.data.data
     // dayScore.value = res.data.score
   })
 }
 
+const loading = ref(false)
+
 function signin() {
-  signinApi().then((res) => {
-    showPopup.value = true
-    getSigninList()
-    getUserInfo()
-    getUserDetail()
-  })
+  if (loading.value) {
+    return
+  }
+  loading.value = true
+  const useApi = isVip.value ? signinTeamApi : signinApi
+  useApi()
+    .then((res) => {
+      showPopup.value = true
+      getSigninList()
+      getUserInfo()
+      getUserDetail()
+    })
+    .finally(() => {
+      loading.value = false
+    })
 }
 
 function getRules() {
@@ -59,7 +72,12 @@ const content = computed(() => {
   return htmlDecodeByRegExp(rules.value.content || '').replace(/<img/g, '<img  width="100%"')
 })
 
-onMounted(() => {
+// onMounted(() => {
+//   getSigninList()
+//   getRules()
+// })
+
+onActivated(() => {
   getSigninList()
   getRules()
 })
@@ -76,7 +94,7 @@ onMounted(() => {
     </NormalHeader>
     <div class="green-bg"></div>
     <BgTwo :imgSrc="signinBg" router="Signin" />
-    <div class="signin-box">
+    <!-- <div class="signin-box">
       <van-row :gutter="[12, 12]">
         <van-col :span="item == 7 ? 12 : 6" v-for="item in 7" :key="item">
           <div class="day-card">
@@ -88,10 +106,11 @@ onMounted(() => {
           </div>
         </van-col>
       </van-row>
-    </div>
+    </div> -->
     <div class="signin-card">
       <div style="font-size: 18px; font-weight: 600; text-align: center; margin-bottom: 16px">
-        签到已获得 {{ userDetail.signin_money }} 元
+        {{ isVip ? '团队' : '会员' }}签到已获得
+        {{ isVip ? userDetail.signin_money : userDetail.outside_signin_money }} {{ currency }}
         <!-- USDT -->
       </div>
       <van-button
@@ -99,9 +118,10 @@ onMounted(() => {
         round
         block
         :disabled="signinOk"
+        :loading="loading"
         @click="signin"
       >
-        立即签到
+        {{ signinOk ? '已' : '立即' }}签到
       </van-button>
     </div>
     <div class="normal-card">
@@ -116,7 +136,7 @@ onMounted(() => {
       <div class="signin-pop">
         <div class="signin-text">
           恭喜您获得 <img :src="starIcon" alt="" height="36" width="36" /> <span>{{ '5' }}</span
-          >元
+          >{{ currency }}
         </div>
       </div>
       <van-icon class="close-icon" size="40" name="close" color="#fff" @click="showPopup = false" />
@@ -153,7 +173,8 @@ onMounted(() => {
   }
 }
 .signin-card {
-  margin: 16px 16px;
+  // margin: 16px 16px;
+  margin: 120px 16px 16px;
   padding: 24px;
   background-color: #fff;
   border-radius: 16px;

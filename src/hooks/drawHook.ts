@@ -7,7 +7,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 export default function () {
-  const { userDetail } = storeToRefs(useCommonStore())
+  const { userDetail, userInfo } = storeToRefs(useCommonStore())
   const { getUserDetail, getUserInfo } = useCommonStore()
 
   const drawRule = ref<ArticleInfoType>({ content: '' } as ArticleInfoType)
@@ -78,11 +78,16 @@ export default function () {
 
   const showPopup = ref(false)
 
+  const loading = ref(false)
+
   function startCallback(type: any) {
-    if (playing.value) {
+    if (playing.value || loading.value) {
       return
     }
-    raffleDrawApi({})
+    loading.value = true
+    raffleDrawApi({
+      draw_type: type
+    })
       .then((res) => {
         myLucky.value.play()
         playing.value = true
@@ -93,13 +98,18 @@ export default function () {
           const index = raffleLists.value.findIndex((item) => item.id == res.data.data.id) || 0
           winInfo.value = raffleLists.value[index]
           myLucky.value.stop(index)
-          showPopup.value = true
           playing.value = false
         }, 1500)
+        setTimeout(() => {
+          showPopup.value = true
+        }, 2500)
       })
       .catch(() => {
         myLucky.value.stop(0)
         playing.value = false
+      })
+      .finally(() => {
+        loading.value = false
       })
   }
 
@@ -120,6 +130,7 @@ export default function () {
     prizes,
     userDetail,
     winInfo,
-    showPopup
+    showPopup,
+    userInfo
   }
 }

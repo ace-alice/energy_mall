@@ -7,6 +7,7 @@ import invitationIcon from '@/assets/images/icons/invitation.png'
 import openEyeIcon from '@/assets/images/icons/open_eye.png'
 import closeEyeIcon from '@/assets/images/icons/close_eye.png'
 import registerHook from '@/hooks/registerHook'
+import { getLocal } from '@/utils/storage'
 
 const { formData, onSubmit, openEye, openEye2, openEye3, openEye4, checked, router } =
   registerHook()
@@ -128,6 +129,7 @@ const { formData, onSubmit, openEye, openEye2, openEye3, openEye4, checked, rout
         <van-field
           v-model="formData.invite"
           type="text"
+          :disabled="!!getLocal('inviteCode')"
           name="invite"
           placeholder="请输入邀请码"
           :rules="[{ required: true, message: '请输入邀请码' }]"

@@ -3,13 +3,17 @@ import { getGoodsRecordApi } from '@/api/index'
 import type { GoodsOrderItemType, ProjectItemType } from '@/interface/common'
 import GoodOrderItem from './order-item.vue'
 import pageHook from '@/hooks/pageHook'
+import { useCommonStore } from '@/stores/common'
 
 const props = defineProps(['status'])
+
+const { isVip } = storeToRefs(useCommonStore())
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<GoodsOrderItemType>({
   api: getGoodsRecordApi,
   otherForm: () => ({
-    status: props.status
+    status: props.status,
+    goods_type: isVip.value ? '3' : '1,2'
   })
 })
 

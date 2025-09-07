@@ -32,7 +32,7 @@ const handleBeforeUnload = (event: BeforeUnloadEvent) => {
   console.log('⛔ 页面即将刷新或关闭')
 
   if (isVip.value) {
-    vipExpiredDate.value = dayjs().unix() + 10
+    vipExpiredDate.value = dayjs().unix() + 30
   }
 
   window.removeEventListener('beforeunload', handleBeforeUnload)
@@ -78,7 +78,7 @@ onMounted(async () => {
   window.WebViewJSBridge.registerHandler(
     ChannelType.routeBack,
     function (data: any, success: Function, fail: Function) {
-      if (router.currentRoute.value.name == 'Home') {
+      if (router.currentRoute.value.name?.toString().includes('Home')) {
         window.WebViewJSBridge.callHandler(AppChannelType.closeMiniProgram)
       } else {
         router.go(-1)

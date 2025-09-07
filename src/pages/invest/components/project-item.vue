@@ -17,7 +17,7 @@
     <div class="bottom three-del">
       <div>
         <div>总投资额</div>
-        <div>{{ Number(item.profit_cycle) }}<span>USDT</span></div>
+        <div>{{ Number(item.invest) }}<span>USDT</span></div>
       </div>
       <div style="text-align: center">
         <div>项目利率</div>

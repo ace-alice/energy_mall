@@ -1,5 +1,15 @@
 <script setup lang="ts" name="GoodOrderList">
+import { useCommonStore } from '@/stores/common'
 import GoodItemList from './components/tab-item-list.vue'
+const { isVip } = storeToRefs(useCommonStore())
+
+const route = useRoute()
+
+// onMounted(() => {
+//   if (route.query.tab) {
+//     active.value = Number(route.query.tab) + 1
+//   }
+// })
 
 const active = ref(0)
 
@@ -9,6 +19,12 @@ const enterList = [
   { text: '待收货', tab: 1 },
   { text: '已完成', tab: 2 }
 ]
+
+onActivated(() => {
+  if (route.query.tab) {
+    active.value = Number(route.query.tab) + 1
+  }
+})
 </script>
 
 <template>
@@ -19,7 +35,7 @@ const enterList = [
       height="160px"
       router="GoodOrderList"
     />
-    <NormalHeader title="商城订单" :background="false" bg-color="#A9F1C6" />
+    <NormalHeader :title="isVip ? '兑换记录' : '商城订单'" :background="false" bg-color="#A9F1C6" />
     <van-tabs
       v-model:active="active"
       background="transparent"

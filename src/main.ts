@@ -14,6 +14,8 @@ import '@/tools/jsBridge/index'
 import { Lazyload } from 'vant'
 import VueLuckyCanvas from '@lucky-canvas/vue'
 
+import './utils/initData'
+
 // 设置 Vant 语言为英文
 Locale.use('zh-CN', zhCN)
 

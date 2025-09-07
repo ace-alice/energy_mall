@@ -50,3 +50,34 @@ export function getDrawType(type: number) {
 export function getDrawTheme(type: number): any {
   return drawTheme[type] || '会员'
 }
+
+export const profitTypeEnums = [
+  {
+    label: '每期返息到期返本',
+    value: 0
+  },
+  {
+    label: '一次性到期返本息',
+    value: 1
+  },
+  {
+    label: '每期返息不返本',
+    value: 2
+  },
+  {
+    label: '每期返息到期双倍本金',
+    value: 3
+  },
+  {
+    label: '每期返息并且返回本金',
+    value: 4
+  },
+  {
+    label: '每期复利返息到期返本',
+    value: 5
+  }
+]
+
+export function getProfitType(type: number): any {
+  return profitTypeEnums.find((item) => item.value == type)
+}

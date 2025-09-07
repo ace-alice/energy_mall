@@ -30,11 +30,13 @@
     <!-- <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div> -->
     <div class="normal-card item-info">
       <div style="font-size: 16px">概况</div>
-      <div style="margin-top: 4px; color: #999">收益类型：每周返利到期返本</div>
-      <div style="margin-top: 4px; color: #999">积分赠送：20</div>
+      <div style="margin-top: 4px; color: #999">
+        收益类型：{{ getProfitType(projectDetail.profit_type)?.label || '' }}
+      </div>
+      <div style="margin-top: 4px; color: #999">积分赠送：{{ projectDetail.gift_points }}</div>
       <div class="three-del">
         <div>
-          <div>{{ Number(projectDetail.profit_cycle) }}<span>USDT</span></div>
+          <div>{{ Number(projectDetail.invest) }}<span>USDT</span></div>
           <div>总投资额</div>
         </div>
         <div style="text-align: center">
@@ -63,7 +65,7 @@ import { getInvestDetailApi, investBuyApi } from '@/api'
 import type { InvestItemType } from '@/interface/common'
 import backIcon from '@/assets/images/icons/back_white_icon.png'
 import { useCommonStore } from '@/stores/common'
-import { htmlDecodeByRegExp } from '@/utils/common'
+import { htmlDecodeByRegExp, getProfitType } from '@/utils/common'
 
 const normalPinActionRef = ref()
 

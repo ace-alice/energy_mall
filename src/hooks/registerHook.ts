@@ -4,13 +4,14 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
 import { showLoadingToast } from 'vant'
+import { getLocal } from '@/utils/storage'
 
 export default function () {
   const checked = ref(false)
 
   const formData = reactive<RegisterForm>({
     phone: '',
-    invite: '',
+    invite: getLocal('inviteCode') || '',
     password: '',
     withdraw: '',
     username: '',

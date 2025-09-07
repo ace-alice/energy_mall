@@ -26,7 +26,7 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="兑换记录" :border="false" :icon="transfer" is-link to="index">
+      <van-cell title="兑换记录" :border="false" :icon="transfer" is-link to="/good-order-list">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
@@ -41,11 +41,11 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell> -->
-      <van-cell title="特殊积分" :border="false" :icon="points" is-link to="index">
+      <!-- <van-cell title="特殊积分" :border="false" :icon="points" is-link to="index">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
-      </van-cell>
+      </van-cell> -->
       <van-cell
         title="会员等级说明"
         :border="false"

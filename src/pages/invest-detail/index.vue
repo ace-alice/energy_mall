@@ -28,31 +28,52 @@
       <van-icon name="play" />
     </div> -->
     <!-- <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div> -->
-    <div class="normal-card item-info">
-      <div style="font-size: 16px">概况</div>
-      <div style="margin-top: 4px; color: #999">
-        收益类型：{{ getProfitType(projectDetail.profit_type)?.label || '' }}
+    <van-sticky>
+      <div style="background-color: #fff; padding: 6px 16px">
+        <div class="normal-card item-info">
+          <div style="font-size: 16px">概况</div>
+          <div style="margin-top: 4px; color: #999">
+            收益类型：{{
+              getProfitType(projectDetail.profit_type, projectDetail.profit_cycle_time)
+            }}
+          </div>
+          <div style="margin-top: 4px; color: #999">积分赠送：{{ projectDetail.gift_points }}</div>
+          <div class="three-del">
+            <div>
+              <div>{{ Number(projectDetail.invest) }}<span>USDT</span></div>
+              <div>总投资额</div>
+            </div>
+            <div style="text-align: center">
+              <div>{{ projectDetail.profit_rate }}<span>%</span></div>
+              <div>项目利率</div>
+            </div>
+            <div style="text-align: right">
+              <div>
+                {{ projectDetail.profit_cycle * getCycleTime(projectDetail.profit_cycle_time).value
+                }}<span>{{ getCycleTime(projectDetail.profit_cycle_time).label }}</span>
+              </div>
+              <div>持有时间</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="margin-top: 4px; color: #999">积分赠送：{{ projectDetail.gift_points }}</div>
-      <div class="three-del">
-        <div>
-          <div>{{ Number(projectDetail.invest) }}<span>USDT</span></div>
-          <div>总投资额</div>
+    </van-sticky>
+
+    <van-tabs v-model:active="active" scrollspy sticky offset-top="142" class="team-tabs">
+      <van-tab title="产品信息">
+        <ItemInfo :info="projectDetail" />
+      </van-tab>
+      <van-tab title="产品详情">
+        <div style="padding: 0 16px; width: 100%">
+          <van-divider>产品详情</van-divider>
+          <div v-html="content"></div>
         </div>
-        <div style="text-align: center">
-          <div>{{ projectDetail.profit_rate }}<span>%</span></div>
-          <div>项目利率</div>
-        </div>
-        <div style="text-align: right">
-          <div>{{ projectDetail.profit_cycle }}<span>天</span></div>
-          <div>持有时间</div>
-        </div>
-      </div>
-    </div>
-    <TitleDel title="产品介绍" />
-    <div style="padding: 0 16px 60px">
-      <div v-html="content"></div>
-    </div>
+      </van-tab>
+      <van-tab title="产品协议">
+        <Agreement :info="projectDetail" />
+      </van-tab>
+    </van-tabs>
+    <!-- <TitleDel title="产品介绍" /> -->
     <div class="buy-box">
       <van-button type="primary" round block @click="toPins">立即购买</van-button>
     </div>
@@ -65,9 +86,13 @@ import { getInvestDetailApi, investBuyApi } from '@/api'
 import type { InvestItemType } from '@/interface/common'
 import backIcon from '@/assets/images/icons/back_white_icon.png'
 import { useCommonStore } from '@/stores/common'
-import { htmlDecodeByRegExp, getProfitType } from '@/utils/common'
+import { htmlDecodeByRegExp, getProfitType, getCycleTime } from '@/utils/common'
+import Agreement from './components/agreement.vue'
+import ItemInfo from './components/item-info.vue'
 
 const normalPinActionRef = ref()
+
+const active = ref(0)
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
@@ -143,6 +168,7 @@ function toBuy(pin: string) {
   background-size: 100% 100%;
   color: #fff;
   font-size: 12px;
+  margin: unset;
 }
 .buy-box {
   background-color: #fff;

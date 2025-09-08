@@ -53,11 +53,11 @@ export function getDrawTheme(type: number): any {
 
 export const profitTypeEnums = [
   {
-    label: '每期返息到期返本',
+    label: '每***付息,到期返本',
     value: 0
   },
   {
-    label: '一次性到期返本息',
+    label: '到期返还本金及利息',
     value: 1
   },
   {
@@ -65,19 +65,73 @@ export const profitTypeEnums = [
     value: 2
   },
   {
-    label: '每期返息到期双倍本金',
+    label: '每***返息,到期双倍本金',
     value: 3
   },
   {
-    label: '每期返息并且返回本金',
+    label: '每***付息,并且返回本金',
     value: 4
   },
   {
-    label: '每期复利返息到期返本',
+    label: '每***复利付息,到期返本',
     value: 5
   }
 ]
 
-export function getProfitType(type: number): any {
-  return profitTypeEnums.find((item) => item.value == type)
+export function getProfitType(type: number, seconds: number): any {
+  const temp1 = profitTypeEnums.find((item) => item.value == type)
+  const tem2 = getCycleTime(seconds)
+  return (temp1?.label || '').replace('***', `${tem2.value == 1 ? '' : tem2.value}${tem2.label}`)
+}
+
+export const cycleTimeEnums = [
+  {
+    label: '小时',
+    value: 3600
+  },
+  {
+    label: '一天',
+    value: 86400
+  },
+  {
+    label: '十天',
+    value: 864000
+  },
+  {
+    label: '一周',
+    value: 604800
+  },
+  {
+    label: '一月',
+    value: 2592000
+  },
+  {
+    label: '一年',
+    value: 31536000
+  }
+]
+
+export function getCycleTime(seconds: number): { label: string; value: number } {
+  const units = [
+    { label: '小时', value: 3600 },
+    { label: '天', value: 86400 },
+    { label: '周', value: 604800 },
+    { label: '月', value: 2592000 }, // 按 30 天算
+    { label: '年', value: 31536000 } // 按 365 天算
+  ]
+
+  for (let i = units.length - 1; i >= 0; i--) {
+    if (seconds >= units[i].value) {
+      let temp = (seconds / units[i].value).toFixed(0)
+
+      return {
+        label: units[i].label,
+        value: Number(temp)
+      }
+    }
+  }
+  return {
+    label: '秒',
+    value: seconds
+  }
 }

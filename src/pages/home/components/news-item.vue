@@ -1,5 +1,15 @@
 <template>
-  <div class="news-item">
+  <div
+    class="news-item"
+    @click="
+      router.push({
+        name: 'ArticleDetail',
+        query: {
+          id: item.id
+        }
+      })
+    "
+  >
     <van-image
       width="100"
       height="80"
@@ -22,6 +32,8 @@
 <script setup lang="ts" name="TeamItem">
 import news_bg from '@/assets/images/background/news_bg.png'
 import { htmlDecodeByRegExp } from '@/utils/common'
+
+const router = useRouter()
 
 const props = defineProps(['item'])
 

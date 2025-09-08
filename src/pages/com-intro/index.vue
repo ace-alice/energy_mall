@@ -28,7 +28,9 @@ const tabs = [
         </div>
       </div>
     </van-sticky>
-    <ComDetail :key="activeCode" :code="activeCode" />
+    <KeepAlive>
+      <ComDetail :key="activeCode" :code="activeCode" />
+    </KeepAlive>
   </div>
 </template>
 

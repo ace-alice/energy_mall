@@ -16,9 +16,7 @@ const { comVideoUrl } = storeToRefs(useCommonStore())
 const { getComVideoUrl } = useCommonStore()
 
 onMounted(() => {
-  if (!comVideoUrl.value) {
-    getComVideoUrl()
-  }
+  getComVideoUrl()
 })
 </script>
 

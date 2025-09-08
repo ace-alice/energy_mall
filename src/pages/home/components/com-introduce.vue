@@ -1,5 +1,12 @@
 <template>
-  <van-grid square :border="false" class="home-enter" :column-num="5" icon-size="36" clickable>
+  <van-grid
+    square
+    :border="false"
+    class="home-enter"
+    :column-num="routerList.length"
+    icon-size="36"
+    clickable
+  >
     <van-grid-item
       v-for="rout in routerList"
       :key="rout.router"

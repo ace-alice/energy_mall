@@ -28,7 +28,7 @@ const refreshing = ref(false)
 const page = ref(0)
 
 const onLoad = () => {
-  getArticles({ page: page.value + 1, class_id: 4 })
+  getArticles({ page: page.value + 1, class_id: 2 })
     .then((res) => {
       if (refreshing.value) {
         list.value = []

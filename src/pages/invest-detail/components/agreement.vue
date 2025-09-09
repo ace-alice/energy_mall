@@ -4,7 +4,7 @@ import jia_z from '@/assets/images/common/jia_z.png'
 import danbao_z from '@/assets/images/common/danbao_z.png'
 import { useCommonStore } from '@/stores/common'
 import type { InvestItemType } from '@/interface/common'
-import { getProfitType } from '@/utils/common'
+import { getProfitType, getCycleTime } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
 
@@ -43,8 +43,11 @@ const { info } = defineProps<{
         <van-grid-item style="flex-basis: 65%" :text="userInfo.sfz_number" />
         <van-grid-item style="flex-basis: 35%" text="投入本金数额" />
         <van-grid-item style="flex-basis: 65%" :text="`${info.invest.toString()} ${currency}`" />
-        <van-grid-item style="flex-basis: 35%" text="协议期(天)" />
-        <van-grid-item style="flex-basis: 65%" :text="`${info.profit_cycle.toString()} 天`" />
+        <van-grid-item style="flex-basis: 35%" text="协议期" />
+        <van-grid-item
+          style="flex-basis: 65%"
+          :text="`${info.profit_cycle * getCycleTime(info.profit_cycle_time).value} ${getCycleTime(info.profit_cycle_time).label}`"
+        />
         <van-grid-item style="flex-basis: 35%" text="预期收益率" />
         <van-grid-item style="flex-basis: 65%" :text="`${info.profit_rate.toString()} %`" />
         <van-grid-item style="flex-basis: 35%" text="起息日" />

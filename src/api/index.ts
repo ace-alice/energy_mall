@@ -569,3 +569,42 @@ export function getMoneyLogApi(data: any) {
     data
   })
 }
+
+/**
+ * 获取项目订单详情
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getItemOrderInfoApi(data: any) {
+  return service({
+    url: `/item/orderInfo`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取团队成员
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getTeamMemberApi(data: any) {
+  return service({
+    url: `/Team/blow`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 获取团队成员
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getTeamMemberSelfApi(data: any) {
+  return service({
+    url: `/Team/lists`,
+    method: 'POST',
+    data
+  })
+}

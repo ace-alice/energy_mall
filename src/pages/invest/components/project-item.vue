@@ -25,14 +25,21 @@
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
-        <div>{{ item.profit_cycle }}<span>天</span></div>
+        <div>
+          {{ item.profit_cycle * getCycleTime(item.profit_cycle_time).value
+          }}<span>{{ getCycleTime(item.profit_cycle_time).label }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="ProjectItem">
-const props = defineProps(['item'])
+import type { InvestItemType } from '@/interface/common'
+import { getCycleTime } from '@/utils/common'
+const { item } = defineProps<{
+  item: InvestItemType
+}>()
 const router = useRouter()
 </script>
 

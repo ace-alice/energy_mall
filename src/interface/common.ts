@@ -423,6 +423,7 @@ export interface InvestItemType {
   status: number
   sort: number
   level: number
+  level_name: string
   class_id: number
   class_name: string
   invest: number
@@ -454,7 +455,8 @@ export interface InvestItemType {
   level_income: number
   gift_product_expires: number
   video_link: string
-  is_rebate: number
+  sales_limit: number
+  sales_time: number
 }
 
 export interface InvestOrderItemType {
@@ -557,4 +559,18 @@ export interface MoneyLogType {
   update_time: number
   create_at: string
   update_at: string
+}
+
+export interface TeamMemberType {
+  id: number
+  phone: string
+  username: string
+  nickname: string
+  level_name: string
+  sfz_name?: string
+  total_recharge: string
+  total_withdraw: string
+  total_invest: string
+  valid_user: number
+  total_user: number
 }

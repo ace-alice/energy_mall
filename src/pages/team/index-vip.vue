@@ -5,7 +5,7 @@
       <template #box>
         <div class="header-box">
           <img :src="homeLogo" height="32" width="140" class="header-log" alt="" />
-          <van-field
+          <!-- <van-field
             v-model="searchText"
             type="number"
             name="searchText"
@@ -18,7 +18,7 @@
             <template #right-icon>
               <van-button type="success" size="small" style="width: 60px" round>查询</van-button>
             </template>
-          </van-field>
+          </van-field> -->
         </div>
       </template>
     </HomeHeader>
@@ -53,11 +53,11 @@
         color="#13B756"
         title-active-color="#fff"
         title-inactive-color="#13B756"
-        :offset-top="94 + mediaQueryInfo.top"
+        :offset-top="52 + mediaQueryInfo.top"
       >
-        <van-tab title="查看一级下层"><TeamList /></van-tab>
-        <van-tab title="查看二级下层"> <TeamList /> </van-tab>
-        <van-tab title="查看三级下层"> <TeamList /> </van-tab>
+        <van-tab title="直属下级"><TeamList lv="1" /></van-tab>
+        <van-tab title="查看二级下层"> <TeamList lv="2" /> </van-tab>
+        <van-tab title="查看三级下层"> <TeamList lv="3" /> </van-tab>
       </van-tabs>
     </div>
   </div>
@@ -82,7 +82,7 @@ const { mediaQueryInfo } = storeToRefs(useCommonStore())
   .van-sticky--fixed {
     .van-tabs__nav--card {
       border-radius: unset;
-      background-color: #222;
+      background-color: #000;
     }
   }
 

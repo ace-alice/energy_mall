@@ -8,7 +8,7 @@
           <div>
             <div class="label">总注册人数</div>
             <div>
-              <VueCountTo :end-val="Number(userInfo.money)" :start-val="0" />
+              {{ Number(userDetail.team_item) }}
             </div>
           </div>
         </div>
@@ -17,9 +17,9 @@
         <div style="display: flex; align-items: center">
           <img :src="real_total" width="35" style="margin-right: 8px" alt="" />
           <div>
-            <div class="label">直推实名人数</div>
+            <div class="label">团队投资次数</div>
             <div>
-              <VueCountTo :end-val="Number(userInfo.money)" :start-val="0" />
+              {{ Number(userDetail.team_invite_num) }}
             </div>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <img :src="valid_total" width="35" style="margin-right: 8px" alt="" />
           <div>
             <div class="label">有效充值人数</div>
-            <div>22345.00</div>
+            <div>{{ Number(userDetail.team_invite_user) }}</div>
           </div>
         </div>
       </van-grid-item>
@@ -37,9 +37,9 @@
         <div style="display: flex; align-items: center">
           <img :src="my_total" width="35" style="margin-right: 8px" alt="" />
           <div>
-            <div class="label">直推注册人数</div>
+            <div class="label">团队投资金额</div>
             <div>
-              <VueCountTo :end-val="Number(userInfo.user_points)" :start-val="0" />
+              <VueCountTo :end-val="Number(userDetail.team_invite)" :start-val="0" />
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@ import real_total from '@/assets/images/icons/real_total.png'
 import valid_total from '@/assets/images/icons/valid_total.png'
 import my_total from '@/assets/images/icons/my_total.png'
 import { useCommonStore } from '@/stores/common'
-const { userInfo } = storeToRefs(useCommonStore())
+const { userDetail } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

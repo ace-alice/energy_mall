@@ -91,14 +91,7 @@ const onInput = (e: any) => {
           <van-icon name="arrow" size="16" />
         </template>
       </van-field>
-      <div
-        class="rate"
-        v-if="
-          method.account_info?.coin_name &&
-          method.account_info?.coin_name == notionCurrency &&
-          userInfo.rate
-        "
-      >
+      <div class="rate" v-if="method.account_info?.type != 1 && userInfo.rate">
         <div>
           <span style="opacity: 0.6; font-size: 14px">兑换结果</span>
           {{ (amount * Number(userInfo.rate)).toFixed(0) }} {{ notionCurrency }}

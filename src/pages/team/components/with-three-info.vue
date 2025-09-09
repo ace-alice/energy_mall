@@ -3,59 +3,67 @@
     <van-grid-item class="direction">
       <div>
         <div class="label">一级投资人数</div>
-        <div>
-          <VueCountTo :end-val="Number(userInfo.money)" :start-val="0" />
-        </div>
+        <div>{{ Number(userDetail.team_item_v1) }}</div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
         <div class="label">二级投资人数</div>
-        <div>22345.00</div>
+        <div>{{ Number(userDetail.team_item_v2) }}</div>
       </div>
     </van-grid-item>
     <van-grid-item>
       <div>
         <div class="label">三级投资人数</div>
-        <div>
-          <VueCountTo :end-val="Number(userInfo.user_points)" :start-val="0" />
-        </div>
+        <div>{{ Number(userDetail.team_item_v3) }}</div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
         <div class="label">一级投资资金</div>
-        <div>22345.00</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_invite_v1)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
         <div class="label">二级投资资金</div>
-        <div>22345.00</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_invite_v2)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
     <van-grid-item>
       <div>
         <div class="label">三级投资资金</div>
-        <div>22345.00</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_invite_v3)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
-        <div class="label">三级内总计投资</div>
-        <div>22345.00</div>
+        <div class="label">一级充值资金</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_recharge_v1)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
-        <div class="label">三级内总计提现</div>
-        <div>22345.00</div>
+        <div class="label">二级充值资金</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_recharge_v2)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
     <van-grid-item>
       <div>
-        <div class="label">团队总充值</div>
-        <div>22345.00</div>
+        <div class="label">三级充值资金</div>
+        <div>
+          <VueCountTo :end-val="Number(userDetail.team_recharge_v3)" :start-val="0" />
+        </div>
       </div>
     </van-grid-item>
   </van-grid>
@@ -63,7 +71,7 @@
 
 <script setup lang="ts" name="WithThreeInfo">
 import { useCommonStore } from '@/stores/common'
-const { userInfo } = storeToRefs(useCommonStore())
+const { userDetail } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

@@ -5,32 +5,34 @@
         <div>
           <div class="label">一级投资人数</div>
           <div>
-            <VueCountTo :end-val="Number(userInfo.money)" :start-val="0" />
+            {{ Number(userDetail.team_item_v1) }}
           </div>
         </div>
       </van-grid-item>
       <van-grid-item class="direction">
         <div>
           <div class="label">二级投资人数</div>
-          <div>22345.00</div>
+          <div>
+            {{ Number(userDetail.team_item_v2) }}
+          </div>
         </div>
       </van-grid-item>
       <van-grid-item>
         <div>
           <div class="label">三级投资人数</div>
           <div>
-            <VueCountTo :end-val="Number(userInfo.user_points)" :start-val="0" />
+            {{ Number(userDetail.team_item_v3) }}
           </div>
         </div>
       </van-grid-item>
     </van-grid>
-    <van-button type="primary" style="width: 50%" round>查看详情</van-button>
+    <!-- <van-button type="primary" style="width: 50%" round>查看详情</van-button> -->
   </div>
 </template>
 
 <script setup lang="ts" name="TeamCommission">
 import { useCommonStore } from '@/stores/common'
-const { userInfo } = storeToRefs(useCommonStore())
+const { userDetail } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

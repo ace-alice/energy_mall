@@ -98,7 +98,15 @@ onBeforeUnmount(() => {
   <router-view v-slot="{ Component }">
     <transition name="fade" mode="out-in">
       <keep-alive
-        :exclude="['Recharge', 'UsdtAdd', 'BankAdd', 'Withdraw', 'Transfer', 'ArticleDetail']"
+        :exclude="[
+          'Recharge',
+          'UsdtAdd',
+          'BankAdd',
+          'Withdraw',
+          'Transfer',
+          'ArticleDetail',
+          'InvestAgreement'
+        ]"
       >
         <component :is="Component" :key="route.path" />
       </keep-alive>

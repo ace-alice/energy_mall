@@ -73,7 +73,7 @@ export const profitTypeEnums = [
     value: 4
   },
   {
-    label: '每***复利付息,到期返本',
+    label: '每***复利,到期返本返息',
     value: 5
   }
 ]

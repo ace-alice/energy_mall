@@ -1,47 +1,56 @@
 <template>
-  <div class="team-item">
-    <div class="name">Summer 13576768909</div>
-    <div class="time">注册时间 2024.12.23 14:3</div>
+  <div
+    class="team-item"
+    @click="router.push(`/child-team/${item.id}?title=${item.sfz_name || item.username}的团队`)"
+  >
+    <div class="name">{{ item.sfz_name || item.username }}</div>
+    <div class="time">等级 {{ item.level_name }}</div>
     <div class="info">
-      <van-grid :border="false" column-num="4" :center="false">
+      <van-grid :border="false" column-num="3" :center="false">
         <van-grid-item class="direction">
           <div>
             <div class="label">充值(USDT)</div>
             <div class="value">
-              <VueCountTo :end-val="Number(200)" :start-val="0" />
+              <VueCountTo :end-val="Number(item.total_recharge)" :start-val="0" />
             </div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
             <div class="label">提现(USDT)</div>
-            <div class="value">22345.00</div>
-          </div>
-        </van-grid-item>
-        <van-grid-item class="direction">
-          <div>
-            <div class="label">在投(USDT)</div>
-            <div class="value">22345.00</div>
+            <div class="value">
+              <VueCountTo :end-val="Number(item.total_withdraw)" :start-val="0" />
+            </div>
           </div>
         </van-grid-item>
         <van-grid-item>
           <div>
             <div class="label">总投资(USDT)</div>
-            <div class="value">22345.00</div>
+            <div class="value">
+              <VueCountTo :end-val="Number(item.total_invest)" :start-val="0" />
+            </div>
           </div>
         </van-grid-item>
       </van-grid>
     </div>
     <div class="next-team">
-      <div>团队总人数<span>123</span></div>
-      <div>一级总人数 <span>123</span></div>
+      <div>
+        团队总人数<span>{{ item.total_user }}</span>
+      </div>
+      <div>
+        有效人数 <span>{{ item.valid_user }}</span>
+      </div>
       <van-icon name="arrow" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="TeamItem">
-const props = defineProps(['item'])
+import type { TeamMemberType } from '@/interface/common'
+
+const { item } = defineProps<{ item: TeamMemberType }>()
+
+const router = useRouter()
 </script>
 
 <style lang="scss" scoped>

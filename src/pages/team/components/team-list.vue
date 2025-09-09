@@ -6,43 +6,25 @@
       finished-text="没有更多了"
       @load="onLoad"
     >
-      <TeamItem v-for="item in list" :key="item" :item="item">{{ item }}</TeamItem>
+      <van-empty description="暂无数据" v-if="!list.length" />
+      <TeamItem v-for="item in list" :key="item.id" :item="item">{{ item }}</TeamItem>
     </van-list>
   </van-pull-refresh>
 </template>
 
 <script setup lang="ts" name="TeamList">
+import { getTeamMemberSelfApi } from '@/api'
+import pageHook from '@/hooks/pageHook'
+import type { TeamMemberType } from '@/interface/common'
+import { useCommonStore } from '@/stores/common'
 import TeamItem from './team-item.vue'
-const list = ref<number[]>([])
-const loading = ref(false)
-const finished = ref(false)
-const refreshing = ref(false)
 
-const onLoad = () => {
-  setTimeout(() => {
-    if (refreshing.value) {
-      list.value = []
-      refreshing.value = false
-    }
+const props = defineProps(['lv'])
 
-    for (let i = 0; i < 10; i++) {
-      list.value.push(list.value.length + 1)
-    }
-    loading.value = false
+const { userDetail } = storeToRefs(useCommonStore())
 
-    if (list.value.length >= 40) {
-      finished.value = true
-    }
-  }, 1000)
-}
-
-const onRefresh = () => {
-  // 清空列表数据
-  finished.value = false
-
-  // 重新加载数据
-  // 将 loading 设置为 true，表示处于加载状态
-  loading.value = true
-  onLoad()
-}
+const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<TeamMemberType>({
+  api: getTeamMemberSelfApi,
+  otherForm: () => ({ lv: +props.lv })
+})
 </script>

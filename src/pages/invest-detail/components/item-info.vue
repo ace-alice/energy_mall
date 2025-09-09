@@ -48,7 +48,7 @@ const { info } = defineProps<{
       <div class="title">可认购金额</div>
       <div class="desc">{{ info.invest }} {{ currency }}</div>
       <div class="title">认购等级</div>
-      <div class="desc">{{ info.level }}及以上</div>
+      <div class="desc">{{ info.level_name }} 及以上</div>
       <div class="title">产品概述</div>
       <div class="desc">{{ info.desc }}及以上</div>
     </div>

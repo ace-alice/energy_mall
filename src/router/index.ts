@@ -372,6 +372,17 @@ const router = createRouter({
       }
     },
     {
+      path: '/invest-agreement/:id',
+      name: 'InvestAgreement',
+      component: () =>
+        import(
+          /* webpackChunkName: "invest-order-agreement" */ '@/pages/invest-order/agreement.vue'
+        ),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/com-intro',
       name: 'ComIntro',
       component: () => import(/* webpackChunkName: "com-intro" */ '@/pages/com-intro/index.vue'),
@@ -443,6 +454,14 @@ const router = createRouter({
       path: '/savings',
       name: 'SavingsVip',
       component: () => import(/* webpackChunkName: "savings" */ '@/pages/savings/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/child-team/:uid',
+      name: 'ChildTeam',
+      component: () => import(/* webpackChunkName: "child-team" */ '@/pages/team/child-team.vue'),
       meta: {
         keepAlive: true
       }

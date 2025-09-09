@@ -8,6 +8,7 @@
         <img :src="hiIcon" width="22" style="margin-right: 4px" alt="" />
         <div>{{ userInfo.username || userInfo.phone2 }}</div>
         <img
+          v-if="!isVip"
           :src="userInfo.outside_level_img || getIconByLevel(userInfo.level)"
           height="20"
           style="margin-left: 4px"
@@ -15,7 +16,7 @@
           srcset=""
         />
       </div>
-      <div class="level">等级: {{ userInfo.outside_level_name }}</div>
+      <div class="level">等级: {{ isVip ? userInfo.level_name : userInfo.outside_level_name }}</div>
     </div>
   </div>
 </template>
@@ -26,7 +27,7 @@ import { useCommonStore } from '@/stores/common'
 import avatarIcon from '@/assets/images/common/avatar.png'
 import { getIconByLevel } from '@/utils/level'
 
-const { userInfo } = storeToRefs(useCommonStore())
+const { userInfo, isVip } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

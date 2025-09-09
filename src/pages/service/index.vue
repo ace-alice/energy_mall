@@ -17,9 +17,7 @@ const serviceSrc = computed(() => {
 })
 
 onMounted(() => {
-  if (!serviceUrl.value) {
-    geServiceUrl()
-  }
+  geServiceUrl()
 })
 </script>
 

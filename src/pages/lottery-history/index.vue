@@ -38,7 +38,7 @@ onActivated(() => {
           </div>
           <div style="font-size: 24px; font-weight: 500; color: #13b756">
             +{{ item.amount }}
-            <span style="font-size: 12px">{{ +item.type ? currency : '积分' }}</span>
+            <span style="font-size: 12px">{{ +item.type ? '积分' : currency }}</span>
           </div>
         </div>
       </van-list>

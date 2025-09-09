@@ -18,14 +18,14 @@
         <van-grid-item class="direction">
           <div>
             <div>
-              <VueCountTo :end-val="Number(userInfo.money)" :start-val="moneyStartVal" />
+              <VueCountTo :end-val="Number(userInfo.frozen_money)" :start-val="moneyStartVal" />
             </div>
             <div class="label">可用余额({{ currency }})</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
-            <div><VueCountTo :end-val="Number(userInfo.frozen_money)" /></div>
+            <div><VueCountTo :end-val="Number(userInfo.money)" /></div>
             <div class="label">可提余额({{ currency }})</div>
           </div>
         </van-grid-item>

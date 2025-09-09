@@ -65,8 +65,7 @@ const currency = __VITE_CURRENCY
     >
       <div class="signin-pop">
         <div class="signin-text">
-          恭喜您获得 <span>{{ winInfo.money || '0' }} {{ +winInfo.type ? currency : '积分' }}</span
-          >元
+          恭喜您获得 <span>{{ winInfo.money || '0' }} {{ +winInfo.type ? '积分' : currency }}</span>
         </div>
       </div>
       <van-icon class="close-icon" size="40" name="close" color="#fff" @click="showPopup = false" />

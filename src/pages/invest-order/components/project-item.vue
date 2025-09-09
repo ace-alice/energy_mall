@@ -29,14 +29,29 @@
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
-        <div>{{ item.profit_cycle }}<span>天</span></div>
+        <div>
+          {{ item.profit_cycle * getCycleTime(item.profit_cycle_time).value
+          }}<span>{{ getCycleTime(item.profit_cycle_time).label }}</span>
+        </div>
       </div>
+    </div>
+    <van-divider />
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <div style="flex-grow: 1; font-size: 14px">
+        {{ getProfitType(item.profit_type, item.profit_cycle_time) }}
+      </div>
+      <van-button type="primary" size="mini" :to="`/invest-agreement/${item.id}`"
+        >查看合同</van-button
+      >
+      <!-- <van-button type="primary" size="mini" style="margin-left: 12px">查看详情</van-button> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="ProjectItem">
-const props = defineProps(['item'])
+import type { InvestOrderItemType } from '@/interface/common'
+import { getCycleTime, getProfitType } from '@/utils/common'
+const { item } = defineProps<{ item: InvestOrderItemType }>()
 const router = useRouter()
 
 const statusOptions = [
@@ -61,7 +76,7 @@ const statusOptions = [
 ]
 
 const currentStatus = computed(() => {
-  return statusOptions.find((s) => props.item.item_status == s.type)
+  return statusOptions.find((s) => item.item_status == s.type)
 })
 </script>
 

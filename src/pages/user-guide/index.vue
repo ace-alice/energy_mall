@@ -9,7 +9,7 @@ const router = useRouter()
 const enterList = [
   { text: '会员等级', icon: user_level, router: '/legend/user_level' },
   { text: '团队等级', icon: team_level, router: '/legend/team_level' },
-  { text: '市场制度', icon: market, router: '/legend/market_rule' }
+  { text: '会员推荐奖励', icon: market, router: '/legend/market_rule' }
 ]
 </script>
 

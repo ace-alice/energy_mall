@@ -467,6 +467,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/credit-conversion',
+      name: 'CreditConversion',
+      component: () =>
+        import(/* webpackChunkName: "credit-conversion" */ '@/pages/credit-conversion/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
       redirect: '/'

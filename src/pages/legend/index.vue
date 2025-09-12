@@ -17,7 +17,7 @@ const articleInfo = ref<ArticleInfoType>({ content: '', title: '' } as ArticleIn
 function getTitle() {
   switch (code) {
     case 'market_rule':
-      return '市场制度说明'
+      return '会员推荐奖励说明'
     case 'team_level':
       return '团队等级说明'
     case 'user_level':

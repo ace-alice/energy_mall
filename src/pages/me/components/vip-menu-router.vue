@@ -46,7 +46,7 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell> -->
-      <van-cell
+      <!-- <van-cell
         title="会员等级说明"
         :border="false"
         :icon="level_notice"
@@ -56,7 +56,7 @@
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
-      </van-cell>
+      </van-cell> -->
     </van-cell-group>
   </div>
 </template>

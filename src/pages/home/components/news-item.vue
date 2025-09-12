@@ -39,7 +39,7 @@ const props = defineProps(['item'])
 
 const content = computed(() => {
   return htmlDecodeByRegExp(props.item.content)
-    .replace('<img', '<img  mode="widthFix"')
+    .replace('<img', '<img mode="widthFix"')
     .replace(/<[^>]*>/g, '')
 })
 </script>

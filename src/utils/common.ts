@@ -170,7 +170,7 @@ export function incomeMath(
   cycle: number
 ) {
   if (isInter) {
-    return money * (1 + rate) ** cycle + money * principal
+    return money * (1 + rate) ** cycle
   } else {
     return money * rate * cycle + money * principal
   }

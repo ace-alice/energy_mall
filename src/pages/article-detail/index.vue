@@ -1,7 +1,7 @@
 <script setup lang="ts" name="ArticleDetail">
 import { articleInfoApi } from '@/api'
 import type { ArticleInfoType } from '@/interface/common'
-import { htmlDecodeByRegExp } from '@/utils/common'
+import { htmlDecodeByRegExp, isVideoUrl } from '@/utils/common'
 
 const route = useRoute()
 
@@ -40,6 +40,9 @@ onMounted(() => {
         </template>
         加载中...
       </van-loading>
+    </div>
+    <div class="normal-card" style="padding: 0; height: 540px">
+      <VideoPlayer v-if="isVideoUrl(articleInfo.desc)" :src="articleInfo.desc" />
     </div>
     <div class="box" v-html="content"></div>
   </div>

@@ -135,3 +135,29 @@ export function getCycleTime(seconds: number): { label: string; value: number } 
     value: seconds
   }
 }
+
+export function isVideoUrl(url: string) {
+  if (typeof url !== 'string') return false
+
+  // 必须以 http 或 https 开头
+  if (!/^https?:\/\//i.test(url)) {
+    return false
+  }
+
+  // 常见视频扩展名
+  const videoExts = [
+    '.mp4',
+    '.avi',
+    '.mov',
+    '.wmv',
+    '.flv',
+    '.mkv',
+    '.webm',
+    '.3gp',
+    '.ts',
+    '.m3u8'
+  ]
+
+  // 判断后缀
+  return videoExts.some((ext) => url.toLowerCase().includes(ext))
+}

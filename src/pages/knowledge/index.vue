@@ -4,6 +4,7 @@ import knowledgeBg from '@/assets/images/background/know_ledge.png'
 import { getArticles } from '@/api'
 import pageHook from '@/hooks/pageHook'
 import type { ArticleInfoType } from '@/interface/common'
+import { isVideoUrl } from '@/utils/common'
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
@@ -55,9 +56,14 @@ function toDetail(item: ArticleInfoType) {
             width="95"
             style="flex-shrink: 0; margin-right: 16px"
           />
-          <div>
+          <div style="flex-grow: 1">
             <van-text-ellipsis :content="item.title" />
-            <van-text-ellipsis style="font-size: 12px; color: #999" :content="item.desc" rows="2" />
+
+            <van-text-ellipsis
+              style="font-size: 12px; color: #999"
+              :content="isVideoUrl(item.desc) ? '请打开详情观看视频' : item.desc"
+              rows="2"
+            />
           </div>
         </div>
       </van-list>

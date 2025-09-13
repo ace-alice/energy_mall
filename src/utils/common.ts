@@ -161,3 +161,31 @@ export function isVideoUrl(url: string) {
   // 判断后缀
   return videoExts.some((ext) => url.toLowerCase().includes(ext))
 }
+
+export function incomeMath(
+  money: number,
+  rate: number,
+  principal: number,
+  isInter: boolean,
+  cycle: number
+) {
+  if (isInter) {
+    return money * (1 + rate) ** cycle + money * principal
+  } else {
+    return money * rate * cycle + money * principal
+  }
+}
+
+export function incomeRateMathText(
+  money: number,
+  rate: number,
+  isInter: boolean,
+  cycle: number,
+  cycleType: { label: string; value: number },
+  isNoBen: boolean
+) {
+  if (isInter) {
+    return ''
+  }
+  return ` 生产计算：按照最低起投金额${money}，收益公式：${money} x ${rate}% x ${cycle}(${cycleType.value}${cycleType.label})${isNoBen ? ' - ' : ''}${isNoBen ? money : ''}`
+}

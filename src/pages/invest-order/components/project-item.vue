@@ -20,25 +20,40 @@
     <van-divider />
     <div class="bottom">
       <div>
-        <div>投资金额</div>
-        <div>{{ Number(item.amount) }}<span>USDT</span></div>
+        <div>投资金额({{ currency }})</div>
+        <div>
+          {{ Number(item.discounted_amount) || Number(item.amount)
+          }}<span
+            v-if="
+              Number(item.discounted_amount) &&
+              Number(item.discounted_amount) != Number(item.amount)
+            "
+            >{{ Number(item.amount) }}</span
+          >
+        </div>
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>{{ item.profit_rate }}<span>%</span></div>
+        <div>
+          {{ (Number(item.profit_rate) + Number(item.profit_extra)).toFixed(2) }}<span>%</span>
+        </div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
         <div>
-          {{ item.profit_cycle * getCycleTime(item.profit_cycle_time).value
-          }}<span>{{ getCycleTime(item.profit_cycle_time).label }}</span>
+          {{
+            Number(item.profit_cycle) *
+            getCycleTime(Number(item.cycle_time) || Number(item.profit_cycle_time)).value
+          }}<span>{{
+            getCycleTime(Number(item.cycle_time) || Number(item.profit_cycle_time)).label
+          }}</span>
         </div>
       </div>
     </div>
     <van-divider />
     <div style="display: flex; justify-content: space-between; align-items: center">
       <div style="flex-grow: 1; font-size: 14px">
-        {{ getProfitType(item.profit_type, item.profit_cycle_time) }}
+        {{ getProfitType(Number(item.profit_type), Number(item.profit_cycle_time)) }}
       </div>
       <van-button type="primary" size="mini" :to="`/invest-agreement/${item.id}`"
         >查看合同</van-button
@@ -53,6 +68,8 @@ import type { InvestOrderItemType } from '@/interface/common'
 import { getCycleTime, getProfitType } from '@/utils/common'
 const { item } = defineProps<{ item: InvestOrderItemType }>()
 const router = useRouter()
+
+const currency = __VITE_CURRENCY
 
 const statusOptions = [
   {

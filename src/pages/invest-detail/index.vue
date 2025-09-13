@@ -40,11 +40,24 @@
           <div style="margin-top: 4px; color: #999">积分赠送：{{ projectDetail.gift_points }}</div>
           <div class="three-del">
             <div>
-              <div>{{ Number(projectDetail.invest) }}<span>USDT</span></div>
-              <div>总投资额</div>
+              <div>
+                {{ Number(projectDetail.discounted_invest) || Number(projectDetail.invest) }}
+                <span
+                  v-if="Number(projectDetail.discounted_invest) != Number(projectDetail.invest)"
+                  style="text-decoration: line-through; margin-right: 4px"
+                  >{{ Number(projectDetail.invest) }}</span
+                >
+              </div>
+              <div>总投资额({{ currency }})</div>
             </div>
             <div style="text-align: center">
-              <div>{{ projectDetail.profit_rate }}<span>%</span></div>
+              <div>
+                {{
+                  (Number(projectDetail.profit_rate) + Number(projectDetail.profit_extra)).toFixed(
+                    2
+                  )
+                }}<span>%</span>
+              </div>
               <div>项目利率</div>
             </div>
             <div style="text-align: right">
@@ -89,6 +102,8 @@ import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp, getProfitType, getCycleTime } from '@/utils/common'
 import Agreement from './components/agreement.vue'
 import ItemInfo from './components/item-info.vue'
+
+const currency = __VITE_CURRENCY
 
 const normalPinActionRef = ref()
 

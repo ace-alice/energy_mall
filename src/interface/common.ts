@@ -426,6 +426,7 @@ export interface InvestItemType {
   level_name: string
   class_id: number
   class_name: string
+  discounted: number
   invest: number
   invest_scale: number
   invest_limit: number
@@ -452,11 +453,13 @@ export interface InvestItemType {
   product_release_time: string
   product_insurance_time: string
   gift_goods: number
+  gift_item: number
   level_income: number
   gift_product_expires: number
   video_link: string
   sales_limit: number
   sales_time: number
+  discounted_invest: number
 }
 
 export interface InvestOrderItemType {
@@ -473,6 +476,7 @@ export interface InvestOrderItemType {
   item_status: number
   item_type: number
   amount: string
+  discounted_amount: string
   gift_bonus: string
   gift_points: number
   gift_raffle: number
@@ -495,12 +499,14 @@ export interface InvestOrderItemType {
   create_at: string
   update_at: string
   gift_goods: number
+  gift_item: number
+  is_gift: number
   gift_product_expires: number
   principal: string
   img: string
-  profit_cycle_time: number
-  profit_cycle: number
-  profit_type: number
+  profit_cycle_time: string
+  profit_cycle: string
+  profit_type: string
   end_time2: number
   item_invest_scale: string
   product_release_time: string

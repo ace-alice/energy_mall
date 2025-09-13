@@ -1,13 +1,38 @@
 <script setup name="ItemInfo" lang="ts">
 import type { InvestItemType } from '@/interface/common'
 import richIcon from '@/assets/images/icons/rich.png'
-import { getCycleTime } from '@/utils/common'
+import { getCycleTime, incomeMath, incomeRateMathText } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
 
 const { info } = defineProps<{
   info: InvestItemType
 }>()
+
+const incomeMoney = computed(() => {
+  return incomeMath(
+    Number(info.invest),
+    (Number(info.profit_rate) + Number(info.profit_extra)) / 100,
+    getCycleTime(info.profit_cycle_time).value == 2
+      ? 0
+      : getCycleTime(info.profit_cycle_time).value == 3
+        ? 2
+        : 1,
+    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_cycle)
+  )
+})
+
+const incomeText = computed(() => {
+  return incomeRateMathText(
+    Number(info.invest),
+    Number(info.profit_rate) + Number(info.profit_extra),
+    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_cycle),
+    getCycleTime(info.profit_cycle_time),
+    getCycleTime(info.profit_cycle_time).value == 2
+  )
+})
 </script>
 <template>
   <div class="pro-info">
@@ -24,23 +49,25 @@ const { info } = defineProps<{
         </div>
         <div>
           买入{{ info.invest }} {{ currency }}，预计本息收入<span style="color: green">{{
-            (info.invest * (+info.profit_rate / 100) * info.profit_cycle + info.invest).toFixed(2)
+            (
+              info.invest *
+                ((Number(info.profit_rate) + Number(info.profit_extra)) / 100) *
+                info.profit_cycle +
+              info.invest
+            ).toFixed(2)
           }}</span>
           {{ currency }}
         </div>
       </div>
     </div>
     <div style="font-size: 14px; padding: 8px 20px; line-height: 1.4">
-      生产计算：按照最低起投金额{{ info.invest }}，收益公式：{{ info.invest }} x
-      {{ +info.profit_rate }}% x {{ info.profit_cycle }} ({{
-        getCycleTime(info.profit_cycle_time).value
-      }}{{ getCycleTime(info.profit_cycle_time).label }}) = 预计收益
+      {{ incomeText }} = 预计收益
       <span style="color: green">
-        {{ (info.invest * (+info.profit_rate / 100) * info.profit_cycle).toFixed(2) }}
+        {{ incomeMoney - Number(info.discounted_invest || Number(info.invest)) }}
         {{ currency }}</span
       >，总预计本息
       <span style="color: green">
-        {{ (info.invest * (+info.profit_rate / 100) * info.profit_cycle + info.invest).toFixed(2) }}
+        {{ incomeMoney }}
         {{ currency }}</span
       >
     </div>

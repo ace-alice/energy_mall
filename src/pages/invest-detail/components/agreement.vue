@@ -4,7 +4,7 @@ import jia_z from '@/assets/images/common/jia_z.png'
 import danbao_z from '@/assets/images/common/danbao_z.png'
 import { useCommonStore } from '@/stores/common'
 import type { InvestItemType } from '@/interface/common'
-import { getProfitType, getCycleTime } from '@/utils/common'
+import { getProfitType, getCycleTime, incomeMath } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
 
@@ -13,6 +13,20 @@ const { userInfo } = storeToRefs(useCommonStore())
 const { info } = defineProps<{
   info: InvestItemType
 }>()
+
+const incomeMoney = computed(() => {
+  return incomeMath(
+    Number(info.invest),
+    (Number(info.profit_rate) + Number(info.profit_extra)) / 100,
+    getCycleTime(info.profit_cycle_time).value == 2
+      ? 0
+      : getCycleTime(info.profit_cycle_time).value == 3
+        ? 2
+        : 1,
+    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_cycle)
+  )
+})
 </script>
 <template>
   <div class="agreement">
@@ -49,7 +63,10 @@ const { info } = defineProps<{
           :text="`${info.profit_cycle * getCycleTime(info.profit_cycle_time).value} ${getCycleTime(info.profit_cycle_time).label}`"
         />
         <van-grid-item style="flex-basis: 35%" text="预期收益率" />
-        <van-grid-item style="flex-basis: 65%" :text="`${info.profit_rate.toString()} %`" />
+        <van-grid-item
+          style="flex-basis: 65%"
+          :text="`${(Number(info.profit_rate) + Number(info.profit_extra)).toFixed(2)} %`"
+        />
         <van-grid-item style="flex-basis: 35%" text="起息日" />
         <van-grid-item
           style="flex-basis: 65%"
@@ -61,10 +78,7 @@ const { info } = defineProps<{
           :text="`${dayjs().add(info.profit_cycle, 'day').format('YYYY-MM-DD')}`"
         />
         <van-grid-item style="flex-basis: 35%" text="应收本息" />
-        <van-grid-item
-          style="flex-basis: 65%"
-          :text="`${+info.invest * ((+info.profit_rate / 100) * info.profit_cycle + 1)} ${currency}`"
-        />
+        <van-grid-item style="flex-basis: 65%" :text="incomeMoney.toFixed(2)" />
         <van-grid-item style="flex-basis: 35%" text="还款方式" />
         <van-grid-item
           style="flex-basis: 65%"

@@ -4,7 +4,7 @@ import jia_z from '@/assets/images/common/jia_z.png'
 import danbao_z from '@/assets/images/common/danbao_z.png'
 import { useCommonStore } from '@/stores/common'
 import type { InvestOrderItemType } from '@/interface/common'
-import { getProfitType, getCycleTime } from '@/utils/common'
+import { getProfitType, getCycleTime, incomeMath } from '@/utils/common'
 import { getItemOrderInfoApi } from '@/api'
 
 const currency = __VITE_CURRENCY
@@ -32,6 +32,20 @@ function getInfo() {
     router.push({ name: 'InvestOrderVip' })
   }
 }
+
+const incomeMoney = computed(() => {
+  return incomeMath(
+    Number(info.value.amount),
+    (Number(info.value.profit_rate) + Number(info.value.profit_extra)) / 100,
+    getCycleTime(info.value.cycle_time).value == 2
+      ? 0
+      : getCycleTime(info.value.cycle_time).value == 3
+        ? 2
+        : 1,
+    getCycleTime(info.value.cycle_time).value == 5,
+    Number(info.value.profit_cycle)
+  )
+})
 
 onMounted(() => {
   getInfo()
@@ -76,10 +90,13 @@ onMounted(() => {
           <van-grid-item style="flex-basis: 35%" text="协议期" />
           <van-grid-item
             style="flex-basis: 65%"
-            :text="`${info.profit_cycle * getCycleTime(info.profit_cycle_time).value} ${getCycleTime(info.profit_cycle_time).label}`"
+            :text="`${Number(info.profit_cycle || Number(info.profit_cycle_time)) * getCycleTime(Number(info.cycle_time) || Number(info.profit_cycle_time)).value} ${getCycleTime(Number(info.cycle_time) || Number(info.profit_cycle_time)).label}`"
           />
           <van-grid-item style="flex-basis: 35%" text="预期收益率" />
-          <van-grid-item style="flex-basis: 65%" :text="`${info.profit_rate} %`" />
+          <van-grid-item
+            style="flex-basis: 65%"
+            :text="`${(Number(info.profit_rate) + Number(info.profit_extra)).toFixed(2)} %`"
+          />
           <van-grid-item style="flex-basis: 35%" text="起息日" />
           <van-grid-item
             style="flex-basis: 65%"
@@ -88,17 +105,19 @@ onMounted(() => {
           <van-grid-item style="flex-basis: 35%" text="到期日" />
           <van-grid-item
             style="flex-basis: 65%"
-            :text="`${dayjs().add(info.profit_cycle, 'day').format('YYYY-MM-DD')}`"
+            :text="`${dayjs().add(+info.profit_cycle, 'day').format('YYYY-MM-DD')}`"
           />
           <van-grid-item style="flex-basis: 35%" text="应收本息" />
-          <van-grid-item
-            style="flex-basis: 65%"
-            :text="`${(+info.amount * ((+info.profit_rate / 100) * info.profit_cycle + 1)).toFixed(2)} ${currency}`"
-          />
+          <van-grid-item style="flex-basis: 65%" :text="`${incomeMoney.toFixed(2)} ${currency}`" />
           <van-grid-item style="flex-basis: 35%" text="还款方式" />
           <van-grid-item
             style="flex-basis: 65%"
-            :text="getProfitType(info.profit_type, info.profit_cycle_time)"
+            :text="
+              getProfitType(
+                Number(info.profit_type),
+                Number(info.profit_cycle_time) || Number(info.cycle_time)
+              )
+            "
           />
         </van-grid>
       </div>

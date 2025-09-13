@@ -16,12 +16,25 @@
     <van-divider />
     <div class="bottom three-del">
       <div>
-        <div>总投资额</div>
-        <div>{{ Number(item.invest) }}<span>USDT</span></div>
+        <div>总投资额(USDT)</div>
+        <div>
+          {{ Number(item.discounted_invest) || Number(item.invest) }}
+          <span
+            v-if="
+              Number(item.discounted_invest) &&
+              Number(item.discounted_invest) != Number(item.invest)
+            "
+            style="text-decoration: line-through; margin-right: 4px"
+            >{{ Number(item.invest) }}</span
+          >
+          <!-- <span>USDT</span> -->
+        </div>
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>{{ item.profit_rate }}<span>%</span></div>
+        <div>
+          {{ (Number(item.profit_rate) + Number(item.profit_extra)).toFixed(2) }}<span>%</span>
+        </div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>

@@ -69,7 +69,7 @@ const incomeText = computed(() => {
     <div style="padding: 0 16px">
       <div class="title">可认购金额</div>
       <div class="desc">{{ info.invest }} {{ currency }}</div>
-      <div class="title">项目利率</div>
+      <!-- <div class="title">项目利率</div>
       <div class="desc">
         (基础利率
         {{ Number(info.profit_rate) }}% x VIP收益加成 {{ Number(info.profit_extra) }}%) + 基础利率
@@ -77,7 +77,7 @@ const incomeText = computed(() => {
         <span style="font-size: 18px; color: red"
           >{{ rateMath(info.profit_rate, info.profit_extra).toFixed(2) }}%</span
         >
-      </div>
+      </div> -->
       <div class="title">认购等级</div>
       <div class="desc">{{ info.level_name || '普通会员' }} 及以上</div>
       <div class="title">产品概述</div>

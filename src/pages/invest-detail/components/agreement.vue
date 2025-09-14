@@ -4,7 +4,7 @@ import jia_z from '@/assets/images/common/jia_z.png'
 import danbao_z from '@/assets/images/common/danbao_z.png'
 import { useCommonStore } from '@/stores/common'
 import type { InvestItemType } from '@/interface/common'
-import { getProfitType, getCycleTime, incomeMath } from '@/utils/common'
+import { getProfitType, getCycleTime, incomeMath, rateMath } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
 
@@ -17,7 +17,7 @@ const { info } = defineProps<{
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.invest),
-    (Number(info.profit_rate) + Number(info.profit_extra)) / 100,
+    rateMath(info.profit_rate, info.profit_extra),
     getCycleTime(info.profit_cycle_time).value == 2
       ? 0
       : getCycleTime(info.profit_cycle_time).value == 3
@@ -65,7 +65,7 @@ const incomeMoney = computed(() => {
         <van-grid-item style="flex-basis: 35%" text="预期收益率" />
         <van-grid-item
           style="flex-basis: 65%"
-          :text="`${(Number(info.profit_rate) + Number(info.profit_extra)).toFixed(2)} %`"
+          :text="`${rateMath(info.profit_rate, info.profit_extra).toFixed(2)} %`"
         />
         <van-grid-item style="flex-basis: 35%" text="起息日" />
         <van-grid-item

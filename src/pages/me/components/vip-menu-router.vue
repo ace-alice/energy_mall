@@ -6,6 +6,11 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
+      <van-cell title="额度转换" :border="false" :icon="transfer" is-link to="/credit-conversion">
+        <template #right-icon>
+          <img :src="allowRight" width="20" height="20" alt="" />
+        </template>
+      </van-cell>
       <van-cell title="我的卡券" :border="false" :icon="mall" is-link to="/me-vip">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />

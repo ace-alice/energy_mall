@@ -1,7 +1,7 @@
 <script setup name="ItemInfo" lang="ts">
 import type { InvestItemType } from '@/interface/common'
 import richIcon from '@/assets/images/icons/rich.png'
-import { getCycleTime, incomeMath, incomeRateMathText } from '@/utils/common'
+import { getCycleTime, incomeMath, incomeRateMathText, rateMath } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
 
@@ -12,7 +12,7 @@ const { info } = defineProps<{
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.invest),
-    (Number(info.profit_rate) + Number(info.profit_extra)) / 100,
+    rateMath(info.profit_rate, info.profit_extra),
     getCycleTime(info.profit_cycle_time).value == 2
       ? 0
       : getCycleTime(info.profit_cycle_time).value == 3
@@ -26,7 +26,7 @@ const incomeMoney = computed(() => {
 const incomeText = computed(() => {
   return incomeRateMathText(
     Number(info.invest),
-    Number(info.profit_rate) + Number(info.profit_extra),
+    rateMath(info.profit_rate, info.profit_extra),
     Number(info.profit_type) == 5,
     Number(info.profit_cycle),
     getCycleTime(info.profit_cycle_time),
@@ -49,12 +49,7 @@ const incomeText = computed(() => {
         </div>
         <div>
           买入{{ info.invest }} {{ currency }}，预计本息收入<span style="color: green">{{
-            (
-              info.invest *
-                ((Number(info.profit_rate) + Number(info.profit_extra)) / 100) *
-                info.profit_cycle +
-              info.invest
-            ).toFixed(2)
+            incomeMoney
           }}</span>
           {{ currency }}
         </div>
@@ -74,6 +69,15 @@ const incomeText = computed(() => {
     <div style="padding: 0 16px">
       <div class="title">可认购金额</div>
       <div class="desc">{{ info.invest }} {{ currency }}</div>
+      <div class="title">项目利率</div>
+      <div class="desc">
+        (基础利率
+        {{ Number(info.profit_rate) }}% x VIP收益加成 {{ Number(info.profit_extra) }}%) + 基础利率
+        {{ info.profit_rate }}% =
+        <span style="font-size: 18px; color: red"
+          >{{ rateMath(info.profit_rate, info.profit_extra).toFixed(2) }}%</span
+        >
+      </div>
       <div class="title">认购等级</div>
       <div class="desc">{{ info.level_name || '普通会员' }} 及以上</div>
       <div class="title">产品概述</div>

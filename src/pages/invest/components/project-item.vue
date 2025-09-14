@@ -5,6 +5,7 @@
       <van-image width="90" height="65" lazy-load :src="item.img" />
       <div class="p-info">
         <div>{{ item.title }}</div>
+        <div>{{ getProfitType(item.profit_type, item.profit_cycle_time) }}</div>
         <van-progress
           :pivot-text="`${item.progress}%`"
           :color="Number(item.progress) == 100 ? '#FBC145' : '#13B756'"
@@ -32,9 +33,7 @@
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>
-          {{ (Number(item.profit_rate) + Number(item.profit_extra)).toFixed(2) }}<span>%</span>
-        </div>
+        <div>{{ rateMath(item.profit_rate, item.profit_extra).toFixed(2) }}<span>%</span></div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
@@ -49,7 +48,7 @@
 
 <script setup lang="ts" name="ProjectItem">
 import type { InvestItemType } from '@/interface/common'
-import { getCycleTime } from '@/utils/common'
+import { getCycleTime, getProfitType, rateMath } from '@/utils/common'
 const { item } = defineProps<{
   item: InvestItemType
 }>()
@@ -64,7 +63,7 @@ const router = useRouter()
   .p-info {
     height: 65px;
     flex-grow: 1;
-    padding: 8px 12px;
+    padding: 0 12px;
     font-size: 12px;
     display: flex;
     flex-direction: column;
@@ -74,8 +73,7 @@ const router = useRouter()
     }
     & > div:nth-child(2) {
       font-size: 14px;
-      font-weight: 600;
-      margin-top: 4px;
+      margin: 0 0 6px;
     }
   }
 }

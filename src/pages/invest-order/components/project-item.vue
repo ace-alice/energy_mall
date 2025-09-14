@@ -34,9 +34,7 @@
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>
-          {{ (Number(item.profit_rate) + Number(item.profit_extra)).toFixed(2) }}<span>%</span>
-        </div>
+        <div>{{ rateMath(item.profit_rate, item.profit_extra).toFixed(2) }}<span>%</span></div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
@@ -65,7 +63,7 @@
 
 <script setup lang="ts" name="ProjectItem">
 import type { InvestOrderItemType } from '@/interface/common'
-import { getCycleTime, getProfitType } from '@/utils/common'
+import { getCycleTime, getProfitType, rateMath } from '@/utils/common'
 const { item } = defineProps<{ item: InvestOrderItemType }>()
 const router = useRouter()
 

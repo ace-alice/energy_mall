@@ -41,8 +41,8 @@ onMounted(() => {
         加载中...
       </van-loading>
     </div>
-    <div class="normal-card" style="padding: 0; height: 540px">
-      <VideoPlayer v-if="isVideoUrl(articleInfo.desc)" :src="articleInfo.desc" />
+    <div class="normal-card" v-if="isVideoUrl(articleInfo.desc)" style="padding: 0; height: 540px">
+      <VideoPlayer :src="articleInfo.desc" />
     </div>
     <div class="box" v-html="content"></div>
   </div>

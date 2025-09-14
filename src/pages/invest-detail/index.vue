@@ -52,11 +52,7 @@
             </div>
             <div style="text-align: center">
               <div>
-                {{
-                  (Number(projectDetail.profit_rate) + Number(projectDetail.profit_extra)).toFixed(
-                    2
-                  )
-                }}<span>%</span>
+                {{ rateMath(projectDetail.profit_rate, projectDetail.profit_extra) }}<span>%</span>
               </div>
               <div>项目利率</div>
             </div>
@@ -99,7 +95,7 @@ import { getInvestDetailApi, investBuyApi } from '@/api'
 import type { InvestItemType } from '@/interface/common'
 import backIcon from '@/assets/images/icons/back_white_icon.png'
 import { useCommonStore } from '@/stores/common'
-import { htmlDecodeByRegExp, getProfitType, getCycleTime } from '@/utils/common'
+import { htmlDecodeByRegExp, getProfitType, getCycleTime, rateMath } from '@/utils/common'
 import Agreement from './components/agreement.vue'
 import ItemInfo from './components/item-info.vue'
 

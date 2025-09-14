@@ -170,10 +170,14 @@ export function incomeMath(
   cycle: number
 ) {
   if (isInter) {
-    return money * (1 + rate) ** cycle
+    return money * (1 + rate / 100) ** cycle
   } else {
-    return money * rate * cycle + money * principal
+    return money * (rate / 100) * cycle + money * principal
   }
+}
+
+export function rateMath(baseRate: any, add: any): number {
+  return Number(((Number(baseRate) || 0) * ((Number(add) || 0) / 100 + 1)).toFixed(2))
 }
 
 export function incomeRateMathText(

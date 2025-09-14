@@ -18,7 +18,7 @@ const incomeMoney = computed(() => {
       : getCycleTime(info.profit_cycle_time).value == 3
         ? 2
         : 1,
-    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_type) == 5,
     Number(info.profit_cycle)
   )
 })
@@ -27,7 +27,7 @@ const incomeText = computed(() => {
   return incomeRateMathText(
     Number(info.invest),
     Number(info.profit_rate) + Number(info.profit_extra),
-    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_type) == 5,
     Number(info.profit_cycle),
     getCycleTime(info.profit_cycle_time),
     getCycleTime(info.profit_cycle_time).value == 2
@@ -63,11 +63,11 @@ const incomeText = computed(() => {
     <div style="font-size: 14px; padding: 8px 20px; line-height: 1.4">
       {{ incomeText }} = 预计收益
       <span style="color: green">
-        {{ incomeMoney - Number(info.discounted_invest || Number(info.invest)) }}
+        {{ (incomeMoney - Number(info.discounted_invest || Number(info.invest))).toFixed(2) }}
         {{ currency }}</span
       >，总预计本息
       <span style="color: green">
-        {{ incomeMoney }}
+        {{ incomeMoney.toFixed(2) }}
         {{ currency }}</span
       >
     </div>

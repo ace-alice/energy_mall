@@ -23,7 +23,7 @@ const incomeMoney = computed(() => {
       : getCycleTime(info.profit_cycle_time).value == 3
         ? 2
         : 1,
-    getCycleTime(info.profit_cycle_time).value == 5,
+    Number(info.profit_type) == 5,
     Number(info.profit_cycle)
   )
 })

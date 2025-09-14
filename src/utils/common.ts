@@ -185,7 +185,7 @@ export function incomeRateMathText(
   isNoBen: boolean
 ) {
   if (isInter) {
-    return ''
+    return `生产计算：按照最低起投金额${money}，收益公式：每次的收益会放入本金中用于下次计算收益`
   }
-  return ` 生产计算：按照最低起投金额${money}，收益公式：${money} x ${rate}% x ${cycle}(${cycleType.value}${cycleType.label})${isNoBen ? ' - ' : ''}${isNoBen ? money : ''}`
+  return `生产计算：按照最低起投金额${money}，收益公式：${money} x ${rate}% x ${cycle}(${cycleType.value}${cycleType.label})${isNoBen ? ' - ' : ''}${isNoBen ? money : ''}`
 }

@@ -1,6 +1,6 @@
 import { useRouter } from 'vue-router'
 import { ref, reactive, nextTick } from 'vue'
-import { showToast } from 'vant'
+import { showToast, closeToast } from 'vant'
 import { useCommonStore } from '@/stores/common'
 import { storeToRefs } from 'pinia'
 import { doTransferApi } from '@/api'
@@ -12,8 +12,8 @@ export default function () {
   const { getUserInfo, getUserDetail } = useCommonStore()
 
   function onSubmit() {
-    formData.money = Math.abs(formData.money || 0)
-    if ((+userInfo.value.outside_money || 0) < +(formData.money || 0)) {
+    formData.amount = Math.abs(formData.amount || 0)
+    if ((+userInfo.value.money || 0) < +(formData.amount || 0)) {
       showToast({ type: 'fail', message: '您的余额不足' })
       return
     }
@@ -24,9 +24,9 @@ export default function () {
     })
   }
 
-  const formData = reactive<{ money: undefined | number; phone: number }>({
-    money: undefined,
-    phone: 1
+  const formData = reactive<{ amount: undefined | number; phone: undefined | number }>({
+    amount: undefined,
+    phone: undefined
   })
 
   const normalPinActionRef = ref()
@@ -40,7 +40,7 @@ export default function () {
         getUserDetail()
         showToast({ type: 'text', message: '转账申请已成功发送' })
         setTimeout(() => {
-          router.push({ name: 'HomeNormal' })
+          router.push({ name: 'TransferOrder' })
         }, 200)
       })
       .catch((e) => {})

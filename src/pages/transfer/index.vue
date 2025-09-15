@@ -2,17 +2,17 @@
   <div class="normal-page">
     <BgTwo router="Transfer" />
     <NormalHeader :background="false" title="转账">
-      <!-- <template #right>
+      <template #right>
         <van-button
           plain
           round
           size="small"
           type="success"
           style="background: none"
-          @click="router.push({ name: '' })"
+          @click="router.push({ name: 'TransferOrder' })"
           >转账记录</van-button
         >
-      </template> -->
+      </template>
     </NormalHeader>
     <BalanceBox />
     <div class="normal-card">
@@ -37,9 +37,9 @@
         </van-field>
         <div class="title"><img :src="rechargeIcon" alt="" height="24" />转账金额</div>
         <van-field
-          v-model="formData.money"
+          v-model="formData.amount"
           type="number"
-          name="money"
+          name="amount"
           :rules="[{ required: true, message: '请输入转账金额' }]"
           placeholder="请输入转账金额"
         >
@@ -64,6 +64,8 @@
 import TransferHook from '@/hooks/TransferHook'
 import rechargeIcon from '@/assets/images/icons/recharge.png'
 import BalanceBox from './components/balance-box.vue'
+const router = useRouter()
+
 const { onSubmit, formData, toTransfer, normalPinActionRef } = TransferHook()
 </script>
 

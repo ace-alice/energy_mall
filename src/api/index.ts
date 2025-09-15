@@ -449,7 +449,7 @@ export function doWithdrawApi(data: any) {
  */
 export function doTransferApi(data: any) {
   return service({
-    url: '/Transfer/operate',
+    url: '/money/memberTransfer',
     method: 'POST',
     data
   })
@@ -604,6 +604,32 @@ export function getTeamMemberApi(data: any) {
 export function getTeamMemberSelfApi(data: any) {
   return service({
     url: `/Team/lists`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 额度转换
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function selfTransferApi(data: any) {
+  return service({
+    url: `/money/selfTransfer`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 额度转换
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getMemberTransferAuditListApi(data: any) {
+  return service({
+    url: `/money/getMemberTransferAuditList`,
     method: 'POST',
     data
   })

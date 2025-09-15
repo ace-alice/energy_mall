@@ -2,10 +2,19 @@
   <div class="normal-page">
     <BgTwo router="RechargeProcess" />
     <NormalHeader :background="false" title="充值流程"> </NormalHeader>
-    <div class="c-box">
-      <div class="h-box">银行卡和扫码充值流程</div>
+    <div style="margin-top: 240px" v-if="!articleInfo.id">
+      <van-loading vertical>
+        <template #icon>
+          <van-icon name="star-o" size="30" />
+        </template>
+        加载中...
+      </van-loading>
+    </div>
+    <div class="c-box" v-else>
+      <div class="h-box">{{ articleInfo.title }}</div>
       <div class="b-box">
-        <van-steps direction="vertical" :active="-1">
+        <div class="box" v-html="content"></div>
+        <!-- <van-steps direction="vertical" :active="-1">
           <van-step>
             <h3>STEP 1</h3>
             <p class="step">点击[我的]</p>
@@ -30,14 +39,41 @@
             <h3>STEP 6</h3>
             <p class="step">点击进入 [钱包]界面点击进入 [钱包]</p>
           </van-step>
-        </van-steps>
+        </van-steps> -->
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="RechargeProcess">
-const router = useRouter()
+import { articleInfoApi } from '@/api'
+import type { ArticleInfoType } from '@/interface/common'
+import { htmlDecodeByRegExp, isVideoUrl } from '@/utils/common'
+
+const route = useRoute()
+
+const articleInfo = ref<ArticleInfoType>({ content: '', title: '' } as ArticleInfoType)
+
+function getArticleInfo() {
+  const obj: any = {}
+  if (route.query['id']) {
+    obj['id'] = route.query['id']
+  }
+  if (route.query['code']) {
+    obj['code'] = route.query['code']
+  }
+  articleInfoApi(obj).then((res) => {
+    articleInfo.value = res.data.data
+  })
+}
+
+const content = computed(() => {
+  return htmlDecodeByRegExp(articleInfo.value.content).replace(/<img/g, '<img  width="100%"')
+})
+
+onMounted(() => {
+  getArticleInfo()
+})
 </script>
 
 <style lang="scss" scoped>

@@ -56,13 +56,14 @@ function goBack() {
         name="arrow-left"
         width="18"
         height="18"
+        style="margin-right: 50px"
         :src="backIconTag == 1 ? backIcon : backIcon2"
         @click="goBack"
       />
-      <div v-else style="width: 30px; height: 1px"></div>
+      <div v-else style="width: 66px; height: 1px"></div>
       <div class="title">{{ title }}</div>
       <slot name="right">
-        <div v-if="!slots.right" style="width: 30px; height: 1px"></div>
+        <div v-if="!slots.right" style="width: 66px; height: 1px"></div>
       </slot>
     </div>
     <slot name="bottom"> </slot>

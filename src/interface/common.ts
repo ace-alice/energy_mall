@@ -580,3 +580,24 @@ export interface TeamMemberType {
   valid_user: number
   total_user: number
 }
+
+export interface TransferOrderItemType {
+  id: number
+  from_uid: number
+  from_username: string
+  from_phone: string
+  to_uid: number
+  to_username: string
+  to_phone: string
+  amount: string
+  status: number
+  admin_id: number
+  admin_name: string
+  audit_time: number
+  audit_remark: string
+  order_no: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}

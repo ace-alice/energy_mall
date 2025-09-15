@@ -9,7 +9,14 @@
           size="small"
           type="success"
           style="background: none"
-          @click="router.push({ name: 'RechargeProcess' })"
+          @click="
+            router.push({
+              name: 'RechargeProcess',
+              query: {
+                code: 'recharge_process'
+              }
+            })
+          "
           >充值流程</van-button
         >
       </template>

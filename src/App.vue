@@ -25,6 +25,22 @@ const route = useRoute()
 
 const active = ref(0)
 
+const backTopShow = ref(false)
+
+const routeTimer = ref<NodeJS.Timeout | null>(null)
+
+// 也可以只监听 path
+watch(
+  () => route.path,
+  (newPath, oldPath) => {
+    backTopShow.value = false
+    routeTimer.value && clearTimeout(routeTimer.value)
+    routeTimer.value = setTimeout(() => {
+      backTopShow.value = true
+    }, 400)
+  }
+)
+
 const { token, isVip, vipExpiredDate } = storeToRefs(useCommonStore())
 
 const handleBeforeUnload = (event: BeforeUnloadEvent) => {
@@ -105,7 +121,8 @@ onBeforeUnmount(() => {
           'Withdraw',
           'Transfer',
           'ArticleDetail',
-          'InvestAgreement'
+          'InvestAgreement',
+          'CreditConversion'
         ]"
       >
         <component :is="Component" :key="route.path" />
@@ -197,6 +214,10 @@ onBeforeUnmount(() => {
       </template>
     </van-tabbar-item>
   </van-tabbar>
+  <RefreshUserInfo />
+  <template v-if="backTopShow">
+    <van-back-top target=".normal-page" z-index="1100" teleport="#app" bottom="150" right="10" />
+  </template>
 </template>
 
 <style lang="scss">

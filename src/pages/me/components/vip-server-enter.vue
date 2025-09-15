@@ -12,10 +12,12 @@ import wallet from '@/assets/images/icons/wallet.png'
 import g_pig from '@/assets/images/icons/g_pig.png'
 import transfer_1 from '@/assets/images/icons/transfer_1.png'
 import rich from '@/assets/images/icons/rich.png'
+import transfer from '@/assets/images/icons/transfer.png'
 
 const enterList = [
   { text: '官方承兑', img: wallet, router: '/r-w-e' },
   { text: '转账', img: transfer_1, router: '/transfer' },
+  { text: '额度转换', img: transfer, router: '/credit-conversion' },
   { text: '存钱罐', img: g_pig, router: '/savings' }
   // { text: '聚宝盆', img: rich, router: '/savings' }
 ]

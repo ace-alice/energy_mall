@@ -23,11 +23,11 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell>
-      <van-cell title="转账" :border="false" :icon="transfer" is-link to="/transfer">
+      <!-- <van-cell title="转账" :border="false" :icon="transfer" is-link to="/transfer">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
-      </van-cell>
+      </van-cell> -->
       <van-cell title="额度转换" :border="false" :icon="transfer" is-link to="/credit-conversion">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />

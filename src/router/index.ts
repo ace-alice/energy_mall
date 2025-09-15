@@ -107,6 +107,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/transfer-order',
+      name: 'TransferOrder',
+      component: () =>
+        import(/* webpackChunkName: "transfer-order" */ '@/pages/transfer-order/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/withdraw',
       name: 'Withdraw',
       component: () => import(/* webpackChunkName: "withdraw" */ '@/pages/withdraw/index.vue'),
@@ -471,6 +480,15 @@ const router = createRouter({
       name: 'CreditConversion',
       component: () =>
         import(/* webpackChunkName: "credit-conversion" */ '@/pages/credit-conversion/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/credit-order',
+      name: 'CreditOrder',
+      component: () =>
+        import(/* webpackChunkName: "credit-order" */ '@/pages/credit-order/index.vue'),
       meta: {
         keepAlive: true
       }

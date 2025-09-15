@@ -175,8 +175,8 @@ const { formData, onSubmit, openEye, openEye2, openEye3, openEye4, checked, rout
         <div class="custom">
           <van-checkbox v-model="checked" checked-color="#222" icon-size="16"
             >我已阅读并同意
-            <span>《服务协议》</span>
-            <span>《隐私协议》</span>
+            <span @click="router.push({ name: 'ServicePrivate' })">《服务协议》</span>
+            <span @click="router.push({ name: 'RegPrivate' })">《隐私协议》</span>
           </van-checkbox>
         </div>
       </div>

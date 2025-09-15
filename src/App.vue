@@ -122,7 +122,8 @@ onBeforeUnmount(() => {
           'Transfer',
           'ArticleDetail',
           'InvestAgreement',
-          'CreditConversion'
+          'CreditConversion',
+          'SavingsVip'
         ]"
       >
         <component :is="Component" :key="route.path" />

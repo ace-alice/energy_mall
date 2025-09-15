@@ -634,3 +634,42 @@ export function getMemberTransferAuditListApi(data: any) {
     data
   })
 }
+
+/**
+ * 余额宝转入
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function yueBaoDepositApi(data: any) {
+  return service({
+    url: `/YueBao/deposit`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 余额宝转出
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function yueBaoWithdrawApi(data: any) {
+  return service({
+    url: `/YueBao/withdraw`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 余额宝明细
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function yueBaoRecordApi(data: any) {
+  return service({
+    url: `/YueBao/record`,
+    method: 'POST',
+    data
+  })
+}

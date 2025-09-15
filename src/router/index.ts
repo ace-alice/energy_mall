@@ -468,6 +468,15 @@ const router = createRouter({
       }
     },
     {
+      path: '/savings-order',
+      name: 'SavingsOrder',
+      component: () =>
+        import(/* webpackChunkName: "savings-order" */ '@/pages/savings-order/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/child-team/:uid',
       name: 'ChildTeam',
       component: () => import(/* webpackChunkName: "child-team" */ '@/pages/team/child-team.vue'),

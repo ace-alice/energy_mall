@@ -601,3 +601,17 @@ export interface TransferOrderItemType {
   create_at: string
   update_at: string
 }
+export interface YueBaoRecordItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  type: number
+  money: string
+  info: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}

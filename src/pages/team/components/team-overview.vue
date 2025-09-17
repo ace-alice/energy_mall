@@ -2,44 +2,46 @@
   <div class="team-overview">
     <div class="team-level">一级团队长</div>
     <van-grid :border="false" column-num="2" :center="false">
-      <van-grid-item class="direction">
+      <van-grid-item class="">
         <div style="display: flex; align-items: center">
-          <img :src="re_total" width="35" style="margin-right: 8px" alt="" />
+          <img :src="re_total" width="35" style="margin-right: 4px" alt="" />
           <div>
             <div class="label">总注册人数</div>
             <div>
-              {{ Number(userDetail.team_item) }}
+              {{ Number(userDetail.team_num) }}
             </div>
           </div>
         </div>
       </van-grid-item>
-      <van-grid-item class="direction">
+      <van-grid-item class="">
         <div style="display: flex; align-items: center">
           <img :src="real_total" width="35" style="margin-right: 8px" alt="" />
           <div>
-            <div class="label">团队投资次数</div>
+            <div class="label">有效充值人数</div>
             <div>
-              {{ Number(userDetail.team_invite_num) }}
+              {{ Number(userDetail.valid_recharge_num) }}
             </div>
           </div>
         </div>
       </van-grid-item>
-      <van-grid-item class="direction">
+      <van-grid-item class="">
         <div style="display: flex; align-items: center">
-          <img :src="valid_total" width="35" style="margin-right: 8px" alt="" />
+          <img :src="valid_total" width="35" style="margin-right: 4px" alt="" />
           <div>
-            <div class="label">有效充值人数</div>
-            <div>{{ Number(userDetail.team_invite_user) }}</div>
+            <div class="label">有效充值金额</div>
+            <div>
+              <VueCountTo :end-val="Number(userDetail.team_recharge_money)" :start-val="0" />
+            </div>
           </div>
         </div>
       </van-grid-item>
       <van-grid-item>
         <div style="display: flex; align-items: center">
-          <img :src="my_total" width="35" style="margin-right: 8px" alt="" />
+          <img :src="my_total" width="35" style="margin-right: 4px" alt="" />
           <div>
-            <div class="label">团队投资金额</div>
+            <div class="label">团队提款金额</div>
             <div>
-              <VueCountTo :end-val="Number(userDetail.team_invite)" :start-val="0" />
+              <VueCountTo :end-val="Number(userDetail.team_withdraw_money)" :start-val="0" />
             </div>
           </div>
         </div>
@@ -79,7 +81,7 @@ const { userDetail } = storeToRefs(useCommonStore())
   color: #999999;
 }
 :deep(.van-grid-item__content) {
-  padding: 10px 20px;
+  padding: 10px 8px;
   font-size: 17px;
 }
 </style>

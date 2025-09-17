@@ -33,15 +33,15 @@
         title-inactive-color="#999999"
         swipeable
       >
-        <van-tab title="三级内概况">
+        <van-tab title="二级内概况">
           <WithThreeInfoBox />
         </van-tab>
         <van-tab title="团队概况">
           <TeamOverviewBox />
         </van-tab>
-        <van-tab title="团队佣金">
+        <!-- <van-tab title="团队佣金">
           <TeamCommissionBox />
-        </van-tab>
+        </van-tab> -->
       </van-tabs>
     </div>
     <div style="padding: 0 16px">
@@ -57,7 +57,7 @@
       >
         <van-tab title="直属下级"><TeamList lv="1" /></van-tab>
         <van-tab title="查看二级下层"> <TeamList lv="2" /> </van-tab>
-        <van-tab title="查看三级下层"> <TeamList lv="3" /> </van-tab>
+        <!-- <van-tab title="查看三级下层"> <TeamList lv="3" /> </van-tab> -->
       </van-tabs>
     </div>
   </div>

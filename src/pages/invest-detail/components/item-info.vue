@@ -2,8 +2,11 @@
 import type { InvestItemType } from '@/interface/common'
 import richIcon from '@/assets/images/icons/rich.png'
 import { getCycleTime, incomeMath, incomeRateMathText, rateMath } from '@/utils/common'
+import { useCommonStore } from '@/stores/common'
 
 const currency = __VITE_CURRENCY
+
+const { userInfo } = storeToRefs(useCommonStore())
 
 const { info } = defineProps<{
   info: InvestItemType
@@ -12,7 +15,7 @@ const { info } = defineProps<{
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.invest),
-    rateMath(info.profit_rate, info.profit_extra),
+    rateMath(info.profit_rate, userInfo.value.level_extra),
     getCycleTime(info.profit_cycle_time).value == 2
       ? 0
       : getCycleTime(info.profit_cycle_time).value == 3
@@ -26,7 +29,7 @@ const incomeMoney = computed(() => {
 const incomeText = computed(() => {
   return incomeRateMathText(
     Number(info.invest),
-    rateMath(info.profit_rate, info.profit_extra),
+    rateMath(info.profit_rate, userInfo.value.level_extra),
     Number(info.profit_type) == 5,
     Number(info.profit_cycle),
     getCycleTime(info.profit_cycle_time),
@@ -56,9 +59,9 @@ const incomeText = computed(() => {
       </div>
     </div>
     <div style="font-size: 14px; padding: 8px 20px; line-height: 1.4">
-      {{ incomeText }} = 预计收益
+      {{ incomeText }} = 预计利息收益
       <span style="color: green">
-        {{ (incomeMoney - Number(info.discounted_invest || Number(info.invest))).toFixed(2) }}
+        {{ (incomeMoney - Number(info.invest)).toFixed(2) }}
         {{ currency }}</span
       >，总预计本息
       <span style="color: green">

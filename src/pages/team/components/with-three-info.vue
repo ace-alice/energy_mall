@@ -1,68 +1,47 @@
 <template>
-  <van-grid :border="false" column-num="3" :center="false">
+  <van-grid :border="false" column-num="2" :center="false">
     <van-grid-item class="direction">
       <div>
         <div class="label">一级投资人数</div>
-        <div>{{ Number(userDetail.team_item_v1) }}</div>
+        <div>{{ Number(userDetail.lv1Data.count) }}</div>
       </div>
     </van-grid-item>
-    <van-grid-item class="direction">
+    <van-grid-item class="">
       <div>
         <div class="label">二级投资人数</div>
-        <div>{{ Number(userDetail.team_item_v2) }}</div>
-      </div>
-    </van-grid-item>
-    <van-grid-item>
-      <div>
-        <div class="label">三级投资人数</div>
-        <div>{{ Number(userDetail.team_item_v3) }}</div>
+        <div>{{ Number(userDetail.lv2Data.count) }}</div>
       </div>
     </van-grid-item>
     <van-grid-item class="direction">
       <div>
         <div class="label">一级投资资金</div>
         <div>
-          <VueCountTo :end-val="Number(userDetail.team_invite_v1)" :start-val="0" />
+          <VueCountTo :end-val="Number(userDetail.lv1Data.sum_invest_money)" :start-val="0" />
         </div>
       </div>
     </van-grid-item>
-    <van-grid-item class="direction">
+    <van-grid-item class="">
       <div>
         <div class="label">二级投资资金</div>
         <div>
-          <VueCountTo :end-val="Number(userDetail.team_invite_v2)" :start-val="0" />
+          <VueCountTo :end-val="Number(userDetail.lv2Data.sum_invest_money)" :start-val="0" />
         </div>
       </div>
     </van-grid-item>
-    <van-grid-item>
-      <div>
-        <div class="label">三级投资资金</div>
-        <div>
-          <VueCountTo :end-val="Number(userDetail.team_invite_v3)" :start-val="0" />
-        </div>
-      </div>
-    </van-grid-item>
+
     <van-grid-item class="direction">
       <div>
         <div class="label">一级充值资金</div>
         <div>
-          <VueCountTo :end-val="Number(userDetail.team_recharge_v1)" :start-val="0" />
+          <VueCountTo :end-val="Number(userDetail.lv1Data.sum_recharge_money)" :start-val="0" />
         </div>
       </div>
     </van-grid-item>
-    <van-grid-item class="direction">
+    <van-grid-item class="">
       <div>
         <div class="label">二级充值资金</div>
         <div>
-          <VueCountTo :end-val="Number(userDetail.team_recharge_v2)" :start-val="0" />
-        </div>
-      </div>
-    </van-grid-item>
-    <van-grid-item>
-      <div>
-        <div class="label">三级充值资金</div>
-        <div>
-          <VueCountTo :end-val="Number(userDetail.team_recharge_v3)" :start-val="0" />
+          <VueCountTo :end-val="Number(userDetail.lv2Data.sum_recharge_money)" :start-val="0" />
         </div>
       </div>
     </van-grid-item>

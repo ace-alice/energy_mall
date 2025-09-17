@@ -19,6 +19,10 @@ const props = defineProps(['title'])
   height: 40px;
   img {
     height: 13px;
+    flex-grow: 1;
+  }
+  div {
+    flex-shrink: 0;
   }
   .rotateZ {
     transform: rotateZ(180deg);

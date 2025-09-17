@@ -7,7 +7,7 @@ const active = ref(0)
 
 const enterList = [
   { text: '全部', tab: null },
-  { text: '转入', tab: 1 },
+  { text: '存入', tab: 1 },
   { text: '取出', tab: 2 },
   { text: '收益', tab: 3 }
 ]

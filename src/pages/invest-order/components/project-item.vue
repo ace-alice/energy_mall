@@ -63,11 +63,14 @@
 
 <script setup lang="ts" name="ProjectItem">
 import type { InvestOrderItemType } from '@/interface/common'
+import { useCommonStore } from '@/stores/common'
 import { getCycleTime, getProfitType, rateMath } from '@/utils/common'
 const { item } = defineProps<{ item: InvestOrderItemType }>()
 const router = useRouter()
 
 const currency = __VITE_CURRENCY
+
+const { userInfo } = storeToRefs(useCommonStore())
 
 const statusOptions = [
   {

@@ -1,92 +1,97 @@
 <template>
-  <div style="margin-top: 240px" v-if="!projectDetail.id">
-    <van-loading vertical>
-      <template #icon>
-        <van-icon name="star-o" size="30" />
-      </template>
-      加载中...
-    </van-loading>
-  </div>
   <div
     class="normal-page"
-    v-else
     :style="{
       '--height': `${mediaQueryInfo.top + 20}px`
     }"
   >
-    <div class="back" @click="router.back()">
-      <img :src="backIcon" height="20" width="20" alt="" />
+    <div style="margin-top: 240px" v-if="!projectDetail.id" class="normal-page">
+      <van-loading vertical>
+        <template #icon>
+          <van-icon name="star-o" size="30" />
+        </template>
+        加载中...
+      </van-loading>
     </div>
-    <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
-    <div style="padding: 0 16px">
-      <div class="title">{{ projectDetail.title }}</div>
-    </div>
-    <!-- <div class="ways">
+    <template v-else>
+      <div class="back" @click="router.back()">
+        <img :src="backIcon" height="20" width="20" alt="" />
+      </div>
+      <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
+      <div style="padding: 0 16px">
+        <div class="title">{{ projectDetail.title }}</div>
+      </div>
+      <!-- <div class="ways">
       <img :src="send_way" width="20" height="20" alt="" />
       <div style="flex-grow: 1; font-weight: 600">配送方式</div>
       <div style="font-size: 14px">物流配送</div>
       <van-icon name="play" />
     </div> -->
-    <!-- <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div> -->
-    <van-sticky>
-      <div style="background-color: #fff; padding: 6px 16px">
-        <div class="normal-card item-info">
-          <div style="font-size: 16px">概况</div>
-          <div style="margin-top: 4px; color: #999">
-            收益类型：{{
-              getProfitType(projectDetail.profit_type, projectDetail.profit_cycle_time)
-            }}
-          </div>
-          <div style="margin-top: 4px; color: #999">积分赠送：{{ projectDetail.gift_points }}</div>
-          <div class="three-del">
-            <div>
-              <div>
-                {{ Number(projectDetail.discounted_invest) || Number(projectDetail.invest) }}
-                <span
-                  v-if="Number(projectDetail.discounted_invest) != Number(projectDetail.invest)"
-                  style="text-decoration: line-through; margin-right: 4px"
-                  >{{ Number(projectDetail.invest) }}</span
-                >
-              </div>
-              <div>总投资额({{ currency }})</div>
+      <!-- <div style="font-size: 17px; padding: 0 16px 16px">图文介绍</div> -->
+      <van-sticky>
+        <div style="background-color: #fff; padding: 6px 16px">
+          <div class="normal-card item-info">
+            <div style="font-size: 16px">概况</div>
+            <div style="margin-top: 4px; color: #999">
+              收益类型：{{
+                getProfitType(projectDetail.profit_type, projectDetail.profit_cycle_time)
+              }}
             </div>
-            <div style="text-align: center">
-              <div>
-                {{ rateMath(projectDetail.profit_rate, projectDetail.profit_extra) }}<span>%</span>
-              </div>
-              <div>项目利率</div>
+            <div style="margin-top: 4px; color: #999">
+              积分赠送：{{ projectDetail.gift_points }}
             </div>
-            <div style="text-align: right">
+            <div class="three-del">
               <div>
-                {{ projectDetail.profit_cycle * getCycleTime(projectDetail.profit_cycle_time).value
-                }}<span>{{ getCycleTime(projectDetail.profit_cycle_time).label }}</span>
+                <div>
+                  {{ Number(projectDetail.discounted_invest) || Number(projectDetail.invest) }}
+                  <span
+                    v-if="Number(projectDetail.discounted_invest) != Number(projectDetail.invest)"
+                    style="text-decoration: line-through; margin-right: 4px"
+                    >{{ Number(projectDetail.invest) }}</span
+                  >
+                </div>
+                <div>总投资额({{ currency }})</div>
               </div>
-              <div>持有时间</div>
+              <div style="text-align: center">
+                <div>
+                  {{ rateMath(projectDetail.profit_rate, userInfo.level_extra) }}<span>%</span>
+                </div>
+                <div>项目利率</div>
+              </div>
+              <div style="text-align: right">
+                <div>
+                  {{
+                    projectDetail.profit_cycle *
+                    getCycleTime(projectDetail.profit_cycle_time).value
+                  }}<span>{{ getCycleTime(projectDetail.profit_cycle_time).label }}</span>
+                </div>
+                <div>持有时间</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </van-sticky>
+      </van-sticky>
 
-    <van-tabs v-model:active="active" scrollspy sticky offset-top="142" class="team-tabs">
-      <van-tab title="产品信息">
-        <ItemInfo :info="projectDetail" />
-      </van-tab>
-      <van-tab title="产品详情">
-        <div style="padding: 0 16px; width: 100%">
-          <van-divider>产品详情</van-divider>
-          <div v-html="content"></div>
-        </div>
-      </van-tab>
-      <van-tab title="产品协议">
-        <Agreement :info="projectDetail" />
-      </van-tab>
-    </van-tabs>
-    <!-- <TitleDel title="产品介绍" /> -->
-    <div class="buy-box">
-      <van-button type="primary" round block @click="toPins">立即购买</van-button>
-    </div>
-    <NormalPinAction ref="normalPinActionRef" @submit="toBuy" />
+      <van-tabs v-model:active="active" scrollspy sticky offset-top="142" class="team-tabs">
+        <van-tab title="产品信息">
+          <ItemInfo :info="projectDetail" />
+        </van-tab>
+        <van-tab title="产品详情">
+          <div style="padding: 0 16px; width: 100%">
+            <van-divider>产品详情</van-divider>
+            <div v-html="content"></div>
+          </div>
+        </van-tab>
+        <van-tab title="产品协议">
+          <Agreement :info="projectDetail" />
+        </van-tab>
+      </van-tabs>
+      <!-- <TitleDel title="产品介绍" /> -->
+      <div class="buy-box">
+        <van-button type="primary" round block @click="toPins">立即购买</van-button>
+      </div>
+      <NormalPinAction ref="normalPinActionRef" @submit="toBuy" />
+    </template>
   </div>
 </template>
 
@@ -105,7 +110,7 @@ const normalPinActionRef = ref()
 
 const active = ref(0)
 
-const { mediaQueryInfo } = storeToRefs(useCommonStore())
+const { mediaQueryInfo, userInfo } = storeToRefs(useCommonStore())
 
 const { getUserInfo, getUserDetail } = useCommonStore()
 

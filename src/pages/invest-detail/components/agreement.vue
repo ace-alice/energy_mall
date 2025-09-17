@@ -17,7 +17,7 @@ const { info } = defineProps<{
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.invest),
-    rateMath(info.profit_rate, info.profit_extra),
+    rateMath(info.profit_rate, userInfo.value.level_extra),
     getCycleTime(info.profit_cycle_time).value == 2
       ? 0
       : getCycleTime(info.profit_cycle_time).value == 3
@@ -36,7 +36,7 @@ const incomeMoney = computed(() => {
       <div>合同编号：HTXXXXXXXXXXXXXX</div>
       <div>甲方（管理方）：Iberdrola（伊比德罗拉）能源投资（中国）有限公司</div>
       <div>乙方（投资方）：{{ userInfo.sfz_name }} ({{ userInfo.sfz_number }})</div>
-      <div>丙方（担保方）：劳合设保险股份有限公司</div>
+      <div>丙方（担保方）：劳合社保险股份有限公司</div>
     </div>
     <div class="box-base">
       基于各方的业务需求和责任，双方签订本合同完全是自愿的，并非强迫或欺骗。在本合同履行过程中，如需对本合同内容进行变更或补充，双方同意制作本合同理财明细。本合同附件是本合同不可分割的组成部分，与本合同具有同等法律效力。
@@ -65,7 +65,7 @@ const incomeMoney = computed(() => {
         <van-grid-item style="flex-basis: 35%" text="预期收益率" />
         <van-grid-item
           style="flex-basis: 65%"
-          :text="`${rateMath(info.profit_rate, info.profit_extra).toFixed(2)} %`"
+          :text="`${rateMath(info.profit_rate, userInfo.level_extra).toFixed(2)} %`"
         />
         <van-grid-item style="flex-basis: 35%" text="起息日" />
         <van-grid-item
@@ -91,7 +91,7 @@ const incomeMoney = computed(() => {
       1.本协议成立：甲方首先在“Iberdrola（伊比德罗拉）能源投资（中国）有限公司‘’线上平台上发布相关的投资资产项目收益，乙方按照甲方的规则，通过在“Iberdrola（伊比德罗拉）能源投资（中国）有限公司”线上平台上相关的投资资产项目收益，按钮确认投资时，本协议下所约定的关系即成立，本协议的签署关系同时成立。
     </div>
     <div class="box-base child-base">
-      2投资资金冻结：乙方点击“立即投资”按钮即视为其已经向甲方发出不可撤销的授权指令，授权甲方全权处理和操作本次的投资金额(“乙方''通用电气能源投资（中国）有限公司''线上平台账户”)中的冻结金额等同于本协议投资的本金数额的资金。上述冻结在本协议生效时或本协议确定失效时(项目周期结束)解除。
+      2投资资金冻结：乙方点击“立即投资”按钮即视为其已经向甲方发出不可撤销的授权指令，授权甲方全权处理和操作本次的投资金额(“乙方'Iberdrola（伊比德罗拉）能源投资（中国）有限公司''线上平台账户”)中的冻结金额等同于本协议投资的本金数额的资金。上述冻结在本协议生效时或本协议确定失效时(项目周期结束)解除。
     </div>
     <div class="box-base child-base">
       3.投资资金变更：本协议生效的同时，甲方即不可撤销乙方所投资的金额，本金额等同于本协议第一条所列的“收益金额、期限、返款方式”。
@@ -163,7 +163,7 @@ const incomeMoney = computed(() => {
         <div style="text-align: end">{{ dayjs().format('YYYY-MM-DD') }}</div>
       </div>
       <div>
-        <div>丙方（担保方）：劳合设保险股份有限公司</div>
+        <div>丙方（担保方）：劳合社保险股份有限公司</div>
         <div style="text-align: end">{{ dayjs().format('YYYY-MM-DD') }}</div>
       </div>
       <img :src="jia_z" class="img-z z-1" width="100" height="100" alt="" />

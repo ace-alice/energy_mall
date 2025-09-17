@@ -8,6 +8,18 @@ export interface MediaQueryInfo {
   top: number
   bottom: number
 }
+
+export interface Lv1Data {
+  sum_invest_money: string
+  sum_recharge_money: string
+  count: number
+}
+
+export interface Lv2Data {
+  sum_invest_money: string
+  sum_recharge_money: string
+  count: number
+}
 export interface UserInfo {
   money: string
   frozen_money: string
@@ -25,6 +37,8 @@ export interface UserInfo {
   sfz_number: string
   level: number
   level_name: string
+  level_extra: string
+  level_signin_amount: number
   signin_num: number
   user_points: number
   invite: string
@@ -36,11 +50,9 @@ export interface UserInfo {
   outside_level_img: string
   outside_level_start_time: string
   outside_level_end_time: string
-  outside_level_sign_amount: string
+  outside_level_sign_amount: number
   rate: string
-  new_user_draw: number
   raffle_num: number
-  level_team_draw: number
 }
 
 export interface UserDetail {
@@ -90,6 +102,12 @@ export interface UserDetail {
   update_time: number
   create_at: string
   update_at: string
+  lv1Data: Lv1Data
+  lv2Data: Lv2Data
+  team_num: number
+  team_recharge_money: string
+  team_withdraw_money: string
+  valid_recharge_num: number
 }
 
 export interface TeamInfo {

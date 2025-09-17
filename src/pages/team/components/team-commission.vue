@@ -1,27 +1,19 @@
 <template>
   <div class="team-commission">
-    <van-grid :border="false" column-num="3" :center="false">
+    <van-grid :border="false" column-num="2" :center="false">
       <van-grid-item class="direction">
         <div>
           <div class="label">一级投资人数</div>
           <div>
-            {{ Number(userDetail.team_item_v1) }}
+            {{ Number(userDetail.lv1Data.count) }}
           </div>
         </div>
       </van-grid-item>
-      <van-grid-item class="direction">
+      <van-grid-item class="">
         <div>
           <div class="label">二级投资人数</div>
           <div>
-            {{ Number(userDetail.team_item_v2) }}
-          </div>
-        </div>
-      </van-grid-item>
-      <van-grid-item>
-        <div>
-          <div class="label">三级投资人数</div>
-          <div>
-            {{ Number(userDetail.team_item_v3) }}
+            {{ Number(userDetail.lv2Data.count) }}
           </div>
         </div>
       </van-grid-item>

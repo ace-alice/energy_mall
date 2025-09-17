@@ -91,7 +91,7 @@
     <van-sticky :offset-bottom="50" position="bottom">
       <div style="margin-top: 40px; padding: 16px">
         <van-button block round type="primary" :disabled="disabled" @click="toOpenPin"
-          >提交充值订单</van-button
+          >提交提现订单</van-button
         >
       </div>
     </van-sticky>

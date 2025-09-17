@@ -120,9 +120,9 @@ function onSubmit() {
 
     <van-sticky :offset-bottom="50" position="bottom">
       <div style="margin-top: 40px; padding: 16px">
-        <van-button block round type="primary" :disabled="disabled" @click="onSubmit"
-          >提交充值订单</van-button
-        >
+        <van-button block round type="primary" :disabled="disabled" @click="onSubmit">{{
+          channelType == 'deposit' ? '存入' : '取出'
+        }}</van-button>
       </div>
     </van-sticky>
   </div>

@@ -11,15 +11,9 @@ import starIcon from '@/assets/images/icons/star.png'
 
 const currency = __VITE_CURRENCY
 
-const { userDetail, userInfo, isVip } = storeToRefs(useCommonStore())
+const { userDetail, isVip, userInfo } = storeToRefs(useCommonStore())
 
 const { getUserInfo, getUserDetail } = useCommonStore()
-
-const dayScore = ref(0)
-
-const maxSigninDays = ref(0)
-
-const signinDays = ref(0)
 
 const signinList = ref<SigninHistoryItemType[]>([])
 
@@ -30,7 +24,7 @@ const showPopup = ref(false)
 const rules = ref<ArticleInfoType>(Object.assign({}, defaultArticleInfo))
 
 const signinOk = computed(() => {
-  var nowDate = dayjs().format('yyyy-mm-dd')
+  var nowDate = dayjs().format('YYYY-MM-DD')
   return signinList.value.some((item) => item.create_at.slice(0, 10) === nowDate)
 })
 
@@ -63,9 +57,11 @@ function signin() {
 }
 
 function getRules() {
-  articleInfoApi({ code: 'team_recward_system' }).then((res) => {
-    rules.value = res.data.data
-  })
+  articleInfoApi({ code: isVip.value ? 'inside_signin_rule' : 'outside_signin_rule' }).then(
+    (res) => {
+      rules.value = res.data.data
+    }
+  )
 }
 
 const content = computed(() => {
@@ -135,7 +131,12 @@ onActivated(() => {
     >
       <div class="signin-pop">
         <div class="signin-text">
-          恭喜您获得 <img :src="starIcon" alt="" height="36" width="36" /> <span>{{ '5' }}</span
+          恭喜您获得 <img :src="starIcon" alt="" height="36" width="36" />
+          <span>{{
+            isVip
+              ? Number(userInfo.level_signin_amount) || 0
+              : Number(userInfo.outside_level_sign_amount) || 0
+          }}</span
           >{{ currency }}
         </div>
       </div>

@@ -2,12 +2,20 @@
   <div class="money-info">
     <div>
       <div>可提余额({{ currency }})</div>
-      <div><VueCountTo :end-val="Number(userInfo.outside_money)" :start-val="moneyStartVal" /></div>
+      <div>
+        <VueCountTo
+          :end-val="isVip ? Number(userInfo.money) : Number(userInfo.outside_money)"
+          :start-val="0"
+        />
+      </div>
     </div>
     <div>
       <div>可用余额({{ currency }})</div>
       <div>
-        <VueCountTo :end-val="Number(userInfo.outside_frozen_money)" :start-val="0" />
+        <VueCountTo
+          :end-val="isVip ? Number(userInfo.frozen_money) : Number(userInfo.outside_frozen_money)"
+          :start-val="0"
+        />
       </div>
     </div>
   </div>
@@ -19,16 +27,7 @@ import { useCommonStore } from '@/stores/common'
 const currency = __VITE_CURRENCY
 
 const notionCurrency = __VITE_NATION_CURRENCY
-const { userInfo } = storeToRefs(useCommonStore())
-
-const moneyStartVal = ref(0)
-
-watch(
-  () => userInfo.value.outside_money,
-  (newVal, oldVal) => {
-    moneyStartVal.value = +oldVal
-  }
-)
+const { userInfo, isVip } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>

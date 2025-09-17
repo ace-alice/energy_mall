@@ -8,7 +8,7 @@
         @load="onLoad"
       >
         <NiceGoodsBox :list="list.slice(0, 3)" />
-        <HotGoodsBox :list="list.slice(3)" />
+        <HotGoodsBox :list="list" />
       </van-list>
     </van-pull-refresh>
   </div>

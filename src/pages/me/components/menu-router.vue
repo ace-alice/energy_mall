@@ -1,14 +1,7 @@
 <template>
   <div class="menu-router">
     <van-cell-group :border="false">
-      <van-cell
-        title="会员专属商场"
-        :border="false"
-        :icon="mall"
-        is-link
-        to="/me-vip"
-        @click="toVipPage"
-      >
+      <van-cell title="会员专属商场" :border="false" :icon="mall" is-link @click="toVipPage">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
@@ -44,11 +37,18 @@ import mall from '@/assets/images/icons/mall.png'
 import withdraw from '@/assets/images/icons/withdraw.png'
 import transfer from '@/assets/images/icons/transfer.png'
 import { useCommonStore } from '@/stores/common'
+import { showToast } from 'vant'
 
-const { isVip } = storeToRefs(useCommonStore())
+const { isVip, userInfo } = storeToRefs(useCommonStore())
 
 function toVipPage() {
+  if (!userInfo.value.outside_level_sign_amount) {
+    showToast({ type: 'fail', message: '请先购买会员卡后尝试...' })
+    router.push({ name: 'HomeNormal' })
+    return
+  }
   isVip.value = true
+  router.push('/me-vip')
 }
 
 const router = useRouter()

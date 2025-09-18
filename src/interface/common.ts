@@ -633,3 +633,37 @@ export interface YueBaoRecordItemType {
   create_at: string
   update_at: string
 }
+
+export interface WithdrawOrderItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  order_no: string
+  status: number
+  type: number
+  name: string
+  bank_name: string
+  bank_branch: string
+  bank_account: string
+  coin_name: string
+  coin_blockchain: string
+  coin_account: string
+  alipay_account: string
+  alipay_img: string
+  wx_img: string
+  amount: string
+  amount_real: string
+  exchange_rate: string
+  handling_fee: string
+  handling_rate: string
+  remark: string
+  is_energy: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  rate: string
+  mall_type: number
+}

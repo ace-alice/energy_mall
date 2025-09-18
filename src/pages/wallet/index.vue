@@ -18,13 +18,13 @@
           <div>
             <div style="margin-bottom: 10px">可用金额(USDT)</div>
             <div style="font-size: 28px; font-weight: 500">
-              {{ userInfo.money }}
+              {{ userInfo.frozen_money }}
             </div>
           </div>
           <div>
             <div style="margin-bottom: 10px">可提金额(USDT)</div>
             <div style="font-size: 28px; font-weight: 500">
-              {{ userInfo.frozen_money }}
+              {{ userInfo.money }}
             </div>
           </div>
         </div>

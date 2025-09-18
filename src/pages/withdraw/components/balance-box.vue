@@ -38,15 +38,15 @@ const { userInfo, isVip } = storeToRefs(useCommonStore())
   background-image: url('@/assets/images/background/recharge_bg.png');
   background-size: 100% 100%;
   margin: 0 16px;
-  padding: 0 40px;
+  padding: 0 20px;
   & > div {
     color: #ffffff99;
-    width: 160px;
-    font-size: 16px;
+    width: 170px;
+    font-size: 12px;
     & > div:nth-child(2) {
       color: #fff;
       margin-top: 12px;
-      font-size: 28px;
+      font-size: 22px;
     }
   }
 }

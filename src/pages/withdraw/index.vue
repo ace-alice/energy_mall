@@ -36,7 +36,7 @@
     <div class="normal-card">
       <div style="font-size: 14px">提现金额</div>
       <div class="self-form recharge-form">
-        <van-field v-model="amount" type="number" placeholder="请输入提现金额" :min="100">
+        <van-field v-model="amount" type="number" placeholder="请输入提现金额" :min="0">
           <template #left-icon> </template>
           <template #right-icon>
             <span style="font-size: 14px; margin-right: 4px; color: #13b756">{{ currency }}</span>

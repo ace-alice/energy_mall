@@ -673,3 +673,29 @@ export function yueBaoRecordApi(data: any) {
     data
   })
 }
+
+/**
+ * 优惠卷列表
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getCouponListApi(data: any) {
+  return service({
+    url: `/user/userCouponsList`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 余额宝明细
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function getUseAbleCouponsApi(data?: any) {
+  return service({
+    url: `/user/userCoupons`,
+    method: 'POST',
+    data
+  })
+}

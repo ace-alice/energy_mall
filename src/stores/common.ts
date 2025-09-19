@@ -17,6 +17,7 @@ import {
   getAddressListApi,
   getBankListApi,
   getInvestClassesApi,
+  getUseAbleCouponsApi,
   getUserDetailApi,
   groupClassesApi,
   settingApi,
@@ -54,6 +55,8 @@ export const useCommonStore = defineStore(
     const userDetail = reactive<UserDetail>(Object.assign({}, defaultUserDetail))
 
     const bankList = ref<BankItemType[]>([])
+
+    const couponList = ref<any[]>([])
 
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
@@ -97,6 +100,12 @@ export const useCommonStore = defineStore(
         fail: (err: any) => {
           console.log('initMediaQuery:' + err)
         }
+      })
+    }
+
+    function getCouponList() {
+      getUseAbleCouponsApi().then((res) => {
+        Object.assign(userInfo, res.data.data)
       })
     }
 
@@ -180,7 +189,9 @@ export const useCommonStore = defineStore(
       getInvestClasses,
       investClasses,
       getPointsClasses,
-      pointsClasses
+      pointsClasses,
+      getCouponList,
+      couponList
     }
   },
   {

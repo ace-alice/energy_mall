@@ -51,7 +51,11 @@
     <van-divider />
     <div style="display: flex; justify-content: space-between; align-items: center">
       <div style="flex-grow: 1; font-size: 14px">
-        {{ getProfitType(Number(item.profit_type), Number(item.profit_cycle_time)) }}
+        {{
+          item.item_status == 0
+            ? getProfitType(Number(item.profit_type), Number(item.profit_cycle_time))
+            : '合同已到期'
+        }}
       </div>
       <van-button type="primary" size="mini" :to="`/invest-agreement/${item.id}`"
         >查看合同</van-button

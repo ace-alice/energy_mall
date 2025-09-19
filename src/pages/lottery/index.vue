@@ -14,7 +14,8 @@ const {
   userDetail,
   winInfo,
   showPopup,
-  userInfo
+  userInfo,
+  loading
 } = drawHook()
 
 const currency = __VITE_CURRENCY
@@ -47,15 +48,12 @@ const currency = __VITE_CURRENCY
     </div>
     <van-sticky :offset-bottom="0" position="bottom">
       <div class="bottom-btn">
-        <div v-waves class="btn-card fresh" @click="startCallback(1)">
-          {{ userInfo.new_user_draw }}次
-        </div>
-        <div v-waves class="btn-card points" @click="startCallback(2)">
+        <van-button type="primary" round block @click="startCallback" :loading="loading"
+          >立即抽奖 ( {{ userInfo.raffle_num }}次 )</van-button
+        >
+        <!-- <div v-waves class="btn-card points" @click="startCallback(2)">
           {{ userInfo.raffle_num }}次
-        </div>
-        <div v-waves class="btn-card vip" @click="startCallback(3)">
-          {{ userInfo.level_team_draw }}次
-        </div>
+        </div> -->
       </div>
     </van-sticky>
     <van-popup

@@ -2,9 +2,27 @@
 import { getMoneyLogApi } from '@/api'
 import pageHook from '@/hooks/pageHook'
 import type { MoneyLogType } from '@/interface/common'
+const route = useRoute()
+
+const pageTitle = ref('资金明细')
 
 const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<MoneyLogType>({
-  api: getMoneyLogApi
+  api: getMoneyLogApi,
+  otherForm: () => {
+    return {
+      class_id: route.params.type == 'point' ? '13,14' : ''
+    }
+  }
+})
+
+onActivated(() => {
+  onRefresh()
+})
+
+onMounted(() => {
+  if (route.params.type == 'point') {
+    pageTitle.value = '积分记录'
+  }
 })
 </script>
 
@@ -16,7 +34,7 @@ const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<Mone
       height="160px"
       router="FundDetail"
     />
-    <NormalHeader title="资金明细" :background="false" bg-color="#A9F1C6" />
+    <NormalHeader :title="pageTitle" :background="false" bg-color="#A9F1C6" />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         v-model:loading="loading"
@@ -81,6 +99,7 @@ const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<Mone
     font-size: 19px;
     font-weight: 600;
     color: #ff3f3f;
+    flex-shrink: 0;
   }
   & > div:nth-child(1) {
     font-size: 16px;

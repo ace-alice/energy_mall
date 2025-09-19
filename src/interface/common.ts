@@ -539,8 +539,8 @@ export interface RaffleItemType {
   chance: string
   type: number
   img: string
-  goods_id: number
-  goods_name: string
+  coupon_id: number
+  coupon_name: string
   create_time: number
   update_time: number
   create_at: string

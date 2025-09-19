@@ -3,7 +3,9 @@ import { buyOutGoodsApi } from '@/api'
 import { useCommonStore } from '@/stores/common'
 import { showToast, closeToast } from 'vant'
 
-const props = defineProps(['items'])
+const currency = __VITE_CURRENCY
+
+const props = defineProps(['items', 'isPoint'])
 
 const emit = defineEmits(['callBack'])
 
@@ -32,10 +34,10 @@ const totalPrice = computed(() => {
 })
 
 function toPins() {
-  if (userInfo.value.outside_frozen_money < totalPrice.value) {
-    showToast({ type: 'fail', message: '可用余额不足' })
-    return
-  }
+  // if (!props.isPoint && userInfo.value.outside_frozen_money < totalPrice.value) {
+  //   showToast({ type: 'fail', message: '可用余额不足' })
+  //   return
+  // }
   if (selectAddress.value) {
     showSheet.value = false
     showKeySheet.value = true
@@ -53,11 +55,14 @@ function toPay() {
       closeToast()
       getUserInfo()
       getUserDetail()
-      closeKey()
       showToast({ type: 'text', message: '购买成功，请到订单页查看详情' })
       emit('callBack', ids.split(','))
     })
-    .catch((e) => {})
+    .finally(() => {
+      setTimeout(() => {
+        closeKey()
+      }, 200)
+    })
 }
 
 function closeKey() {
@@ -115,11 +120,12 @@ watch(
           <van-cell title="添加收货地址" icon="add-o" size="large" clickable to="/address/add" />
         </div>
       </van-radio-group>
-      <GoodsCount v-for="item in items" :item="item" />
+      <GoodsCount v-for="item in items" :item="item" :isPoint="isPoint" />
 
       <div class="submitBox">
         <div class="total">
-          <span style="font-size: 14px">合计</span> <span style="font-size: 12px">￥</span>
+          <span style="font-size: 14px">合计</span>
+          <span style="font-size: 12px">{{ isPoint ? '积分' : currency }}</span>
           <VueCountTo
             style="font-size: 18px; color: #ff3434; font-weight: 600"
             :end-val="totalPrice"

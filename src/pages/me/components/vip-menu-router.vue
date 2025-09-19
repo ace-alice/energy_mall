@@ -11,7 +11,7 @@
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>
       </van-cell> -->
-      <van-cell title="我的卡券" :border="false" :icon="mall" is-link to="/me-vip">
+      <van-cell title="我的卡券" :border="false" :icon="mall" is-link to="/coupon">
         <template #right-icon>
           <img :src="allowRight" width="20" height="20" alt="" />
         </template>

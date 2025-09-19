@@ -88,10 +88,40 @@
       </van-tabs>
       <!-- <TitleDel title="产品介绍" /> -->
       <div class="buy-box">
+        <van-cell
+          v-if="couponList.length == 0"
+          :title="currentMethod.name || '请选择优惠券'"
+          is-link
+          @click="showSelect = true"
+        />
         <van-button type="primary" round block @click="toPins">立即购买</van-button>
       </div>
       <NormalPinAction ref="normalPinActionRef" @submit="toBuy" />
     </template>
+    <van-popup
+      v-model:show="showSelect"
+      round
+      :style="{ 'max-height': '60%', width: '100%' }"
+      :close-on-click-overlay="false"
+    >
+      <div class="box">
+        <div class="radio-group">
+          <van-radio-group v-model="checked">
+            <van-cell-group inset>
+              <van-cell title="选择优惠券" />
+              <van-cell v-for="(item, index) in couponList">
+                <van-radio :name="item.id">优惠券{{ index + 1 }}</van-radio>
+                <CouponItem :item="item" />
+              </van-cell>
+            </van-cell-group>
+          </van-radio-group>
+        </div>
+        <div class="submit">
+          <div v-waves @click="cancelChecked">取消</div>
+          <div v-waves @click="submitChecked">确定</div>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -103,6 +133,7 @@ import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp, getProfitType, getCycleTime, rateMath } from '@/utils/common'
 import Agreement from './components/agreement.vue'
 import ItemInfo from './components/item-info.vue'
+import CouponItem from '@/pages/coupon/components/coupon-item.vue'
 
 const currency = __VITE_CURRENCY
 
@@ -110,12 +141,31 @@ const normalPinActionRef = ref()
 
 const active = ref(0)
 
-const { mediaQueryInfo, userInfo } = storeToRefs(useCommonStore())
+const showSelect = ref(false)
 
-const { getUserInfo, getUserDetail } = useCommonStore()
+const checked = ref()
+
+const { mediaQueryInfo, userInfo, couponList } = storeToRefs(useCommonStore())
+
+const { getUserInfo, getUserDetail, getCouponList } = useCommonStore()
 
 const router = useRouter()
 const route = useRoute()
+
+const currentMethod = ref({ id: null, name: null })
+
+function cancelChecked() {
+  checked.value = currentMethod.value.id
+  showSelect.value = false
+}
+
+function submitChecked() {
+  if (checked.value != currentMethod.value.id) {
+    const temp = couponList.value.find((item) => item.id == checked.value)
+    currentMethod.value = temp!
+  }
+  showSelect.value = false
+}
 
 const projectDetail = reactive<InvestItemType>({} as InvestItemType)
 
@@ -135,6 +185,7 @@ onMounted(() => {
   } else {
     router.push({ name: 'HomeSearch' })
   }
+  getCouponList()
 })
 
 function toPins() {
@@ -159,6 +210,17 @@ function toBuy(pin: string) {
 </script>
 
 <style lang="scss" scoped>
+.box {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .radio-group {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
 .three-del {
   margin-top: 8px;
   & > div {
@@ -257,6 +319,22 @@ function toBuy(pin: string) {
   background-color: #fff;
   &:deep(.title img) {
     filter: brightness(0) saturate(100%);
+  }
+}
+
+.submit {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  div {
+    height: 40px;
+    width: 45%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
   }
 }
 </style>

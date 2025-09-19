@@ -4,11 +4,12 @@
       <img :src="service_2" height="20" alt="" />
       <div>客服</div>
     </div>
-    <div>
+    <!-- <div>
       <img :src="share" height="20" alt="" />
       <div>分享</div>
-    </div>
+    </div> -->
     <van-button
+      v-if="!isPoint"
       class="shop-button"
       round
       size="large"
@@ -18,7 +19,7 @@
     >
       {{ !!hasCart ? '查看' : '加入' }}购物车
     </van-button>
-    <NormalPayAction :items="[item]">
+    <NormalPayAction :items="[item]" :isPoint="isPoint">
       <template #btn>
         <van-button
           class="submit-button"
@@ -44,6 +45,10 @@ const props = defineProps(['item'])
 
 const router = useRouter()
 
+const route = useRoute()
+
+const isPoint = ref(false)
+
 const { addShopCart } = useShopCartStore()
 
 function toAddShopCart(item: ProjectItemType) {
@@ -59,6 +64,12 @@ const { shopCartList } = storeToRefs(useShopCartStore())
 const hasCart = computed(() => {
   return !!shopCartList.value.find((item1) => props.item?.id == item1.id)
 })
+
+onMounted(() => {
+  if (route.query.is_point) {
+    isPoint.value = true
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -73,6 +84,7 @@ const hasCart = computed(() => {
   display: flex;
   align-items: center;
   font-size: 12px;
+  justify-content: space-between;
   & > div {
     width: 60px;
     flex-shrink: 0;

@@ -80,13 +80,13 @@ export default function () {
 
   const loading = ref(false)
 
-  function startCallback(type: any) {
+  function startCallback(type?: any) {
     if (playing.value || loading.value) {
       return
     }
     loading.value = true
     raffleDrawApi({
-      draw_type: type
+      // draw_type: type
     })
       .then((res) => {
         myLucky.value.play()
@@ -131,6 +131,7 @@ export default function () {
     userDetail,
     winInfo,
     showPopup,
-    userInfo
+    userInfo,
+    loading
   }
 }

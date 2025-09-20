@@ -19,6 +19,14 @@ const { userInfo } = storeToRefs(useCommonStore())
 
 const info = ref<InvestOrderItemType>({} as InvestOrderItemType)
 
+const totalRate = computed(() => {
+  let temp = Number(info.value.profit_extra) || 0
+  if (info.value.coupon_id && info.value.coupon_type == 2) {
+    temp = temp + (Number(info.value.coupon_amount) || 0)
+  }
+  return rateMath(info.value.profit_rate, temp).toFixed(2)
+})
+
 function getInfo() {
   if (route.params.id) {
     getItemOrderInfoApi({ id: route.params.id })
@@ -36,7 +44,7 @@ function getInfo() {
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.value.amount),
-    rateMath(info.value.profit_rate, info.value.profit_extra),
+    Number(totalRate.value),
     getCycleTime(info.value.cycle_time).value == 2
       ? 0
       : getCycleTime(info.value.cycle_time).value == 3
@@ -93,10 +101,7 @@ onMounted(() => {
             :text="`${Number(info.profit_cycle || Number(info.profit_cycle_time)) * getCycleTime(Number(info.cycle_time) || Number(info.profit_cycle_time)).value} ${getCycleTime(Number(info.cycle_time) || Number(info.profit_cycle_time)).label}`"
           />
           <van-grid-item style="flex-basis: 35%" text="预期收益率" />
-          <van-grid-item
-            style="flex-basis: 65%"
-            :text="`${rateMath(info.profit_rate, info.profit_extra).toFixed(2)} %`"
-          />
+          <van-grid-item style="flex-basis: 65%" :text="`${totalRate} %`" />
           <van-grid-item style="flex-basis: 35%" text="起息日" />
           <van-grid-item
             style="flex-basis: 65%"

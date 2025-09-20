@@ -1,6 +1,9 @@
 <template>
   <!-- @click="router.push(`/invest-detail/${item.id}`)" -->
   <div class="normal-card project-item" @click="router.push(`/invest-detail/${item.id}`)">
+    <div class="coupon-btn" v-if="item.gift_coupon">
+      {{ item.coupon_info.type == 1 ? '现金抵扣券' : '加息券' }}
+    </div>
     <div class="top">
       <van-image width="90" height="65" lazy-load :src="item.img" />
       <div class="p-info">
@@ -59,7 +62,19 @@ const { userInfo } = storeToRefs(useCommonStore())
 </script>
 
 <style lang="scss" scoped>
+.coupon-btn {
+  position: absolute;
+  right: 0;
+  top: 16px;
+  background-color: #13b756;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
 .project-item {
+  position: relative;
   .top {
     display: flex;
   }

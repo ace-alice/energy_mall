@@ -34,7 +34,7 @@
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>{{ rateMath(item.profit_rate, item.profit_extra).toFixed(2) }}<span>%</span></div>
+        <div>{{ totalRate }}<span>%</span></div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>
@@ -100,6 +100,14 @@ const statusOptions = [
 const currentStatus = computed(() => {
   return statusOptions.find((s) => item.item_status == s.type)
 })
+
+const totalRate = computed(() => {
+  let temp = Number(item.profit_extra) || 0
+  if (item.coupon_id && item.coupon_type == 2) {
+    temp = temp + (Number(item.coupon_amount) || 0)
+  }
+  return rateMath(item.profit_rate, temp).toFixed(2)
+})
 </script>
 
 <style lang="scss" scoped>
@@ -131,6 +139,7 @@ const currentStatus = computed(() => {
         margin-top: 4px;
         span {
           font-size: 12px;
+          text-decoration: line-through;
         }
       }
     }

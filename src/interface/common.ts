@@ -434,6 +434,19 @@ export interface InvestClassItemType {
   update_at: string
 }
 
+export interface Coupon_info {
+  id: number
+  name: string
+  type: number
+  amount: string
+  status: number
+  description: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
 export interface InvestItemType {
   id: number
   title: string
@@ -472,12 +485,14 @@ export interface InvestItemType {
   product_insurance_time: string
   gift_goods: number
   gift_item: number
+  gift_coupon: number
   level_income: number
   gift_product_expires: number
   video_link: string
   sales_limit: number
   sales_time: number
   discounted_invest: number
+  coupon_info: Coupon_info
 }
 
 export interface InvestOrderItemType {
@@ -495,6 +510,7 @@ export interface InvestOrderItemType {
   item_type: number
   amount: string
   discounted_amount: string
+  actual_amount: string
   gift_bonus: string
   gift_points: number
   gift_raffle: number
@@ -512,6 +528,9 @@ export interface InvestOrderItemType {
   last_time: string
   end_time: string
   is_coupon: number
+  coupon_id: number
+  coupon_type: number
+  coupon_amount: string
   create_time: number
   update_time: number
   create_at: string
@@ -522,9 +541,9 @@ export interface InvestOrderItemType {
   gift_product_expires: number
   principal: string
   img: string
-  profit_cycle_time: string
-  profit_cycle: string
-  profit_type: string
+  profit_cycle_time: number
+  profit_cycle: number
+  profit_type: number
   end_time2: number
   item_invest_scale: string
   product_release_time: string

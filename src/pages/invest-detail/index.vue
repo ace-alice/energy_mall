@@ -40,6 +40,9 @@
             <div style="margin-top: 4px; color: #999">
               积分赠送：{{ projectDetail.gift_points }}
             </div>
+            <div style="margin-top: 4px; color: #999" v-if="projectDetail.gift_coupon">
+              优惠券赠送：{{ projectDetail.coupon_info.name }}
+            </div>
             <div class="three-del">
               <div>
                 <div>

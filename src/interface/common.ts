@@ -667,3 +667,24 @@ export interface WithdrawOrderItemType {
   rate: string
   mall_type: number
 }
+
+export interface CouponItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  coupon_id: number
+  coupon_name: string
+  coupon_type: number
+  coupon_amount: string
+  status: number
+  used_time?: any
+  order_id?: any
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  status_text: string
+  coupon_type_text: string
+}

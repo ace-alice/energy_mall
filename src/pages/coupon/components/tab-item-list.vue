@@ -1,12 +1,12 @@
 <script setup name="GoodItemList" lang="ts">
 import { getCouponListApi } from '@/api/index'
-import type { InvestOrderItemType } from '@/interface/common'
+import type { CouponItemType } from '@/interface/common'
 import CouponItem from './coupon-item.vue'
 import pageHook from '@/hooks/pageHook'
 
 const props = defineProps(['status'])
 
-const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<InvestOrderItemType>({
+const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<CouponItemType>({
   api: getCouponListApi,
   otherForm: () => ({
     status: props.status

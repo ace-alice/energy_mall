@@ -105,7 +105,7 @@ export const useCommonStore = defineStore(
 
     function getCouponList() {
       getUseAbleCouponsApi().then((res) => {
-        Object.assign(userInfo, res.data.data)
+        couponList.value = res.data.data
       })
     }
 

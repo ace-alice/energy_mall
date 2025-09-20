@@ -89,7 +89,7 @@
       <!-- <TitleDel title="产品介绍" /> -->
       <div class="buy-box">
         <van-cell
-          v-if="couponList.length == 0"
+          v-if="couponList.length > 0"
           :title="currentMethod.name || '请选择优惠券'"
           is-link
           @click="showSelect = true"

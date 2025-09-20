@@ -19,9 +19,9 @@
       </div>
       <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
       <div class="good-price">
-        <div>{{ isPoint ? '积分' : currency }}</div>
+        <div>{{ isPoint ? '积分' : currencyIcon }}</div>
         <div>{{ projectDetail.price }}</div>
-        <div>{{ isPoint ? '积分' : currency }} {{ projectDetail.original_price }}</div>
+        <div>{{ isPoint ? '积分' : currencyIcon }} {{ projectDetail.original_price }}</div>
         <div>已出售{{ '100' }}+</div>
       </div>
       <div style="padding: 0 16px">
@@ -59,6 +59,7 @@ import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp } from '@/utils/common'
 
 const currency = __VITE_CURRENCY
+const currencyIcon = __VITE_CURRENCY_ICON
 
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 

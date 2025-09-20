@@ -50,8 +50,10 @@ const currency = __VITE_CURRENCY
     <van-sticky :offset-bottom="0" position="bottom">
       <div class="bottom-btn">
         <van-button type="primary" round block @click="startCallback" :loading="loading"
-          >立即抽奖 ( {{ userInfo.raffle_num }}次 )</van-button
-        >
+          >立即抽奖
+          <span v-if="Number(userInfo.raffle_num)"> ( {{ userInfo.raffle_num }}次 )</span>
+          <span v-else> ( {{ userInfo.user_points }}积分 )</span>
+        </van-button>
         <!-- <div v-waves class="btn-card points" @click="startCallback(2)">
           {{ userInfo.raffle_num }}次
         </div> -->

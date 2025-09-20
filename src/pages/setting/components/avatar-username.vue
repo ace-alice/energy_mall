@@ -3,7 +3,7 @@
     <van-image :src="userInfo.avatar || avatarIcon" width="74" height="74" round>
       <template v-slot:error>加载失败</template>
     </van-image>
-    <van-uploader reupload max-count="1" v-model="fileList" :after-read="afterRead">
+    <van-uploader reupload max-count="1" :after-read="afterRead">
       <van-button type="primary" style="margin: 12px; height: 36px" round>更换头像</van-button>
     </van-uploader>
 
@@ -44,7 +44,7 @@
 import avatarIcon from '@/assets/images/common/avatar.png'
 import { useCommonStore } from '@/stores/common'
 import allowRight from '@/assets/images/icons/allow-right.png'
-import { editNickNameApi } from '@/api'
+import { editAvatarApi, editNickNameApi } from '@/api'
 import uploadHook from '@/hooks/uploadHook'
 const { userInfo } = storeToRefs(useCommonStore())
 const { getUserInfo } = useCommonStore()
@@ -53,7 +53,11 @@ const nickname = ref('')
 
 const { fileList, afterRead } = uploadHook({ callBack })
 
-function callBack(url: string) {}
+function callBack(url: string) {
+  editAvatarApi({ img: url }).then((res) => {
+    getUserInfo()
+  })
+}
 
 watch(
   () => userInfo.value.nickname,

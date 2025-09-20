@@ -688,13 +688,26 @@ export function getCouponListApi(data: any) {
 }
 
 /**
- * 余额宝明细
+ * 获取有效优惠券
  * @param data 查询参数
  * @returns Promise
  */
 export function getUseAbleCouponsApi(data?: any) {
   return service({
     url: `/user/userCoupons`,
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 更换头像
+ * @param data 查询参数
+ * @returns Promise
+ */
+export function editAvatarApi(data?: any) {
+  return service({
+    url: `/user/editAvatar`,
     method: 'POST',
     data
   })

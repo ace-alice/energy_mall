@@ -7,6 +7,7 @@ import { ref, computed, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
 export default function () {
+  const currency = __VITE_CURRENCY
   const { userDetail, userInfo } = storeToRefs(useCommonStore())
   const { getUserDetail, getUserInfo } = useCommonStore()
 
@@ -118,6 +119,19 @@ export default function () {
     console.log(prize)
   }
 
+  const winText = computed(() => {
+    if (winInfo.value.id) {
+      const textArr = [currency, '积分', '优惠券']
+      if ([0, 1].includes(+winInfo.value.type)) {
+        return `${Number(winInfo.value.money) || 0} ${textArr[+winInfo.value.type]}`
+      } else {
+        return winInfo.value.coupon_name || textArr[2]
+      }
+    } else {
+      return ''
+    }
+  })
+
   return {
     myLucky,
     defaultConfig,
@@ -132,6 +146,7 @@ export default function () {
     winInfo,
     showPopup,
     userInfo,
-    loading
+    loading,
+    winText
   }
 }

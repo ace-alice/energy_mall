@@ -37,11 +37,11 @@
                 getProfitType(projectDetail.profit_type, projectDetail.profit_cycle_time)
               }}
             </div>
-            <div style="margin-top: 4px; color: #999" v-if="projectDetail.gift_coupon">
+            <div style="margin-top: 4px; color: #999">
               限购次数：{{ Number(projectDetail.invest_limit) || '不限购' }}
             </div>
-            <div style="margin-top: 4px; color: #999">
-              积分赠送：{{ projectDetail.gift_points }}
+            <div style="margin-top: 4px; color: #999" v-if="Number(projectDetail.gift_points)">
+              积分赠送：{{ Number(projectDetail.gift_points) }}
             </div>
             <div style="margin-top: 4px; color: #999" v-if="projectDetail.gift_coupon">
               优惠券赠送：{{ projectDetail.coupon_info.name }}

@@ -37,6 +37,9 @@
                 getProfitType(projectDetail.profit_type, projectDetail.profit_cycle_time)
               }}
             </div>
+            <div style="margin-top: 4px; color: #999" v-if="projectDetail.gift_coupon">
+              限购次数：{{ Number(projectDetail.invest_limit) || '' }}
+            </div>
             <div style="margin-top: 4px; color: #999">
               积分赠送：{{ projectDetail.gift_points }}
             </div>

@@ -1,5 +1,6 @@
 <script setup lang="ts" name="RegPrivate">
 import service_un from '@/assets/images/tabs/service_un.png'
+import { title } from 'process'
 const router = useRouter()
 
 const formData = reactive({
@@ -8,6 +9,27 @@ const formData = reactive({
   way: '1',
   suggest: ''
 })
+
+const types = [
+  { id: '1', title: '功能异常' },
+  { id: '2', title: '界面优化' },
+  { id: '3', title: '产品建议' },
+  { id: '4', title: '其他' }
+]
+
+const scenes = [
+  { id: '1', title: '功能异常' },
+  { id: '2', title: '界面优化' },
+  { id: '3', title: '产品建议' },
+  { id: '4', title: '其他' }
+]
+
+const channels = [
+  { id: '1', title: '网络平台' },
+  { id: '2', title: '亲朋好友' },
+  { id: '3', title: '门店商铺' },
+  { id: '4', title: '其他' }
+]
 
 function onAdd() {}
 </script>
@@ -22,28 +44,19 @@ function onAdd() {}
     <div class="normal-card">
       <div class="title">问题类型</div>
       <van-radio-group v-model="formData.type" icon-size="20" checked-color="#000">
-        <van-radio name="1">功能异常</van-radio>
-        <van-radio name="2">界面优化</van-radio>
-        <van-radio name="3">产品建议</van-radio>
-        <van-radio name="4">其他</van-radio>
+        <van-radio :name="item.id" v-for="item in types">{{ item.title }}</van-radio>
       </van-radio-group>
     </div>
     <div class="normal-card">
       <div class="title">问题发生的场景</div>
       <van-radio-group v-model="formData.scene" icon-size="20" checked-color="#000">
-        <van-radio name="1">功能异常</van-radio>
-        <van-radio name="2">界面优化</van-radio>
-        <van-radio name="3">产品建议</van-radio>
-        <van-radio name="4">其他</van-radio>
+        <van-radio :name="item.id" v-for="item in scenes">{{ item.title }}</van-radio>
       </van-radio-group>
     </div>
     <div class="normal-card">
-      <div class="title">了解曼鸥甄品的途径</div>
+      <div class="title">了解Iberdrola的途径</div>
       <van-radio-group v-model="formData.way" icon-size="20" checked-color="#000">
-        <van-radio name="1">网络平台</van-radio>
-        <van-radio name="2">亲朋好友</van-radio>
-        <van-radio name="3">门店商铺</van-radio>
-        <van-radio name="4">其他</van-radio>
+        <van-radio :name="item.id" v-for="item in channels">{{ item.title }}</van-radio>
       </van-radio-group>
     </div>
     <div class="title" style="margin-top: 16px; margin-left: 16px">问题和意见</div>

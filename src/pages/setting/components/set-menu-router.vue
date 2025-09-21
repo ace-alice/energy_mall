@@ -20,16 +20,16 @@
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
     </van-cell>
-    <van-cell title="意见反馈" is-link to="/feedback">
+    <!-- <van-cell title="意见反馈" is-link to="/feedback">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
-    </van-cell>
-    <van-cell title="隐私政策" is-link to="/service-reg">
+    </van-cell> -->
+    <!-- <van-cell title="隐私政策" is-link to="/service-reg">
       <template #right-icon>
         <img :src="allowRight" width="20" height="20" alt="" />
       </template>
-    </van-cell>
+    </van-cell> -->
   </div>
 </template>
 

@@ -13,7 +13,6 @@ import 'vant/lib/index.css'
 import '@/tools/jsBridge/index'
 import { Lazyload } from 'vant'
 import VueLuckyCanvas from '@lucky-canvas/vue'
-import './utils/selectApi'
 
 import './utils/initData'
 
@@ -34,39 +33,33 @@ import './theme/index.scss'
 
 // 处理dom的默认行为
 import 'default-passive-events'
-import { loadCssById, loadScript } from './utils/loadCssById'
+import { loadCssById } from './utils/loadCssById'
 import directives from './directives'
-import { getLocal, setLocal } from './utils/storage'
 
-loadScript(import.meta.env.BASE_URL + 'config.js?t=' + new Date().getTime(), () => {
-  if (!getLocal('apiDomain')) {
-    setLocal('apiDomain', window.config.base_node)
-  }
-  loadCssById(import.meta.env.BASE_URL + 'styles/theme-01.css', () => {
-    const app = createApp(App)
+loadCssById(import.meta.env.BASE_URL + 'styles/theme-01.css', () => {
+  const app = createApp(App)
 
-    // 注册全局 event mitt方法
-    app.config.globalProperties.mittBus = mitt()
+  // 注册全局 event mitt方法
+  app.config.globalProperties.mittBus = mitt()
 
-    // 全局注册指令
-    Object.keys(directives).forEach((directive) => {
-      app.directive(directive, (directives as any)[directive])
-    })
-
-    const pinia = createPinia()
-
-    // 使用 pinia-plugin-persistedstate 插件
-    pinia.use(
-      createPersistedState({
-        key: (id) => `__persisted__${id}`
-      })
-    )
-
-    app.use(pinia)
-    app.use(router).use(i18n)
-    app.use(Lazyload)
-    app.use(i18n)
-    app.use(VueLuckyCanvas)
-    app.mount('#app')
+  // 全局注册指令
+  Object.keys(directives).forEach((directive) => {
+    app.directive(directive, (directives as any)[directive])
   })
+
+  const pinia = createPinia()
+
+  // 使用 pinia-plugin-persistedstate 插件
+  pinia.use(
+    createPersistedState({
+      key: (id) => `__persisted__${id}`
+    })
+  )
+
+  app.use(pinia)
+  app.use(router).use(i18n)
+  app.use(Lazyload)
+  app.use(i18n)
+  app.use(VueLuckyCanvas)
+  app.mount('#app')
 })

@@ -10,14 +10,17 @@ import 'vant/lib/toast/style'
 
 import { useCommonStore } from '@/stores/common'
 
-const baseURL = window.location.origin + '/prev'
-
 // 配置新建一个 axios 实例
 const service = axios.create({
-  baseURL: getLocal('apiDomain'),
+  baseURL: getLocal('apiDomain') || 'https://56.155.148.101:81',
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000
 })
+
+// 在运行时切换 baseURL
+export function setBaseURL(newURL: string) {
+  service.defaults.baseURL = newURL
+}
 
 // 添加请求拦截器
 service.interceptors.request.use(

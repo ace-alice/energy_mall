@@ -49,7 +49,7 @@
       label1="待收收益(USDT)"
       label2="累计收益(USDT)"
       :value1="userDetail.invest_not_earn"
-      :value2="userInfo.invite"
+      :value2="userInfo.income_money"
     />
     <!-- <InfoBox
       title="投资"

@@ -30,6 +30,7 @@ import dayjs from 'dayjs'
 export const useCommonStore = defineStore(
   'common',
   () => {
+    const apiDomain = ref(window.config.base_node)
     const isVip = ref(false)
     const vipExpiredDate = ref<number>(0)
     const lang = ref(initLang())

@@ -24,6 +24,7 @@ declare const __SYSTEM_INFO__: {
 interface Window {
   WebViewJSBridge: any
   WVJBCallbacks: any
+  config: any
 }
 
 declare const __VITE_CURRENCY: string

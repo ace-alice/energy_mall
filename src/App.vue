@@ -14,6 +14,7 @@ import team_se from '@/assets/images/tabs/team_se.png'
 import order_un from '@/assets/images/tabs/order_un.png'
 import dayjs from 'dayjs'
 import { useShopCartStore } from './stores/shopCart'
+import { isValidApi } from './utils/selectApi'
 
 const commonStore = useCommonStore()
 const shopCartStore = useShopCartStore()
@@ -89,6 +90,7 @@ onUnmounted(() => {
 })
 
 onMounted(async () => {
+  isValidApi()
   window.addEventListener('beforeunload', handleBeforeUnload)
   commonStore.initMediaQuery()
   window.WebViewJSBridge.registerHandler(

@@ -15,7 +15,7 @@
               />
               {{ userInfo.user_points }}
             </div>
-            <div>积分记录></div>
+            <div @click="router.push('/fund-detail/point')">积分记录></div>
           </div>
           <div class="header-bottom"></div>
           <img

@@ -1,5 +1,6 @@
 <script setup lang="ts" name="GoodsCount">
-const props = defineProps(['item'])
+const currency = __VITE_CURRENCY
+const props = defineProps(['item', 'isPoint'])
 
 const count = ref(1)
 </script>
@@ -19,7 +20,9 @@ const count = ref(1)
       >
         <div>{{ item.title }}</div>
         <div style="display: flex; justify-content: space-between; margin-top: 12px">
-          <div style="color: #d95555; font-size: 18px">￥{{ item.price }}</div>
+          <div style="color: #d95555; font-size: 18px">
+            {{ isPoint ? '积分' : currency }} {{ item.price }}
+          </div>
           <van-stepper v-model="count" disabled />
         </div>
       </div>
@@ -27,7 +30,7 @@ const count = ref(1)
     <van-divider />
     <div class="flex-between">
       <div>合计</div>
-      <div>￥<VueCountTo :end-val="item.price * count" /></div>
+      <div>{{ isPoint ? ' 积分' : currency }} <VueCountTo :end-val="item.price * count" /></div>
     </div>
   </div>
 </template>

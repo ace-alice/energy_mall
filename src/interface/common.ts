@@ -434,6 +434,19 @@ export interface InvestClassItemType {
   update_at: string
 }
 
+export interface Coupon_info {
+  id: number
+  name: string
+  type: number
+  amount: string
+  status: number
+  description: string
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+}
+
 export interface InvestItemType {
   id: number
   title: string
@@ -472,12 +485,14 @@ export interface InvestItemType {
   product_insurance_time: string
   gift_goods: number
   gift_item: number
+  gift_coupon: number
   level_income: number
   gift_product_expires: number
   video_link: string
   sales_limit: number
   sales_time: number
   discounted_invest: number
+  coupon_info: Coupon_info
 }
 
 export interface InvestOrderItemType {
@@ -495,6 +510,7 @@ export interface InvestOrderItemType {
   item_type: number
   amount: string
   discounted_amount: string
+  actual_amount: string
   gift_bonus: string
   gift_points: number
   gift_raffle: number
@@ -512,6 +528,9 @@ export interface InvestOrderItemType {
   last_time: string
   end_time: string
   is_coupon: number
+  coupon_id: number
+  coupon_type: number
+  coupon_amount: string
   create_time: number
   update_time: number
   create_at: string
@@ -522,9 +541,9 @@ export interface InvestOrderItemType {
   gift_product_expires: number
   principal: string
   img: string
-  profit_cycle_time: string
-  profit_cycle: string
-  profit_type: string
+  profit_cycle_time: number
+  profit_cycle: number
+  profit_type: number
   end_time2: number
   item_invest_scale: string
   product_release_time: string
@@ -539,8 +558,8 @@ export interface RaffleItemType {
   chance: string
   type: number
   img: string
-  goods_id: number
-  goods_name: string
+  coupon_id: number
+  coupon_name: string
   create_time: number
   update_time: number
   create_at: string
@@ -632,4 +651,59 @@ export interface YueBaoRecordItemType {
   update_time: number
   create_at: string
   update_at: string
+}
+
+export interface WithdrawOrderItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  order_no: string
+  status: number
+  type: number
+  name: string
+  bank_name: string
+  bank_branch: string
+  bank_account: string
+  coin_name: string
+  coin_blockchain: string
+  coin_account: string
+  alipay_account: string
+  alipay_img: string
+  wx_img: string
+  amount: string
+  amount_real: string
+  exchange_rate: string
+  handling_fee: string
+  handling_rate: string
+  remark: string
+  is_energy: number
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  rate: string
+  mall_type: number
+}
+
+export interface CouponItemType {
+  id: number
+  uid: number
+  username: string
+  phone: string
+  is_test: number
+  coupon_id: number
+  coupon_name: string
+  coupon_type: number
+  coupon_amount: string
+  status: number
+  used_time?: any
+  order_id?: any
+  create_time: number
+  update_time: number
+  create_at: string
+  update_at: string
+  status_text: string
+  coupon_type_text: string
 }

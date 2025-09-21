@@ -9,7 +9,7 @@
           <div class="p-info">
             <div>{{ item.title }}</div>
             <div style="display: flex; justify-content: space-between; margin-top: 8px">
-              <div>¥{{ item.price || '0.00' }}</div>
+              <div>{{ currencyIcon }}{{ item.price || '0.00' }}</div>
               <van-icon name="play-circle" />
             </div>
           </div>
@@ -23,6 +23,8 @@
 import nice_p from '@/assets/images/icons/nice_p.png'
 
 const props = defineProps(['list'])
+
+const currencyIcon = __VITE_CURRENCY_ICON
 </script>
 
 <style lang="scss" scoped>

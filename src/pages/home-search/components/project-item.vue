@@ -3,13 +3,14 @@
     <van-image width="100%" height="140" lazy-load :src="item.img" />
     <div class="p-info">
       <div>{{ item.title }}</div>
-      <div>¥{{ item.price || '0.00' }}</div>
+      <div>{{ currencyIcon }} {{ item.price || '0.00' }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="ProjectItem">
 const props = defineProps(['item'])
+const currencyIcon = __VITE_CURRENCY_ICON
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +25,7 @@ const props = defineProps(['item'])
     & > div:nth-child(1) {
       text-overflow: ellipsis;
       text-wrap: nowrap;
-      max-width: 125px;
+      max-width: 94px;
       overflow: hidden;
     }
     & > div:nth-child(2) {

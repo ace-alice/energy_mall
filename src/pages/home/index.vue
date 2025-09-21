@@ -30,7 +30,9 @@ const active = ref(0)
       title-inactive-color="#333333"
       :offset-top="70 + mediaQueryInfo.top"
     >
-      <van-tab title="全部"><ProjectListBox type="" /></van-tab>
+      <van-tab title="全部"
+        ><ProjectListBox :type="groupClasses.map((item) => item.id).join(',')"
+      /></van-tab>
       <van-tab v-for="tab in groupClasses" :title="tab.title"
         ><ProjectListBox :type="tab.id"
       /></van-tab>

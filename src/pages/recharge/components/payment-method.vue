@@ -4,7 +4,7 @@ const props = defineProps(['method'])
 
 <template>
   <div style="margin-top: 12px">
-    <van-cell-group inset v-if="method.account_info.type == 0">
+    <!-- <van-cell-group inset v-if="method.account_info.type == 0">
       <van-cell title="银行名称" :value="method.account_info.bank_name">
         <template #right-icon>
           <Clipboard :content="method.account_info.bank_name" style="margin-left: 8px">
@@ -41,7 +41,10 @@ const props = defineProps(['method'])
           </Clipboard>
         </template>
       </van-cell>
-    </van-cell-group>
+    </van-cell-group> -->
+    <div class="normal-card" v-if="method.account_info.type == 0">
+      <van-button block round type="primary" to="/service">联系客服获取银行卡信息</van-button>
+    </div>
     <van-cell-group inset v-if="method.account_info.type == 1">
       <van-cell title="虚拟币地址" :value="method.account_info.coin_account">
         <template #right-icon>

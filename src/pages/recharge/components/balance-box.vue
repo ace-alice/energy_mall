@@ -1,9 +1,21 @@
 <template>
   <div class="money-info">
     <div>
+      <div>可提余额({{ currency }})</div>
+      <div>
+        <VueCountTo
+          :end-val="isVip ? Number(userInfo.money) : Number(userInfo.outside_money)"
+          :start-val="0"
+        />
+      </div>
+    </div>
+    <div>
       <div>可用余额({{ currency }})</div>
       <div>
-        <VueCountTo :end-val="Number(userInfo.outside_frozen_money)" :start-val="moneyStartVal" />
+        <VueCountTo
+          :end-val="isVip ? Number(userInfo.frozen_money) : Number(userInfo.outside_frozen_money)"
+          :start-val="0"
+        />
       </div>
     </div>
   </div>
@@ -12,7 +24,7 @@
 <script setup lang="ts" name="BalanceBox">
 import { useCommonStore } from '@/stores/common'
 const currency = __VITE_CURRENCY
-const { userInfo } = storeToRefs(useCommonStore())
+const { userInfo, isVip } = storeToRefs(useCommonStore())
 
 const moneyStartVal = ref(0)
 
@@ -32,15 +44,15 @@ watch(
   background-image: url('@/assets/images/background/recharge_bg.png');
   background-size: 100% 100%;
   margin: 0 16px;
-  padding: 0 40px;
+  padding: 0 20px;
   & > div {
     color: #ffffff99;
-    width: 160px;
-    font-size: 16px;
+    width: 170px;
+    font-size: 12px;
     & > div:nth-child(2) {
       color: #fff;
       margin-top: 12px;
-      font-size: 28px;
+      font-size: 22px;
     }
   }
 }

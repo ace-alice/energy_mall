@@ -19,9 +19,9 @@
       </div>
       <van-image width="100%" style="aspect-ratio: 1/1" :src="projectDetail.img" />
       <div class="good-price">
-        <div>¥</div>
+        <div>{{ isPoint ? '积分' : currencyIcon }}</div>
         <div>{{ projectDetail.price }}</div>
-        <div>¥{{ projectDetail.original_price }}</div>
+        <div>{{ isPoint ? '积分' : currencyIcon }} {{ projectDetail.original_price }}</div>
         <div>已出售{{ '100' }}+</div>
       </div>
       <div style="padding: 0 16px">
@@ -58,10 +58,15 @@ import mallIcon from '@/assets/images/icons/mall.png'
 import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp } from '@/utils/common'
 
+const currency = __VITE_CURRENCY
+const currencyIcon = __VITE_CURRENCY_ICON
+
 const { mediaQueryInfo } = storeToRefs(useCommonStore())
 
 const router = useRouter()
 const route = useRoute()
+
+const isPoint = ref(false)
 
 const projectDetail = reactive<ProjectItemType>({} as ProjectItemType)
 
@@ -80,6 +85,9 @@ onMounted(() => {
     getProjectDetail(route.params.id.toString())
   } else {
     router.push({ name: 'HomeSearch' })
+  }
+  if (route.query.is_point) {
+    isPoint.value = true
   }
 })
 </script>

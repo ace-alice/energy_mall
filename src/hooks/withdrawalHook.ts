@@ -1,7 +1,7 @@
-import { doWithdrawApi } from '@/api'
+import { doWithdrawApi, settingApi } from '@/api'
 import type { BankItemType } from '@/interface/common'
 import { ref, computed, onMounted, watch, nextTick } from 'vue'
-import { showToast } from 'vant'
+import { showToast, closeToast } from 'vant'
 import { useRouter } from 'vue-router'
 import { useCommonStore } from '@/stores/common'
 import { storeToRefs } from 'pinia'
@@ -20,6 +20,14 @@ export default function () {
 
   const normalPinActionRef = ref()
 
+  const minWithdraw = ref(0)
+
+  function getMinWithdraw() {
+    settingApi({ key: 'min_withdraw' }).then((res) => {
+      minWithdraw.value = Number(res.data.data.val) || 0
+    })
+  }
+
   function selectHandle() {
     if (channelType.value == 'bank' && bankItems.value.length > 0) {
       showSelect.value = true
@@ -37,6 +45,7 @@ export default function () {
 
   onMounted(() => {
     getBankList()
+    getMinWithdraw()
   })
 
   const currentMethod = ref<BankItemType>(Object.assign({}, defaultBankItem))
@@ -145,10 +154,10 @@ export default function () {
     })
       .then((res) => {
         closeToast()
-        getUserInfo()
-        getUserDetail()
         showToast({ type: 'text', message: '提现申请已成功发送' })
         setTimeout(() => {
+          getUserInfo()
+          getUserDetail()
           router.push({ name: 'WithdrawOrder' })
         }, 200)
       })
@@ -171,6 +180,7 @@ export default function () {
     toWithdraw,
     disabled,
     normalPinActionRef,
-    toOpenPin
+    toOpenPin,
+    minWithdraw
   }
 }

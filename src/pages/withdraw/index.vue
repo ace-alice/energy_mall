@@ -36,13 +36,18 @@
     <div class="normal-card">
       <div style="font-size: 14px">提现金额</div>
       <div class="self-form recharge-form">
-        <van-field v-model="amount" type="number" placeholder="请输入提现金额" :min="100">
+        <van-field v-model="amount" type="number" placeholder="请输入提现金额" :min="minWithdraw">
           <template #left-icon> </template>
           <template #right-icon>
             <span style="font-size: 14px; margin-right: 4px; color: #13b756">{{ currency }}</span>
             <van-icon name="arrow" size="16" color="#13B756" />
           </template>
         </van-field>
+        <div style="color: red; font-size: 14px; margin: 12px 12px 0; height: 16px">
+          <span v-if="amount && amount < minWithdraw">
+            最小提现金额为{{ minWithdraw }}{{ currency }}
+          </span>
+        </div>
       </div>
       <div class="rate" v-if="channelType != 'usdt'">
         <div>
@@ -176,7 +181,8 @@ const {
   toWithdraw,
   disabled,
   normalPinActionRef,
-  toOpenPin
+  toOpenPin,
+  minWithdraw
 } = withdrawalHook()
 </script>
 

@@ -503,6 +503,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/coupon',
+      name: 'Coupon',
+      component: () => import(/* webpackChunkName: "coupon" */ '@/pages/coupon/index.vue'),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: '/:pathMatch(.*)*', // 捕获所有未匹配的路由
       name: 'unknown',
       redirect: '/'

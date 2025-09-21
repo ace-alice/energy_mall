@@ -40,6 +40,9 @@
             <div style="margin-top: 4px; color: #999">
               积分赠送：{{ projectDetail.gift_points }}
             </div>
+            <div style="margin-top: 4px; color: #999" v-if="projectDetail.gift_coupon">
+              优惠券赠送：{{ projectDetail.coupon_info.name }}
+            </div>
             <div class="three-del">
               <div>
                 <div>
@@ -88,21 +91,55 @@
       </van-tabs>
       <!-- <TitleDel title="产品介绍" /> -->
       <div class="buy-box">
+        <van-cell
+          v-if="couponList.length > 0"
+          :title="currentMethod.coupon_name || '请选择优惠券'"
+          is-link
+          @click="showSelect = true"
+        />
         <van-button type="primary" round block @click="toPins">立即购买</van-button>
       </div>
       <NormalPinAction ref="normalPinActionRef" @submit="toBuy" />
     </template>
+    <van-popup
+      v-model:show="showSelect"
+      round
+      :style="{ height: '70%', width: '100%', overflow: 'hidden' }"
+      :close-on-click-overlay="false"
+    >
+      <div style="height: 100%; display: flex; flex-direction: column; width: 100%">
+        <van-cell :title="'选择优惠券'" />
+        <div class="box">
+          <div class="radio-group">
+            <van-radio-group v-model="checked">
+              <van-cell-group inset>
+                <van-cell v-for="(item, index) in couponList">
+                  <van-radio :name="item.id">优惠券{{ index + 1 }}</van-radio>
+                  <CouponItem :item="item" />
+                </van-cell>
+              </van-cell-group>
+            </van-radio-group>
+          </div>
+        </div>
+        <div class="submit">
+          <div v-waves @click="cancelChecked">取消</div>
+          <div v-waves @click="submitChecked">确定</div>
+        </div>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script setup lang="ts" name="InvestDetailVip">
 import { getInvestDetailApi, investBuyApi } from '@/api'
-import type { InvestItemType } from '@/interface/common'
+import type { CouponItemType, InvestItemType } from '@/interface/common'
 import backIcon from '@/assets/images/icons/back_white_icon.png'
 import { useCommonStore } from '@/stores/common'
 import { htmlDecodeByRegExp, getProfitType, getCycleTime, rateMath } from '@/utils/common'
 import Agreement from './components/agreement.vue'
 import ItemInfo from './components/item-info.vue'
+import CouponItem from './components/coupon-item.vue'
+import type { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow'
 
 const currency = __VITE_CURRENCY
 
@@ -110,12 +147,31 @@ const normalPinActionRef = ref()
 
 const active = ref(0)
 
-const { mediaQueryInfo, userInfo } = storeToRefs(useCommonStore())
+const showSelect = ref(false)
 
-const { getUserInfo, getUserDetail } = useCommonStore()
+const checked = ref()
+
+const { mediaQueryInfo, userInfo, couponList } = storeToRefs(useCommonStore())
+
+const { getUserInfo, getUserDetail, getCouponList } = useCommonStore()
 
 const router = useRouter()
 const route = useRoute()
+
+const currentMethod = ref<CouponItemType>({} as CouponItemType)
+
+function cancelChecked() {
+  checked.value = currentMethod.value.id
+  showSelect.value = false
+}
+
+function submitChecked() {
+  if (checked.value != currentMethod.value.id) {
+    const temp = couponList.value.find((item) => item.id == checked.value)
+    currentMethod.value = temp!
+  }
+  showSelect.value = false
+}
 
 const projectDetail = reactive<InvestItemType>({} as InvestItemType)
 
@@ -135,6 +191,7 @@ onMounted(() => {
   } else {
     router.push({ name: 'HomeSearch' })
   }
+  getCouponList()
 })
 
 function toPins() {
@@ -147,7 +204,7 @@ function toPins() {
 
 function toBuy(pin: string) {
   showToast({ type: 'loading', overlay: true })
-  investBuyApi({ id: projectDetail.id, pin: pin })
+  investBuyApi({ id: projectDetail.id, pin: pin, coupon_id: currentMethod.value.id })
     .then((res) => {
       closeToast()
       getUserInfo()
@@ -159,6 +216,19 @@ function toBuy(pin: string) {
 </script>
 
 <style lang="scss" scoped>
+.box {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-grow: 1;
+  .radio-group {
+    flex-grow: 1;
+    overflow: auto;
+  }
+}
 .three-del {
   margin-top: 8px;
   & > div {
@@ -257,6 +327,23 @@ function toBuy(pin: string) {
   background-color: #fff;
   &:deep(.title img) {
     filter: brightness(0) saturate(100%);
+  }
+}
+
+.submit {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+  background-color: #fff;
+  div {
+    height: 40px;
+    width: 45%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
   }
 }
 </style>

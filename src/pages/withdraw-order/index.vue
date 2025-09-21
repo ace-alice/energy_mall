@@ -35,7 +35,11 @@
         >
           <div v-for="item in list" :key="item.id" class="order-item">
             <div class="order-item-title">
-              <div>{{ item.channel_name }}({{ item.class_name }})</div>
+              <div>
+                {{ item.bank_name || item.coin_blockchain || '支付宝' }}({{
+                  maskEmail(item.bank_account || item.coin_account || item.alipay_account)
+                }})
+              </div>
               <div v-if="item.status == 0" class="tag success">成功</div>
               <div v-else-if="item.status == 2" class="tag fail">已拒绝</div>
               <div v-else class="tag load">待审核</div>
@@ -44,6 +48,10 @@
               <div>提现金额({{ currency }})</div>
               <div>{{ item.amount }}</div>
             </div>
+            <!-- <div>
+              <div>到账金额({{ currency }})</div>
+              <div>{{ item.amount_real }}</div>
+            </div> -->
             <div>
               <div>提现时间</div>
               <div>{{ item.create_at }}</div>
@@ -69,12 +77,13 @@
 <script setup lang="ts" name="RechargeOrderList">
 import { withdrawRecordApi } from '@/api'
 import pageHook from '@/hooks/pageHook'
-import type { RechargeOrderItemType } from '@/interface/common'
+import type { WithdrawOrderItemType } from '@/interface/common'
 import { useCommonStore } from '@/stores/common'
+import { maskEmail } from '@/utils/parseTools'
 
 const { userDetail, isVip } = storeToRefs(useCommonStore())
 
-const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<RechargeOrderItemType>({
+const { list, loading, finished, refreshing, onLoad, onRefresh } = pageHook<WithdrawOrderItemType>({
   api: withdrawRecordApi,
   otherForm: () => ({ type: isVip.value ? 2 : 1 })
 })

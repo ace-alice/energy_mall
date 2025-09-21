@@ -96,7 +96,7 @@ function onSubmit() {
           v-model="amount"
           type="number"
           :placeholder="`请输入${channelType == 'deposit' ? '存入' : '取出'}金额`"
-          :min="100"
+          :min="0"
         >
           <template #left-icon> </template>
           <template #right-icon>

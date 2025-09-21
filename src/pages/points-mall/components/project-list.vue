@@ -11,7 +11,7 @@
         <van-grid-item
           v-for="item in list"
           :key="item.id"
-          :to="`/project-detail-normal/${item.id}`"
+          :to="`/project-detail-normal/${item.id}?is_point=1`"
         >
           <ProjectItem :item="item" />
         </van-grid-item>

@@ -14,7 +14,7 @@ const baseURL = window.location.origin + '/prev'
 
 // 配置新建一个 axios 实例
 const service = axios.create({
-  baseURL,
+  baseURL: getLocal('apiDomain'),
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000
 })

@@ -3,7 +3,7 @@
     <div class="menu-top">
       <div @click="router.push({ name: 'Wallet' })">
         <img src="" alt="" />
-        我的钱包
+        我的钱包({{ currency }})
         <van-icon name="arrow" />
       </div>
       <div @click="router.push({ name: 'PointsMall' })">
@@ -20,13 +20,13 @@
             <div>
               <VueCountTo :end-val="Number(userInfo.frozen_money)" :start-val="moneyStartVal" />
             </div>
-            <div class="label">可用余额({{ currency }})</div>
+            <div class="label">可用余额</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
           <div>
             <div><VueCountTo :end-val="Number(userInfo.money)" /></div>
-            <div class="label">可提余额({{ currency }})</div>
+            <div class="label">可提余额</div>
           </div>
         </van-grid-item>
         <van-grid-item>
@@ -34,7 +34,7 @@
             <div>
               <VueCountTo :end-val="Number(userDetail.invest_not_finish)" />
             </div>
-            <div class="label">待收本金({{ currency }})</div>
+            <div class="label">待收本金</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
@@ -42,7 +42,7 @@
             <div>
               <VueCountTo :end-val="Number(userDetail.invest_not_earn)" />
             </div>
-            <div class="label">待收收益({{ currency }})</div>
+            <div class="label">待收收益</div>
           </div>
         </van-grid-item>
         <van-grid-item class="direction">
@@ -50,7 +50,7 @@
             <div>
               <VueCountTo :end-val="Number(userDetail.recharge_money)" />
             </div>
-            <div class="label">累计充值({{ currency }})</div>
+            <div class="label">累计充值</div>
           </div>
         </van-grid-item>
         <van-grid-item>
@@ -58,7 +58,7 @@
             <div>
               <VueCountTo :end-val="Number(userDetail.withdraw_money)" />
             </div>
-            <div class="label">累计提现({{ currency }})</div>
+            <div class="label">累计提现</div>
           </div>
         </van-grid-item>
       </van-grid>
@@ -114,6 +114,7 @@ watch(
     background-color: white;
     border-radius: 12px;
     padding: 12px;
+    font-size: 15px;
   }
   .direction {
     position: relative;

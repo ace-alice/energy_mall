@@ -18,13 +18,13 @@
           <div>
             <div style="margin-bottom: 10px">可用金额(USDT)</div>
             <div style="font-size: 28px; font-weight: 500">
-              {{ userInfo.money }}
+              {{ userInfo.frozen_money }}
             </div>
           </div>
           <div>
             <div style="margin-bottom: 10px">可提金额(USDT)</div>
             <div style="font-size: 28px; font-weight: 500">
-              {{ userInfo.frozen_money }}
+              {{ userInfo.money }}
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
       label1="待收收益(USDT)"
       label2="累计收益(USDT)"
       :value1="userDetail.invest_not_earn"
-      :value2="userInfo.invite"
+      :value2="userDetail.income_money"
     />
     <!-- <InfoBox
       title="投资"

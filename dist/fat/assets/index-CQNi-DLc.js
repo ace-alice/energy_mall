@@ -1,0 +1,7 @@
+
+/**
+ * 由 flying services 提供技术支持
+ * Powered by Hector
+ */
+  
+var e=Object.defineProperty,r=Object.defineProperties,a=Object.getOwnPropertyDescriptors,t=Object.getOwnPropertySymbols,o=Object.prototype.hasOwnProperty,s=Object.prototype.propertyIsEnumerable,n=(r,a,t)=>a in r?e(r,a,{enumerable:!0,configurable:!0,writable:!0,value:t}):r[a]=t;import{_ as c}from"./index-BN3s9VkZ.js";import{_ as i}from"./index-CZGXzAI9.js";import{u as l,_ as p}from"./index-1kZVT1Y0.js";import{O as u,Y as m,K as f,$ as v,a1 as b,S as d,a9 as j,a3 as O,T as y,R as _}from"./vendor-kx7r3U2-.js";import"./bg-2-bcIQGS7T.js";import"./buffer-BJ2qglEo.js";const g={class:"normal-page service-box"},h={class:"service-iframe"},x=["src"],w=u({name:"Service"});const P=p(u(r(((e,r)=>{for(var a in r||(r={}))o.call(r,a)&&n(e,a,r[a]);if(t)for(var a of t(r))s.call(r,a)&&n(e,a,r[a]);return e})({},w),a({setup(e){const{serviceUrl:r,userInfo:a}=m(l()),{geServiceUrl:t}=l(),o=f((()=>{if(r.value){let e="";return a.value.phone&&(e='metadata={"name":"'.concat(a.value.sfz_name||a.value.phone,'","tel":"').concat(a.value.phone,'"}')),"".concat(r.value,"?").concat(e)}return""}));return v((()=>{t()})),(e,r)=>{const a=i,t=c;return _(),b("div",g,[d(a,{router:"Service"}),d(t,null,{box:O((()=>r[0]||(r[0]=[]))),_:1}),j("div",h,[j("iframe",{src:y(o),width:"100%",height:"100%",frameborder:"0"},null,8,x)])])}}}))),[["__scopeId","data-v-e5d37443"]]);export{P as default};

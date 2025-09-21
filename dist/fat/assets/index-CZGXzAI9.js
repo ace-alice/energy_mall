@@ -1,0 +1,7 @@
+
+/**
+ * 由 flying services 提供技术支持
+ * Powered by Hector
+ */
+  
+var r=Object.defineProperty,e=Object.defineProperties,o=Object.getOwnPropertyDescriptors,t=Object.getOwnPropertySymbols,a=Object.prototype.hasOwnProperty,s=Object.prototype.propertyIsEnumerable,l=(e,o,t)=>o in e?r(e,o,{enumerable:!0,configurable:!0,writable:!0,value:t}):e[o]=t;import{O as n,Y as i,Q as c,aa as u,a1 as p,ab as b,T as d,J as m,aD as g,a9 as v,a_ as y,V as h,R as f}from"./vendor-kx7r3U2-.js";import{b as O}from"./bg-2-bcIQGS7T.js";import{u as j,_ as w}from"./index-1kZVT1Y0.js";const P=["src","alt"],_=n({name:"BgTwo"});const C=w(n(e(((r,e)=>{for(var o in e||(e={}))a.call(e,o)&&l(r,o,e[o]);if(t)for(var o of t(e))s.call(e,o)&&l(r,o,e[o]);return r})({},_),o({props:["router","imgSrc","isColor","bgColor","height","hiddenTool"],setup(r){const e=r,{mediaQueryInfo:o}=i(j()),t=m();return(a,s)=>{var l;return f(),c(h,{to:"#app"},[r.isColor?u((f(),p("div",{key:0,style:g({"--height":r.height,"--bg-color":r.bgColor,width:"100%"}),class:"normal-bg"},s[0]||(s[0]=[v("div",{style:{width:"100%"},class:"is-color"},null,-1)]),4)),[[b,e.router&&e.router==d(t).currentRoute.value.name]]):(f(),p("div",{key:1,style:g({"--top":"".concat(d(o).top-44,"px")})},[u(v("img",{class:y(["normal-bg",{"hidden-tool":r.hiddenTool}]),src:r.imgSrc||d(O),alt:null==(l=d(t).currentRoute.value.name)?void 0:l.toString()},null,10,P),[[b,e.router&&e.router==d(t).currentRoute.value.name]])],4))])}}}))),[["__scopeId","data-v-009e0a27"]]);export{C as _};

@@ -1,0 +1,60 @@
+<script setup name="Invest" lang="ts">
+import InvestHeaderBox from './components/invest-header-box.vue'
+import ProjectListBox from './components/project-list.vue'
+import { useCommonStore } from '@/stores/common'
+
+const { mediaQueryInfo, investClasses } = storeToRefs(useCommonStore())
+const active = ref(0)
+</script>
+
+<template>
+  <div class="normal-page">
+    <BgTwo router="InvestVip" />
+    <HomeHeader>
+      <template #box>
+        <InvestHeaderBox />
+      </template>
+    </HomeHeader>
+    <van-tabs
+      class="team-tabs"
+      sticky
+      v-model:active="active"
+      swipeable
+      shrink
+      color="#27B6AD"
+      title-active-color="#333333"
+      title-inactive-color="#333333"
+      :offset-top="70 + mediaQueryInfo.top"
+    >
+      <van-tab v-for="tab in investClasses" :title="tab.title"
+        ><ProjectListBox :type="tab.id"
+      /></van-tab>
+    </van-tabs>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.home-content {
+  width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+:deep(.team-tabs) {
+  .van-tabs__nav {
+    background: var(--main-bg-color);
+  }
+  .van-sticky--fixed {
+    .van-tabs__nav--card {
+      border-radius: unset;
+      background-color: white;
+    }
+  }
+  .van-tabs__wrap {
+    height: 44px;
+    .van-tabs__line {
+      height: 6px;
+      background: linear-gradient(to right, #27b6ad, #f3b546);
+    }
+  }
+}
+</style>

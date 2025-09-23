@@ -42,7 +42,7 @@ export function loginApi(data: LoginForm) {
 export function registerApi(data: RegisterForm) {
   return service({
     url: '/login/register',
-    method: 'post',
+    method: 'POST',
     data
   })
 }
@@ -55,7 +55,7 @@ export function registerApi(data: RegisterForm) {
 export function userInfoApi() {
   return service({
     url: '/user/info',
-    method: 'get'
+    method: 'POST'
   })
 }
 
@@ -103,11 +103,11 @@ export function resetPayPasswordApi(data: any) {
  * @param data 查询参数
  * @returns Promise
  */
-export function settingApi(params: { key: string }) {
+export function settingApi(data: { key: string }) {
   return service({
     url: '/api/setting',
-    method: 'GET',
-    params
+    method: 'POST',
+    data
   })
 }
 
@@ -119,7 +119,7 @@ export function settingApi(params: { key: string }) {
 export function bannerApi() {
   return service({
     url: '/api/banner/',
-    method: 'GET'
+    method: 'POST'
   })
 }
 
@@ -247,7 +247,7 @@ export function getSigninListApi(data: any) {
 export function signinApi() {
   return service({
     url: `/signIn/sign`,
-    method: 'GET'
+    method: 'POST'
   })
 }
 
@@ -259,7 +259,7 @@ export function signinApi() {
 export function signinTeamApi() {
   return service({
     url: `/signIn/signTeam`,
-    method: 'GET'
+    method: 'POST'
   })
 }
 
@@ -294,11 +294,11 @@ export function editNickNameApi(data: any) {
  * @param data 查询参数
  * @returns Promise
  */
-export function articleInfoApi(params: any) {
+export function articleInfoApi(data: any) {
   return service({
     url: `/article/info`,
-    method: 'GET',
-    params
+    method: 'POST',
+    data
   })
 }
 
@@ -349,7 +349,7 @@ export function buyOutGoodsApi(data: any) {
 export function getUserDetailApi() {
   return service({
     url: `/user/detail`,
-    method: 'GET'
+    method: 'POST'
   })
 }
 
@@ -463,7 +463,7 @@ export function doTransferApi(data: any) {
 export function getInvestClassesApi() {
   return service({
     url: '/Item/classes',
-    method: 'GET'
+    method: 'POST'
   })
 }
 

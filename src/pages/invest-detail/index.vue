@@ -60,7 +60,14 @@
               </div>
               <div style="text-align: center">
                 <div>
-                  {{ rateMath(projectDetail.profit_rate, userInfo.level_extra) }}<span>%</span>
+                  {{
+                    rateMath(
+                      projectDetail.profit_rate,
+                      userInfo.level_extra,
+                      projectDetail.profit_cycle,
+                      projectDetail.profit_cycle_time
+                    ).toFixed(2)
+                  }}<span>%</span>
                 </div>
                 <div>项目利率</div>
               </div>
@@ -142,7 +149,6 @@ import { htmlDecodeByRegExp, getProfitType, getCycleTime, rateMath } from '@/uti
 import Agreement from './components/agreement.vue'
 import ItemInfo from './components/item-info.vue'
 import CouponItem from './components/coupon-item.vue'
-import type { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow'
 
 const currency = __VITE_CURRENCY
 
@@ -194,6 +200,10 @@ onMounted(() => {
   } else {
     router.push({ name: 'HomeSearch' })
   }
+  getCouponList()
+})
+
+onActivated(() => {
   getCouponList()
 })
 

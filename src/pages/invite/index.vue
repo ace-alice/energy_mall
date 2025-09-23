@@ -7,7 +7,7 @@ import QRCode from 'qrcode'
 const { userInfo } = storeToRefs(useCommonStore())
 
 const inviteUrl = computed(() => {
-  return `${location.origin}/register?invite=${userInfo.value.invite}`
+  return `${location.origin}/index.html?invite=${userInfo.value.invite}`
 })
 
 const cv = ref<HTMLCanvasElement | null>(null)

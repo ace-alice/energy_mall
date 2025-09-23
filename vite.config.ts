@@ -29,7 +29,7 @@ export default ({ mode, command }: any) => {
     // 构建选项 https://cn.vitejs.dev/config/#server-fsserve-root
     build: {
       minify: 'terser',
-      outDir: `dist/${mode}`,
+      outDir: `dist/${env.VITE_OUTPUT_DIR}`,
       sourcemap: env.VITE_BUILD_SOURCEMAP === 'true',
       target: ['es2015', 'ios11'],
       rollupOptions: {

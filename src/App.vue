@@ -97,7 +97,7 @@ onMounted(async () => {
     ChannelType.routeBack,
     function (data: any, success: Function, fail: Function) {
       if (router.currentRoute.value.name?.toString().includes('Home')) {
-        window.WebViewJSBridge.callHandler(AppChannelType.closeMiniProgram)
+        // window.WebViewJSBridge.callHandler(AppChannelType.closeMiniProgram)
       } else {
         router.go(-1)
       }

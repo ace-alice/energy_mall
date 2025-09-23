@@ -24,7 +24,12 @@ const totalRate = computed(() => {
   if (info.value.coupon_id && info.value.coupon_type == 2) {
     temp = temp + (Number(info.value.coupon_amount) || 0)
   }
-  return rateMath(info.value.profit_rate, temp).toFixed(2)
+  return rateMath(
+    info.value.profit_rate,
+    temp,
+    info.value.profit_cycle,
+    info.value.cycle_time
+  ).toFixed(2)
 })
 
 function getInfo() {
@@ -103,15 +108,9 @@ onMounted(() => {
           <van-grid-item style="flex-basis: 35%" text="预期收益率" />
           <van-grid-item style="flex-basis: 65%" :text="`${totalRate} %`" />
           <van-grid-item style="flex-basis: 35%" text="起息日" />
-          <van-grid-item
-            style="flex-basis: 65%"
-            :text="`${dayjs().add(1, 'day').format('YYYY-MM-DD')}`"
-          />
+          <van-grid-item style="flex-basis: 65%" :text="`${info.create_at}`" />
           <van-grid-item style="flex-basis: 35%" text="到期日" />
-          <van-grid-item
-            style="flex-basis: 65%"
-            :text="`${dayjs().add(+info.profit_cycle, 'day').format('YYYY-MM-DD')}`"
-          />
+          <van-grid-item style="flex-basis: 65%" :text="`${info.end_time}`" />
           <van-grid-item style="flex-basis: 35%" text="应收本息" />
           <van-grid-item style="flex-basis: 65%" :text="`${incomeMoney.toFixed(2)} ${currency}`" />
           <van-grid-item style="flex-basis: 35%" text="还款方式" />

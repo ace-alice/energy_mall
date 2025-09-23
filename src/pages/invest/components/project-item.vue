@@ -36,7 +36,16 @@
       </div>
       <div style="text-align: center">
         <div>项目利率</div>
-        <div>{{ rateMath(item.profit_rate, userInfo.level_extra).toFixed(2) }}<span>%</span></div>
+        <div>
+          {{
+            rateMath(
+              item.profit_rate,
+              userInfo.level_extra,
+              item.profit_cycle,
+              item.profit_cycle_time
+            ).toFixed(2)
+          }}<span>%</span>
+        </div>
       </div>
       <div style="text-align: right">
         <div>持有时间</div>

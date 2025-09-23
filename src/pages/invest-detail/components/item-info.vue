@@ -15,7 +15,12 @@ const { info } = defineProps<{
 const incomeMoney = computed(() => {
   return incomeMath(
     Number(info.invest),
-    rateMath(info.profit_rate, userInfo.value.level_extra),
+    rateMath(
+      info.profit_rate,
+      userInfo.value.level_extra,
+      info.profit_cycle,
+      info.profit_cycle_time
+    ),
     getCycleTime(info.profit_cycle_time).value == 2
       ? 0
       : getCycleTime(info.profit_cycle_time).value == 3
@@ -29,7 +34,12 @@ const incomeMoney = computed(() => {
 const incomeText = computed(() => {
   return incomeRateMathText(
     Number(info.invest),
-    rateMath(info.profit_rate, userInfo.value.level_extra),
+    rateMath(
+      info.profit_rate,
+      userInfo.value.level_extra,
+      info.profit_cycle,
+      info.profit_cycle_time
+    ),
     Number(info.profit_type) == 5,
     Number(info.profit_cycle),
     getCycleTime(info.profit_cycle_time),
@@ -52,7 +62,7 @@ const incomeText = computed(() => {
         </div>
         <div>
           买入{{ info.invest }} {{ currency }}，预计本息收入<span style="color: green">{{
-            incomeMoney
+            incomeMoney.toFixed(2)
           }}</span>
           {{ currency }}
         </div>

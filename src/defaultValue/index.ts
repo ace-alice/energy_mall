@@ -6,11 +6,12 @@ import type {
   UserDetail,
   UserInfo
 } from '@/interface/common'
+import { isNative } from '@/utils/common'
 
 export const defaultMediaQueryInfo: MediaQueryInfo = {
   height: 815,
   width: 375,
-  top: 0,
+  top: isNative() ? 46 : 0,
   bottom: 0
 }
 
@@ -35,7 +36,18 @@ export const defaultUserInfo: UserInfo = {
   user_points: 0,
   invite: '',
   level_team: 0,
-  level_team_name: ''
+  level_team_name: '',
+  level_extra: '',
+  level_signin_amount: 0,
+  outside_money: '',
+  outside_frozen_money: '',
+  outside_level_name: '',
+  outside_level_img: '',
+  outside_level_start_time: '',
+  outside_level_end_time: '',
+  outside_level_sign_amount: 0,
+  rate: '',
+  raffle_num: 0
 }
 
 export const defaultUserDetail: UserDetail = {
@@ -79,7 +91,18 @@ export const defaultUserDetail: UserDetail = {
   create_time: 0,
   update_time: 0,
   create_at: '',
-  update_at: ''
+  update_at: '',
+  outside_recharge_money: '',
+  outside_recharge_num: 0,
+  outside_signin_num: 0,
+  outside_signin_money: '',
+  new_user_draw: 0,
+  lv1Data: {} as any,
+  lv2Data: {} as any,
+  team_num: 0,
+  team_recharge_money: '',
+  team_withdraw_money: '',
+  valid_recharge_num: 0
 }
 
 export const defaultTeamInfo: TeamInfo = {

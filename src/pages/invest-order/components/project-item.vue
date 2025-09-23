@@ -24,6 +24,7 @@
         <div>
           {{ Number(item.discounted_amount) || Number(item.amount)
           }}<span
+            style="text-decoration: line-through"
             v-if="
               Number(item.discounted_amount) &&
               Number(item.discounted_amount) != Number(item.amount)
@@ -106,7 +107,7 @@ const totalRate = computed(() => {
   if (item.coupon_id && item.coupon_type == 2) {
     temp = temp + (Number(item.coupon_amount) || 0)
   }
-  return rateMath(item.profit_rate, temp).toFixed(2)
+  return rateMath(item.profit_rate, temp, item.profit_cycle, item.cycle_time).toFixed(2)
 })
 </script>
 
@@ -139,7 +140,6 @@ const totalRate = computed(() => {
         margin-top: 4px;
         span {
           font-size: 12px;
-          text-decoration: line-through;
         }
       }
     }

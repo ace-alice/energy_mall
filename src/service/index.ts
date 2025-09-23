@@ -10,9 +10,12 @@ import 'vant/lib/toast/style'
 
 import { useCommonStore } from '@/stores/common'
 
+const initUrl =
+  import.meta.env.MODE == 'fat' ? import.meta.env.VITE_APP_API_DOMAIN : 'https://8.138.239.156:81'
+
 // 配置新建一个 axios 实例
 const service = axios.create({
-  baseURL: getLocal('apiDomain') || 'https://56.155.148.101:81',
+  baseURL: getLocal('apiDomain') || initUrl,
   withCredentials: false, // send cookies when cross-domain requests
   timeout: 50000
 })

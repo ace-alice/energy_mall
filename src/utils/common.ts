@@ -1,3 +1,4 @@
+import dayjs, { type ManipulateType } from 'dayjs'
 import { getLocal } from './storage'
 
 export function getSystemLang() {
@@ -176,8 +177,16 @@ export function incomeMath(
   }
 }
 
-export function rateMath(baseRate: any, add: any): number {
-  return Number(((Number(baseRate) || 0) * ((Number(add) || 0) / 100 + 1)).toFixed(2))
+export function rateMath(baseRate: any, add: any, cycle: any, cycle_time: any): number {
+  let baseB = 1
+  if (Number(cycle_time) > 86400) {
+    baseB = Math.floor(Number(cycle_time) / 86400)
+  }
+  if (Number(cycle_time) < 86400) {
+    baseB = Math.floor(Number(cycle_time) / 3600)
+  }
+
+  return Number(baseRate) + Number(add) * baseB
 }
 
 export function incomeRateMathText(
@@ -191,5 +200,25 @@ export function incomeRateMathText(
   if (isInter) {
     return `生产计算：按照最低起投金额${money}，收益公式：每次的收益会放入本金中用于下次计算收益`
   }
-  return `生产计算：按照最低起投金额${money}，收益公式：${money} x ${rate}% x ${cycle}(${cycleType.value}${cycleType.label})${isNoBen ? ' - ' : ''}${isNoBen ? money : ''}`
+  return `生产计算：按照最低起投金额${money}，收益公式：${money} x ${rate.toFixed(2)}% x ${cycle}(${cycleType.value}${cycleType.label})${isNoBen ? ' - ' : ''}${isNoBen ? money : ''}`
+}
+
+export function valueDateMath(cycleTime: number) {
+  let formatType = 'YYYY-MM-DD'
+  if (cycleTime < 86400) {
+    formatType = 'YYYY-MM-DD HH'
+  }
+  return dayjs().format(formatType)
+}
+
+export function endDateMath(cycle: number, cycleTime: number) {
+  let formatType = 'YYYY-MM-DD'
+  let addType: ManipulateType = 'day'
+  let addValue = (cycleTime / 86400) * cycle
+  if (cycleTime < 86400) {
+    formatType = 'YYYY-MM-DD HH'
+    addValue = Math.floor(cycleTime / 3600)
+    addType = 'hour'
+  }
+  return dayjs().add(addValue, addType).format(formatType)
 }

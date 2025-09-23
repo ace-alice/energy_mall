@@ -58,6 +58,8 @@ export const useCommonStore = defineStore(
 
     const couponList = ref<any[]>([])
 
+    const timer = ref<NodeJS.Timeout>()
+
     const showLangChar = computed(() => {
       const langArr = lang.value.split('')
       langArr[0] = langArr[0].toUpperCase()
@@ -94,11 +96,20 @@ export const useCommonStore = defineStore(
           console.log(data)
           try {
             const temp = JSON.parse(data)
-            Object.assign(mediaQueryInfo, temp)
+            if (temp.top && temp.top > 20) {
+              Object.assign(mediaQueryInfo, temp)
+            }
           } catch (e) {}
         },
         fail: (err: any) => {
           console.log('initMediaQuery:' + err)
+          if (!timer.value) {
+            timer.value = setTimeout(() => {
+              initMediaQuery()
+              timer.value && clearTimeout(timer.value)
+              timer.value = undefined
+            }, 5000)
+          }
         }
       })
     }

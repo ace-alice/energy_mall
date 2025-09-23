@@ -1,7 +1,9 @@
 import './jsBridge'
 
 var isAndroid =
-  navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1
+  navigator.userAgent.indexOf('Android') > -1 ||
+  navigator.userAgent.indexOf('android') > -1 ||
+  navigator.userAgent.indexOf('Adr') > -1
 var isiOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 /**
  * @description 初始化JSBridge
